@@ -12,16 +12,15 @@ definition {
 
 		JSONGroup.addGroup(groupName = "Test Site Name");
 
-		ProductMenu.gotoPortlet(    
+		ProductMenu.gotoPortlet(
 			category = "Content & Data",
 			portlet = "Web Content");
 
-        NavItem.gotoStructures();
-        
-        WebContentStructures.addCP(
+		NavItem.gotoStructures();
+
+		WebContentStructures.addCP(
 			structureDescription = "My Structure Description",
 			structureName = "My Structure Name 1");
-
 	}
 
 	tearDown {
@@ -147,7 +146,9 @@ definition {
 
 		var key_fieldLabel = "Localization";
 
-		DataEngine.addField(fieldFieldLabel = "${key_fieldLabel}", fieldName = "Geolocation");
+		DataEngine.addField(
+			fieldFieldLabel = "${key_fieldLabel}",
+			fieldName = "Geolocation");
 
 		DataEngine.editFieldShowLabel(fieldFieldLabel = "${key_fieldLabel}");
 
@@ -167,8 +168,8 @@ definition {
 		}
 
 		Uncheck.uncheckToggleSwitch(
-				key_toggleSwitchLabel = "Show Label",
-				locator1 = "ToggleSwitch#ANY_TOGGLE_SWITCH");
+			key_toggleSwitchLabel = "Show Label",
+			locator1 = "ToggleSwitch#ANY_TOGGLE_SWITCH");
 
 		WebContentStructures.saveCP(structureName = "My Structure Name 1");
 
