@@ -6,23 +6,18 @@ definition {
 	property testray.main.component.name = "Web Content Administration";
 
 	setUp {
+		TestCase.setUpPortalInstance();
+		User.firstLoginPG();
+		Navigator.openURL();
 
-        TestCase.setUpPortalInstance();
-        User.firstLoginPG();
-        Navigator.openURL();
-     
-        
-      	ProductMenu.gotoPortlet(
-		category = "Content & Data",
-		portlet = "Web Content"); 
+		ProductMenu.gotoPortlet(
+			category = "Content & Data",
+			portlet = "Web Content");
 
-        AppBuilderAdmin.switchTab(tabName = "Structures");  
+		AppBuilderAdmin.switchTab(tabName = "Structures");
 
-        WebContentStructures.addCP(
-		structureName = "Test");
-
-        
-    }
+		WebContentStructures.addCP(structureName = "Test");
+	}
 
 	tearDown {
 		var testPortalInstance = PropsUtil.get("test.portal.instance");
@@ -41,10 +36,13 @@ definition {
 	test AddSeparatorOnFormByDragAndDrop {
 		property portal.acceptance = "false";
 
-		DataEngine.addField(fieldName = "Separator", fieldFieldLabel = "Test");
+		DataEngine.addField(
+			fieldFieldLabel = "Test",
+			fieldName = "Separator");
 
-		// TODO LPS-98081 AddSeparatorOnFormByDragAndDrop pending implementation
-
+		DataEngine.viewField(
+			fieldFieldLabel = "Test",
+			fieldName = "Separator");
 	}
 
 	@description = "This is a test for LPS-98081. As a Developer, I want to use separators"
@@ -54,6 +52,7 @@ definition {
 		property portal.acceptance = "false";
 
 		// TODO LPS-98081 DeleteSeparatorOnBuilder pending implementation
+
 	}
 
 	@description = "This is a test for LPS-98081. As a Developer, I want to use separators"
