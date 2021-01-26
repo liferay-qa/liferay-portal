@@ -2565,4 +2565,10 @@ definition {
 		SelectFrameTop();
 	}
 
+	macro assertFieldRepeated {
+		AssertElementPresent(
+			key_fieldName = "${fieldName}",
+			locator1 = "WCEditWebContent#REPEATED_FIELD");
+	}
+
 }
