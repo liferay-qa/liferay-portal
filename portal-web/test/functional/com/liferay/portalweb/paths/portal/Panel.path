@@ -58,6 +58,31 @@
 	<td></td>
 	<td></td>
 </tr>
+<tr>
+	<td>PANEL_HELLO</td>
+	<td>//h1[contains(.,'Hello World')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PANEL_CONF</td>
+	<td>//h2[contains(., 'Configuration')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PANEL_SIMU</td>
+	<td>//button[contains(@data-device, 'custom')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PANEL_HEIGHT</td>
+	<td>//input[contains(@id, 'height')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PANEL_WIDTH</td>
+	<td>//input[contains(@id, 'width')]</td>
+	<td></td>
+</tr>
 <!--MENU-->
 <tr>
 	<td>MENU_ITEM</td>
