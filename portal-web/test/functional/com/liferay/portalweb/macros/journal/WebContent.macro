@@ -866,6 +866,12 @@ definition {
 			value1 = "${webContentTitle} is not approved.");
 	}
 
+	macro assertFieldRepeated {
+		AssertElementPresent(
+			key_fieldName = "${fieldName}",
+			locator1 = "WCEditWebContent#REPEATED_FIELD");
+	}
+
 	macro clickMarginOfContentContainer {
 		var elementHeight = selenium.getElementHeight("WCEditWebContent#CONTENT_CONTAINER");
 		var offSetY = MathUtil.product("50","${elementHeight}");
@@ -2563,12 +2569,6 @@ definition {
 			value1 = "${webContentContent}");
 
 		SelectFrameTop();
-	}
-
-	macro assertFieldRepeated {
-		AssertElementPresent(
-			key_fieldName = "${fieldName}",
-			locator1 = "WCEditWebContent#REPEATED_FIELD");
 	}
 
 }
