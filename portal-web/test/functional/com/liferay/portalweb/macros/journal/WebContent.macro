@@ -131,6 +131,12 @@ definition {
 		PortletEntry.publish();
 	}
 
+	macro assertFieldNotRepeatable {
+        AssertElementNotPresent(
+            key_fieldName = "${fieldName}",
+            locator1 = "WCEditWebContent#REPEATED_FIELD");
+    }
+
 	macro addExpirationDateCP {
 		Panel.expandPanel(panel = "Schedule");
 

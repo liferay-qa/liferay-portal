@@ -128,7 +128,35 @@ definition {
 	test RepeatFieldsetWithoutDuplicatingContent {
 		property portal.acceptance = "false";
 
-		// TODO LPS-107630 RepeatFieldsetWithoutDuplicatingContent pending implementation
+		 ProductMenu.gotoPortlet(
+            category = "Content & Data",
+            panel = "Site Administration",
+            portlet = "Web Content"           
+        );
+
+        NavItem.gotoStructures();
+
+        WebContentStructures.addCP(
+		    structureDescription = "RepeatibleTest",
+			structureName = "RepeatibleTest");
+
+		DataEngine.addField(
+            field = "Numeric",
+            fieldFieldLabel = "Numeric",
+            fieldName = "Numeric");
+
+		DataEngine.editFieldRepeatable(
+            fieldFieldLabel = "Numeric"
+        );
+
+		WebContentStructures.saveCP(structureName = "RepeatibleTest");
+
+		NavItem.gotoWebContent();
+
+		WebContentNavigator.gotoAddWithStructureCP(structureName = "RepeatibleTest");
+
+		WebContent.assertFieldNotRepeatable(fieldName = "RepeatibleTest");
+        
 	}
 
 	@description = "This is a test for LPS-107630. As an App Adm, I want to use an existing fieldset"
