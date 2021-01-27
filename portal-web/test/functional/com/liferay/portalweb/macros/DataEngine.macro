@@ -437,6 +437,23 @@ definition {
 			value1 = "${fieldFieldLabel}");
 	}
 
+	macro viewFieldHelpText {
+		var key_fieldFieldLabel = "${fieldFieldLabel}";
+		var key_text = "${fieldName}";
+
+		AssertClick.assertPartialTextClickAt(
+			locator1 = "DDMEditStructure#FORM_FIELD_CONTAINER",
+			value1 = "${fieldFieldLabel}");
+
+		AssertTextEquals(
+			locator1 = "Button#ANY",
+			value1 = "${fieldName}");
+
+		AssertTextEquals.assertValue(
+			locator1 = "Sidebar#DDM_HELP_TEXT",
+			value1 = "${fieldHelp}");
+	}
+
 	macro viewNestedField {
 		AssertTextEquals.assertValue(
 			key_fieldName = "${fieldName}",

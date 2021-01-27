@@ -7,14 +7,22 @@ definition {
 
 	setUp {
 		TestCase.setUpPortalInstance();
-
 		User.firstLoginPG();
+		Navigator.openURL();
 
-		JSONGroup.addGroup(groupName = "Test Site Name");
+		ProductMenu.gotoPortlet(
+			category = "Content & Data",
+			portlet = "Web Content");
+
+		AppBuilderAdmin.switchTab(tabName = "Structures");
+
+		WebContentStructures.addCP(structureName = "Test");
 	}
 
 	tearDown {
 		var testPortalInstance = PropsUtil.get("test.portal.instance");
+
+		WebContentStructures.deleteCP(structureName = "Test");
 
 		if ("${testPortalInstance}" == "true") {
 			PortalInstances.tearDownCP();
@@ -76,7 +84,24 @@ definition {
 	test EditHelpTextOfSeparator {
 		property portal.acceptance = "false";
 
-		// TODO LPS-98081 EditHelpTextOfSeparator pending implementation
+		DataEngine.addField(
+			fieldFieldLabel = "Test",
+			fieldName = "Separator");
+
+		DataEngine.editFieldTip(
+			fieldFieldLabel = "Test",
+			fieldHelp = "Choose as many content pieces as you would like to feature.");
+
+		Button.clickSave();
+
+		WebContentStructures.editStructure(structureName = "Test");
+
+		DataEngine.viewFieldHelpText(
+			fieldFieldLabel = "Test",
+			fieldHelp = "Choose as many content pieces as you would like to feature.",
+			fieldName = "Separator");
+
+		Button.clickSave();
 	}
 
 	@description = "This is a test for LPS-98081. As a Developer, I want to use separators"
