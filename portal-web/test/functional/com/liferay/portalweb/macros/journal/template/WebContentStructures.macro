@@ -227,7 +227,7 @@ definition {
 			Alert.viewSuccessMessage();
 		}
 	}
-	
+
 	macro viewCP {
 		var key_ddlDataDefinitionName = "${structureName}";
 
