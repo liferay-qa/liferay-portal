@@ -336,7 +336,19 @@ definition {
 	test VerifyRichTextIsSetAsRequired {
 		property portal.acceptance = "false";
 
-		// TODO LPS-98081 VerifyRichTextIsSetAsRequired pending implementation
+		DataEngine.addField(
+			fieldFieldLabel = "Test Required",
+			fieldName = "Rich Text"
+		);
+
+		DataEngine.editFieldRequired(fieldFieldLabel = "Test Required");
+
+		WebContentStructures.saveCP(structureName = "New Structure");
+
+		WebContentNavigator.gotoEditStructure(structureName = "New Structure");
+
+		FormFields.viewRequiredAsterisk();
+
 	}
 
 }
