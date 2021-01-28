@@ -7,26 +7,22 @@ definition {
 
 	setUp {
 		TestCase.setUpPortalInstance();
-        User.firstLoginPG();
-        Navigator.openURL();
-     
-        
-      	ProductMenu.gotoPortlet(
-		category = "Content & Data",
-		portlet = "Web Content"); 
+		User.firstLoginPG();
+		Navigator.openURL();
 
-        AppBuilderAdmin.switchTab(tabName = "Structures");  
+		ProductMenu.gotoPortlet(
+			category = "Content & Data",
+			portlet = "Web Content");
 
-        WebContentStructures.addCP(
-		structureName = "Test");
+		AppBuilderAdmin.switchTab(tabName = "Structures");
+
+		WebContentStructures.addCP(structureName = "Test");
 	}
 
 	tearDown {
 		var testPortalInstance = PropsUtil.get("test.portal.instance");
 
-		WebContentStructures.deleteCP(
-			structureName = "Test"
-		);
+		WebContentStructures.deleteCP(structureName = "Test");
 
 		if ("${testPortalInstance}" == "true") {
 			PortalInstances.tearDownCP();
@@ -54,21 +50,24 @@ definition {
 
 		var fieldLabel = "Test";
 
-        DataEngine.addField(fieldName = "Text", fieldFieldLabel = "Text field");
-		DataEngine.addField(fieldName = "Separator", fieldFieldLabel = "Test");
-		
+		DataEngine.addField(
+			fieldFieldLabel = "Text field",
+			fieldName = "Text");
+		DataEngine.addField(
+			fieldFieldLabel = "Test",
+			fieldName = "Separator");
+
 		DataEngine.deleteField(fieldFieldLabel = "Test");
-
-		AssertElementNotPresent(locator1 = "FormViewBuilder#FIELD_LABEL");  
-
-		Button.clickSave();
-
-		WebContentStructures.editStructure(structureName = "Test"); 
 
 		AssertElementNotPresent(locator1 = "FormViewBuilder#FIELD_LABEL");
 
 		Button.clickSave();
-		
+
+		WebContentStructures.editStructure(structureName = "Test");
+
+		AssertElementNotPresent(locator1 = "FormViewBuilder#FIELD_LABEL");
+
+		Button.clickSave();
 	}
 
 	@description = "This is a test for LPS-98081. As a Developer, I want to use separators"
