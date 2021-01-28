@@ -8,7 +8,6 @@ definition {
 	setUp {
 		TestCase.setUpPortalInstance();
 		User.firstLoginPG();
-		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
 			category = "Content & Data",
