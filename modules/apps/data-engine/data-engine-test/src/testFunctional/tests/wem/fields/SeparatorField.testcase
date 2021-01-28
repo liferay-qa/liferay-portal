@@ -6,15 +6,27 @@ definition {
 	property testray.main.component.name = "Web Content Administration";
 
 	setUp {
-		TestCase.setUpPortalInstance();
+		 TestCase.setUpPortalInstance();
+        User.firstLoginPG();
+        Navigator.openURL();
+     
+        
+      	ProductMenu.gotoPortlet(
+		category = "Content & Data",
+		portlet = "Web Content"); 
 
-		User.firstLoginPG();
+        AppBuilderAdmin.switchTab(tabName = "Structures");  
 
-		JSONGroup.addGroup(groupName = "Test Site Name");
+        WebContentStructures.addCP(
+		structureName = "Test");
 	}
 
 	tearDown {
 		var testPortalInstance = PropsUtil.get("test.portal.instance");
+
+		WebContentStructures.deleteCP(
+			structureName = "Test"
+		);
 
 		if ("${testPortalInstance}" == "true") {
 			PortalInstances.tearDownCP();
@@ -112,7 +124,18 @@ definition {
 	test SetSeparatorRepeatable {
 		property portal.acceptance = "false";
 
-		// TODO LPS-98081 SetSeparatorRepeatable pending implementation
+		DataEngine.addField(fieldName = "Separator", fieldFieldLabel = "Separator test");
+
+        DataEngine.editFieldRepeatable(fieldFieldLabel = "Separator test");
+
+        Button.clickSave();
+
+        WebContentNavigator.gotoEditStructure(structureName = "Test");
+
+        AssertElementPresent(locator1 = "FormFields#FIELD_ADD_DUPLICATE");
+
+		Button.clickSave();
+
 	}
 
 	@description = "This is a test for LPS-98081. As a Developer, I want to use separators"
