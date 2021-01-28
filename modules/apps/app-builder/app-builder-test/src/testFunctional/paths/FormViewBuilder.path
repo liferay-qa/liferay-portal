@@ -205,6 +205,12 @@
 <!--FIELDS_AT_DEPLOYED_APP-->
 
 <tr>
+	<td>TEXT_FIELD_INDEX</td>
+	<td>//label[contains(text(),'${key_fieldName}')]/..//input[${index}]</td>
+	<td></td>
+</tr>
+
+<tr>
 	<td>TEXT_FIELD</td>
 	<td>//label[contains(text(),'${key_fieldName}')]/..//input[1]</td>
 	<td></td>

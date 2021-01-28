@@ -123,7 +123,6 @@ definition {
 	}
 
 	@description = "This is a test for LPS-107630. As an App Adm, I want to use an existing fieldset"
-	@ignore = "true"
 	@priority = "4"
 	test RepeatFieldsetWithoutDuplicatingContent {
 		property portal.acceptance = "false";
@@ -141,12 +140,12 @@ definition {
 			structureName = "RepeatibleTest");
 
 		DataEngine.addField(
-            field = "Numeric",
-            fieldFieldLabel = "Numeric",
-            fieldName = "Numeric");
+            field = "Text",
+            fieldFieldLabel = "Text",
+            fieldName = "Text");
 
 		DataEngine.editFieldRepeatable(
-            fieldFieldLabel = "Numeric"
+            fieldFieldLabel = "Text"
         );
 
 		WebContentStructures.saveCP(structureName = "RepeatibleTest");
@@ -155,8 +154,23 @@ definition {
 
 		WebContentNavigator.gotoAddWithStructureCP(structureName = "RepeatibleTest");
 
-		WebContent.assertFieldNotRepeatable(fieldName = "RepeatibleTest");
-        
+		AssertClick.assertPartialTextClickAt(
+			key_fieldFieldLabel = "Text",
+			locator1 = "DDMEditStructure#FORM_FIELD_CONTAINER",
+			value1 = "Text");
+
+		Type(
+			locator1 = "FormViewBuilder#TEXT_FIELD",
+			key_fieldName = "Text",
+			value1 = "Hello"
+		);
+
+		Click(locator1 = "Button#DUPLICATE");
+
+		AssertTextNotPresent(locator1 = "FormViewBuilder#TEXT_FIELD_INDEX", 
+			key_fieldName = "Text",
+			index = "2",
+			value1 = "Hello");
 	}
 
 	@description = "This is a test for LPS-107630. As an App Adm, I want to use an existing fieldset"
