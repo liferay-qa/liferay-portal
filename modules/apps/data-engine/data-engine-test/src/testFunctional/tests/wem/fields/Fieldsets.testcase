@@ -127,26 +127,23 @@ definition {
 	test RepeatFieldsetWithoutDuplicatingContent {
 		property portal.acceptance = "false";
 
-		 ProductMenu.gotoPortlet(
-            category = "Content & Data",
-            panel = "Site Administration",
-            portlet = "Web Content"           
-        );
+		ProductMenu.gotoPortlet(
+			category = "Content & Data",
+			panel = "Site Administration",
+			portlet = "Web Content");
 
-        NavItem.gotoStructures();
+		NavItem.gotoStructures();
 
-        WebContentStructures.addCP(
-		    structureDescription = "RepeatibleTest",
+		WebContentStructures.addCP(
+			structureDescription = "RepeatibleTest",
 			structureName = "RepeatibleTest");
 
 		DataEngine.addField(
-            field = "Text",
-            fieldFieldLabel = "Text",
-            fieldName = "Text");
+			field = "Text",
+			fieldFieldLabel = "Text",
+			fieldName = "Text");
 
-		DataEngine.editFieldRepeatable(
-            fieldFieldLabel = "Text"
-        );
+		DataEngine.editFieldRepeatable(fieldFieldLabel = "Text");
 
 		WebContentStructures.saveCP(structureName = "RepeatibleTest");
 
@@ -160,16 +157,16 @@ definition {
 			value1 = "Text");
 
 		Type(
-			locator1 = "FormViewBuilder#TEXT_FIELD",
 			key_fieldName = "Text",
-			value1 = "Hello"
-		);
+			locator1 = "FormViewBuilder#TEXT_FIELD",
+			value1 = "Hello");
 
 		Click(locator1 = "Button#DUPLICATE");
 
-		AssertTextNotPresent(locator1 = "FormViewBuilder#TEXT_FIELD_INDEX", 
-			key_fieldName = "Text",
+		AssertTextNotPresent(
 			index = "2",
+			key_fieldName = "Text",
+			locator1 = "FormViewBuilder#TEXT_FIELD_INDEX",
 			value1 = "Hello");
 	}
 
