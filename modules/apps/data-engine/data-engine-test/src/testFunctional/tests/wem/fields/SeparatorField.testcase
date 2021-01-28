@@ -22,9 +22,7 @@ definition {
 	tearDown {
 		var testPortalInstance = PropsUtil.get("test.portal.instance");
 
-		WebContentStructures.deleteCP(
-			structureName = "Test"
-		);
+		WebContentStructures.deleteCP(structureName = "Test");
 
 		if ("${testPortalInstance}" == "true") {
 			PortalInstances.tearDownCP();
@@ -143,24 +141,24 @@ definition {
 	@priority = "4"
 	test EditReferenceOfSeparatorWithInvalidCharacters {
 		property portal.acceptance = "false";
-		
-		DataEngine.addField(fieldName = "Separator", fieldFieldLabel = "Separator test");
-        
+
+		DataEngine.addField(
+			fieldFieldLabel = "Separator test",
+			fieldName = "Separator");
+
 		DataEngine.editFieldReferenceWithInvalidCharacters(
-			fieldFieldLabel = "Separator test", 
-			fieldReference = "example123A@#@$%$%%",
-			assertFieldReference = "example123A"
-		);
-		
+			assertFieldReference = "example123A",
+			fieldFieldLabel = "Separator test",
+			fieldReference = "example123A@#@$%$%%");
+
 		Button.clickSave();
-				
+
 		WebContentNavigator.gotoEditStructure(structureName = "Test");
 
 		AssertClick.assertPartialTextClickAt(
 			key_fieldFieldLabel = "Separator test",
 			locator1 = "DDMEditStructure#FORM_FIELD_CONTAINER",
-			value1 = "Separator test"
-		);
+			value1 = "Separator test");
 
 		Navigator.gotoNavTab(navTab = "Advanced");
 
@@ -168,11 +166,9 @@ definition {
 			key_fieldLabel = "Field Reference",
 			key_fieldName = "fieldReference",
 			locator1 = "Sidebar#TEXT_INPUT",
-			value1 = "example123A"
-		);
+			value1 = "example123A");
 
 		Button.clickSave();
-
 	}
 
 	@description = "This is a test for LPS-98081. As a Developer, I want to use separators"
