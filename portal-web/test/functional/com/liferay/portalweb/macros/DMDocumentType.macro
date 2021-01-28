@@ -1,9 +1,8 @@
 definition {
 
 	macro add {
-		
 		DMDocumentType.addWithoutSave();
-		
+
 		DDLDataDefinition.save();
 	}
 
