@@ -6,15 +6,27 @@ definition {
 	property testray.main.component.name = "Web Content Administration";
 
 	setUp {
-		TestCase.setUpPortalInstance();
+		 TestCase.setUpPortalInstance();
+        User.firstLoginPG();
+        Navigator.openURL();
+     
+        
+      	ProductMenu.gotoPortlet(
+		category = "Content & Data",
+		portlet = "Web Content"); 
 
-		User.firstLoginPG();
+        AppBuilderAdmin.switchTab(tabName = "Structures");  
 
-		JSONGroup.addGroup(groupName = "Test Site Name");
+        WebContentStructures.addCP(
+		structureName = "Test");
 	}
 
 	tearDown {
 		var testPortalInstance = PropsUtil.get("test.portal.instance");
+
+		WebContentStructures.deleteCP(
+			structureName = "Test"
+		);
 
 		if ("${testPortalInstance}" == "true") {
 			PortalInstances.tearDownCP();
@@ -120,8 +132,30 @@ definition {
 	@priority = "3"
 	test ShowAndHideSeparatorLabel {
 		property portal.acceptance = "false";
+		       
+        DataEngine.addField(fieldName = "Separator", fieldFieldLabel = "Test", fieldReference = "Test");
 
-		// TODO LPS-98081 ShowAndHideSeparatorLabel pending implementation
+		var fieldLabel = "Test";
+
+		AssertElementPresent(locator1 = "FormViewBuilder#FIELD_LABEL"); 
+
+
+        DataEngine.editFieldHide(fieldFieldLabel = "Test", fieldLabel = "Test");
+
+		AssertElementNotPresent(locator1 = "FormViewBuilder#FIELD_LABEL");
+
+
+		Button.clickSave();		
+
+		WebContentStructures.editStructure(structureName = "Test");
+		
+
+		AssertElementNotPresent(locator1 = "FormViewBuilder#FIELD_LABEL");        
+		
+
+
+		Button.clickSave();	
+	
 	}
 
 }
