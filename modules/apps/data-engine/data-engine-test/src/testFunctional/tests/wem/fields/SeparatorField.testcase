@@ -7,26 +7,22 @@ definition {
 
 	setUp {
 		TestCase.setUpPortalInstance();
-        User.firstLoginPG();
-        Navigator.openURL();
-     
-        
-      	ProductMenu.gotoPortlet(
-		category = "Content & Data",
-		portlet = "Web Content"); 
+		User.firstLoginPG();
+		Navigator.openURL();
 
-        AppBuilderAdmin.switchTab(tabName = "Structures");  
+		ProductMenu.gotoPortlet(
+			category = "Content & Data",
+			portlet = "Web Content");
 
-        WebContentStructures.addCP(
-		structureName = "Test");
+		AppBuilderAdmin.switchTab(tabName = "Structures");
+
+		WebContentStructures.addCP(structureName = "Test");
 	}
 
 	tearDown {
 		var testPortalInstance = PropsUtil.get("test.portal.instance");
 
-		WebContentStructures.deleteCP(
-			structureName = "Test"
-		);
+		WebContentStructures.deleteCP(structureName = "Test");
 
 		if ("${testPortalInstance}" == "true") {
 			PortalInstances.tearDownCP();
@@ -70,20 +66,25 @@ definition {
 	test DuplicateSeparatorOnBuilder {
 		property portal.acceptance = "false";
 
-		DataEngine.addField(fieldName = "Separator", fieldFieldLabel = "Separator test");
+		DataEngine.addField(
+			fieldFieldLabel = "Separator test",
+			fieldName = "Separator");
 
-        DataEngine.duplicateField(fieldFieldLabel = "Separator test");
+		DataEngine.duplicateField(fieldFieldLabel = "Separator test");
 
-		DataEngine.viewField(fieldName = "Separator", fieldFieldLabel = "Copy of Separator test");
+		DataEngine.viewField(
+			fieldFieldLabel = "Copy of Separator test",
+			fieldName = "Separator");
 
 		Button.clickSave();
 
 		WebContentStructures.editStructure(structureName = "Test");
 
-		DataEngine.viewField(fieldName = "Separator", fieldFieldLabel = "Copy of Separator test");
+		DataEngine.viewField(
+			fieldFieldLabel = "Copy of Separator test",
+			fieldName = "Separator");
 
 		Button.clickSave();
-
 	}
 
 	@description = "This is a test for LPS-98081. As a Developer, I want to use separators"
