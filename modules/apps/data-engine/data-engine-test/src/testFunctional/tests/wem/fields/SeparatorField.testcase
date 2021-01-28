@@ -7,8 +7,8 @@ definition {
 
 	setUp {
 		TestCase.setUpPortalInstance();
+
 		User.firstLoginPG();
-		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
 			category = "Content & Data",
@@ -124,7 +124,6 @@ definition {
 	}
 
 	@description = "This is a test for LPS-98081. As a Developer, I want to use separators"
-	@ignore = "true"
 	@priority = "3"
 	test ShowAndHideSeparatorLabel {
 		property portal.acceptance = "false";
