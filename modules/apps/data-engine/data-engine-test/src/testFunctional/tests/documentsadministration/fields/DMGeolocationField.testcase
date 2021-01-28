@@ -11,6 +11,7 @@ definition {
 		JSONGroup.addGroup(groupName = "Test Site Name");
 		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "test-site-name");
 	}
+
 	tearDown {
 		var testPortalInstance = PropsUtil.get("test.portal.instance");
 		if ("${testPortalInstance}" == "true") {
@@ -71,8 +72,8 @@ definition {
 			dmDocumentTypeName = "DM Document Type Name");
 
 		FormViewBuilder.editFieldLabel(
-            fieldLabel = "Geolocation",
-            label = "Localization");
+			fieldLabel = "Geolocation",
+			label = "Localization");
 
 		DDLDataDefinition.save();
 
