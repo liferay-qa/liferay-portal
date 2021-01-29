@@ -47,6 +47,12 @@
 </tr>
 
 <tr>
+	<td>FIELD_SET_COLLAPSIBLE</td>
+	<td>//div[contains(@class, 'collapsable-panel')]//button[contains(@class, 'collapsed')]</td>
+	<td></td>
+</tr>
+
+<tr>
 	<td>RULE_LABEL</td>
 	<td>//span[contains(@class,'panel-title') and contains(text(),'${ruleLabel}')]</td>
 	<td></td>
@@ -214,6 +220,12 @@
 <tr>
 	<td>SELECT_FIELD</td>
 	<td>//label[contains(text(),'${key_fieldName}')]/following-sibling::div[contains(@class,'ddm-select-dropdown') or contains(@class,'input-group-container')]</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>SELECT_FIELD_SET</td>
+	<td>//div[contains(@class,'fieldset')]//label[contains(text(),'${key_fieldSetName}')]</td>
 	<td></td>
 </tr>
 

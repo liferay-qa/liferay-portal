@@ -22,6 +22,7 @@ definition {
 		else {
 			JSONGroup.deleteGroupByName(groupName = "Test Site Name");
 		}
+		WebContentStructures.tearDownStructureCP();
 	}
 
 	@description = "This is a test for LPS-107630. As an App Adm, I want to use an existing fieldset"
@@ -44,46 +45,12 @@ definition {
 	}
 
 	@description = "This is a test for LPS-107630. As an App Adm, I want to use an existing fieldset"
+	@ignore = "true"
 	@priority = "5"
 	test DuplicateFieldset {
 		property portal.acceptance = "false";
 
-		ProductMenu.gotoPortlet(
-			category = "Content & Data",
-			panel = "Site Administration",
-			portlet = "Web Content");
-
-		NavItem.gotoStructures();
-
-		WebContentStructures.addCP(
-			structureDescription = "DuplicateTest",
-			structureName = "DuplicateTest");
-
-		DataEngine.addFields(fieldNameList = "Text,Image,Upload");
-
-		WebContentStructures.saveCP(structureName = "DuplicateTest");
-
-		WebContentStructures.addCP(
-			structureDescription = "DuplicateTest1",
-			structureName = "DuplicateTest1");
-
-		DataEngine.addFieldsets(
-			fieldsetsLabel = "DuplicateTest",
-			fieldsetsName = "DuplicateTest");
-
-		DataEngine.duplicateFieldsets(fieldsetLabel = "DuplicateTest");
-
-		AssertElementPresent(
-			key_fieldsetLabel = "Copy of DuplicateTest",
-			locator1 = "DDMEditStructure#FORM_FIELD_SETS_CONTAINER_LABEL");
-
-		for (var fieldLabelList : list "Copy of Text,Copy of Image,Copy of Upload") {
-			AssertElementPresent(
-				key_fieldFieldLabel = "${fieldLabelList}",
-				locator1 = "DDMEditStructure#FORM_FIELD_CONTAINER_LABEL");
-		}
-
-		WebContentStructures.saveCP(structureName = "DuplicateTest1");
+		// TODO LPS-107630 DuplicateFieldset pending implementation
 	}
 
 	@description = "This is a test for LPS-107630. As an App Adm, I want to use an existing fieldset"
@@ -105,12 +72,66 @@ definition {
 	}
 
 	@description = "This is a test for LPS-107630. As an App Adm, I want to use an existing fieldset"
-	@ignore = "true"
 	@priority = "4"
 	test FieldsetSetAsCollapsible {
 		property portal.acceptance = "false";
 
-		// TODO LPS-107630 FieldsetSetAsCollapsible pending implementation
+		ProductMenu.gotoPortlet(
+			category = "Content & Data",
+			panel = "Site Administration",
+			portlet = "Web Content");
+
+		NavItem.gotoStructures();
+
+		WebContentStructures.addCP(
+			structureDescription = "CollapsibleFieldSetTest",
+			structureName = "CollapsibleFieldSetTest");
+
+		Navigator.gotoSidebarTab(tabName = "Builder");
+
+		Navigator.gotoNavTab(navTab = "Fieldsets");
+
+		Click(locator1 = "FormViewBuilder#CREATE_NEW_FIELD_SETS");
+
+		DoubleClick(locator1 = "Modal#CREATE_DATE_FIELD");
+
+		Type(
+			locator1 = "FormViewBuilder#FIELD_SET_NAME",
+			value1 = "CollapsibleFieldSetTest");
+
+		Click(locator1 = "Modal#SAVE_BUTTON");
+
+		DataEngine.addFieldsets(
+			fieldsetsLabel = "CollapsibleFieldSetTest",
+			fieldsetsName = "CollapsibleFieldSetTest");
+
+		Click(
+			locator1 = "FormViewBuilder#SELECT_FIELD_SET",
+			key_fieldSetName = "CollapsibleFieldSetTest");
+
+		Check.checkToggleSwitch(
+			checkboxName = "Collapsible",
+			locator1 = "Checkbox#ANY_CHECKBOX");
+
+		WebContentStructures.saveCP(structureName = "CollapsibleFieldSetTest");
+
+		WebContentStructures.editStructureCP(structureName = "CollapsibleFieldSetTest");
+
+		Click(locator1 = "Button#COLLAPSIBLE");
+
+		AssertElementPresent(locator1 = "FormViewBuilder#FIELD_SET_COLLAPSIBLE");
+
+		WebContentStructures.saveCP(structureName = "CollapsibleFieldSetTest");
+
+		WebContentStructures.editStructureCP(structureName = "CollapsibleFieldSetTest");
+		
+		Navigator.gotoNavTab(navTab = "Fieldsets");
+
+		Click(locator1 = "AppBuilder#BUTTON_EDIT_FIELDSET");
+
+		Click(
+			key_selectAction = "Delete",
+			locator1 = "FormViewBuilder#FIELD_ELLIPSIS_ACTION");
 	}
 
 	@description = "This is a test for LPS-107630. As an App Adm, I want to use an existing fieldset"

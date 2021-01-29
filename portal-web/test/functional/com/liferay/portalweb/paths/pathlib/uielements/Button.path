@@ -179,6 +179,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>COLLAPSIBLE</td>
+	<td>//button[contains(@class,'collapse-icon')][1]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>COLOR_EFFECT</td>
 	<td>//button[*[name()='svg'][contains(@class,'lexicon-icon-effects')]]</td>
 	<td></td>
