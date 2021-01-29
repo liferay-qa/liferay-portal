@@ -9,6 +9,16 @@ definition {
 		TestCase.setUpPortalInstance();
 
 		User.firstLoginPG();
+
+		JSONGroup.addGroup(groupName = "Test Site Name");
+
+		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "test-site-name");
+
+		DMNavigator.gotoDocumentType();
+
+		DMDocumentType.addWithoutSave(
+			dmDocumentTypeDescription = "Document Type Description",
+			dmDocumentTypeName = "Document Type Name");
 	}
 
 	tearDown {
@@ -18,7 +28,7 @@ definition {
 			PortalInstances.tearDownCP();
 		}
 		else {
-			DMDocument.tearDownCP();
+			JSONGroup.deleteGroupByName(groupName = "Test Site Name");
 
 			User.logoutPG();
 		}
@@ -80,12 +90,35 @@ definition {
 	}
 
 	@description = "This is a test for LPS-98081. As a Developer, I want to use separators"
-	@ignore = "true"
 	@priority = "4"
 	test EditReferenceOfSeparatorWithInvalidCharacters {
 		property portal.acceptance = "false";
 
-		// TODO LPS-98081 EditReferenceOfSeparatorWithInvalidCharacters pending implementation
+		var assertFieldReference = "Myreference";
+
+		var fieldReferenceWithInvalidChars = "Myreference@#$%¨&*";
+
+		DataEngine.addField(
+			fieldFieldLabel = "Separator test",
+			fieldName = "Separator");
+
+		DataEngine.editFieldReference(
+			assertFieldReference = "${assertFieldReference}",
+			fieldFieldLabel = "Separator test",
+			fieldName = "Separator",
+			fieldReference = "${fieldReferenceWithInvalidChars}");
+
+		Button.clickSave();
+
+		DMNavigator.gotoDocumentCP(dmDocumentTitle = "Document Type Name");
+
+		DataEngine.viewFieldReference(
+			fieldFieldLabel = "Separator test",
+			fieldName = "Separator",
+			fieldReference = "${assertFieldReference}");
+
+		Button.clickSave();
+		
 	}
 
 	@description = "This is a test for LPS-98081. As a Developer, I want to use separators"
