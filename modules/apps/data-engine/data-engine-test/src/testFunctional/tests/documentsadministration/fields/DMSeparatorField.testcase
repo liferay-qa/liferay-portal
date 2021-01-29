@@ -118,7 +118,6 @@ definition {
 			fieldReference = "${assertFieldReference}");
 
 		Button.clickSave();
-		
 	}
 
 	@description = "This is a test for LPS-98081. As a Developer, I want to use separators"
