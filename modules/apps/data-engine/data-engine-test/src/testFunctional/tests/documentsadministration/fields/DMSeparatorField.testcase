@@ -92,7 +92,7 @@ definition {
 	test EditReferenceOfSeparator {
 		property portal.acceptance = "false";
 
-		var assertFieldReference = "Myreference123";
+		var assertFieldReference = "Myreference";
 
 		DataEngine.addField(
 			fieldFieldLabel = "Separator test",
