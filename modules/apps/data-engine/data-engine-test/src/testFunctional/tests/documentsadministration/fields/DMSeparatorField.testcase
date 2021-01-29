@@ -6,7 +6,6 @@ definition {
 	property testray.main.component.name = "Documents Management";
 
 	setUp {
-
 		TestCase.setUpPortalInstance();
 
 		User.firstLoginPG();
@@ -14,30 +13,24 @@ definition {
 		JSONGroup.addGroup(groupName = "Test Site Name");
 
 		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "test-site-name");
-		
+
 		DMNavigator.gotoDocumentType();
 
 		DMDocumentType.addWithoutSave(
 			dmDocumentTypeDescription = "Document Type Description",
-			dmDocumentTypeName = "Document Type Name"
-		);
+			dmDocumentTypeName = "Document Type Name");
 	}
 
 	tearDown {
-
 		var testPortalInstance = PropsUtil.get("test.portal.instance");
 
 		if ("${testPortalInstance}" == "true") {
-
 			PortalInstances.tearDownCP();
-
 		}
 		else {
-
 			JSONGroup.deleteGroupByName(groupName = "Test Site Name");
 
 			User.logoutPG();
-
 		}
 	}
 
@@ -96,15 +89,13 @@ definition {
 
 		DataEngine.addField(
 			fieldFieldLabel = "Separator test",
-			fieldName = "Separator"
-		);
+			fieldName = "Separator");
 
 		DataEngine.editFieldReference(
+			assertFieldReference = "${assertFieldReference}",
 			fieldFieldLabel = "Separator test",
 			fieldName = "Separator",
-			fieldReference = "${assertFieldReference}",
-			assertFieldReference = "${assertFieldReference}"
-		);
+			fieldReference = "${assertFieldReference}");
 
 		Button.clickSave();
 
@@ -113,11 +104,9 @@ definition {
 		DataEngine.viewFieldReference(
 			fieldFieldLabel = "Separator test",
 			fieldName = "Separator",
-			fieldReference = "${assertFieldReference}"
-		);
+			fieldReference = "${assertFieldReference}");
 
 		Button.clickSave();
-		
 	}
 
 	@description = "This is a test for LPS-98081. As a Developer, I want to use separators"
