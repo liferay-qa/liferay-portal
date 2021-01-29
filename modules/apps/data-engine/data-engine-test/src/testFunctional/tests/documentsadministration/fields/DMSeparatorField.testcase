@@ -6,20 +6,33 @@ definition {
 	property testray.main.component.name = "Documents Management";
 
 	setUp {
+
 		TestCase.setUpPortalInstance();
 
 		User.firstLoginPG();
+
+		JSONGroup.addGroup(groupName = "Test Site Name");
+
+		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "test-site-name");
+
+		DMNavigator.gotoDocumentType();
+
+		DMDocumentType.add(
+			dmDocumentTypeDescription = "Document Type Description",
+			dmDocumentTypeFieldNames = "Separator",
+			dmDocumentTypeName = "Document Type Name"
+		);
 	}
 
 	tearDown {
+
 		var testPortalInstance = PropsUtil.get("test.portal.instance");
 
 		if ("${testPortalInstance}" == "true") {
 			PortalInstances.tearDownCP();
 		}
 		else {
-			DMDocument.tearDownCP();
-
+			JSONGroup.deleteGroupByName(groupName = "Test Site Name");
 			User.logoutPG();
 		}
 	}
@@ -107,12 +120,42 @@ definition {
 	}
 
 	@description = "This is a test for LPS-98081. As a Developer, I want to use separators"
-	@ignore = "true"
 	@priority = "3"
 	test ShowAndHideSeparatorLabel {
 		property portal.acceptance = "false";
 
-		// TODO LPS-98081 ShowAndHideSeparatorLabel pending implementation
+		DMNavigator.gotoDocumentCP(dmDocumentTitle = "Document Type Name");
+
+		DataEngine.viewField(
+			fieldFieldLabel = "Separator",
+			fieldName = "Separator"
+		);
+
+		FormViewBuilder.switchToAdvancedTab();
+
+		FormFields.viewSwitcherLabel(
+			fieldLabel = "Separator",
+			fieldName = "Separator"
+		);
+		
+		Uncheck.uncheckToggleSwitch(
+			checkboxName = "Show Label",
+			locator1 = "Checkbox#ANY_CHECKBOX"
+		);
+
+		FormFields.viewSwitcherLabelNotPresent(
+			fieldLabel = "Separator Label",
+			fieldName = "Separator"
+		);
+
+		Button.clickSave();
+
+		DMNavigator.gotoDocumentCP(dmDocumentTitle = "Document Type Name");
+
+		AssertElementNotPresent(locator1 = "DDMEditStructure#FORM_FIELD_CONTAINER");
+
+		Button.clickSave();
+		
 	}
 
 }
