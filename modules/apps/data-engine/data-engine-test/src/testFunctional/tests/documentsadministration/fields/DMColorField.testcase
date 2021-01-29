@@ -55,20 +55,20 @@ definition {
 	@description = "This is a test for LPS-98070. As a Developer, I want to Implement the color field type"
 	@priority = "5"
 	test AddColorFieldByDragAndDrop {
-		property portal.acceptance = "false";		
+		property portal.acceptance = "false";
 
-        DMDocumentType.add(
-            dmDocumentTypeDescription = "DM Document Type Description",
-            dmDocumentTypeFieldNames = "Color",
-            dmDocumentTypeName = "DM Document Type Name");
+		DMDocumentType.add(
+			dmDocumentTypeDescription = "DM Document Type Description",
+			dmDocumentTypeFieldNames = "Color",
+			dmDocumentTypeName = "DM Document Type Name");
 
-        NavItem.click(navItem = "Documents and Media");
+		NavItem.click(navItem = "Documents and Media");
 
 		DMNavigator.gotoAddDocumentTypeCP(dmDocumentTypeName = "DM Document Type Name");
 
 		AssertElementPresent(
-            key_fieldFieldLabel = "Color",
-            locator1 = "DDMEditStructure#FORM_FIELD_CONTAINER_LABEL");
+			key_fieldFieldLabel = "Color",
+			locator1 = "DDMEditStructure#FORM_FIELD_CONTAINER_LABEL");
 	}
 
 	@description = "This is a test for LPS-98070. As a Developer, I want to Implement the color field type"
@@ -78,6 +78,7 @@ definition {
 		property portal.acceptance = "false";
 
 		// TODO LPS-98070 DeleteColorFieldOnBuilder pending implementation
+
 	}
 
 	@description = "This is a test for LPS-98070. As a Developer, I want to Implement the color field type"
