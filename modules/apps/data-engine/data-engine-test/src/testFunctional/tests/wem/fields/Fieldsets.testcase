@@ -115,7 +115,7 @@ definition {
 
 		WebContentStructures.saveCP(structureName = "CollapsibleFieldSetTest");
 
-		WebContentStructures.editStructureCP(structureName = "CollapsibleFieldSetTest");
+		WebContentStructures.editStructure(structureName = "CollapsibleFieldSetTest");
 
 		Click(locator1 = "Button#COLLAPSIBLE");
 
@@ -123,7 +123,7 @@ definition {
 
 		WebContentStructures.saveCP(structureName = "CollapsibleFieldSetTest");
 
-		WebContentStructures.editStructureCP(structureName = "CollapsibleFieldSetTest");
+		WebContentStructures.editStructure(structureName = "CollapsibleFieldSetTest");
 
 		Navigator.gotoNavTab(navTab = "Fieldsets");
 
