@@ -332,6 +332,20 @@ definition {
 		Click(locator1 = "DDMField#FIELD_DUPLICATE");
 	}
 
+	macro assertFieldRepeated {
+		AssertElementPresent(
+			key_fieldReference = "${fieldReference}",
+			key_index = "${index}",
+			locator1 = "WCEditWebContent#REPEATED_FIELD_BY_INDEX");
+	}
+
+	macro assertFieldRepeatedNotPresent {
+		AssertElementNotPresent(
+			key_fieldReference = "${fieldReference}",
+			key_index = "${index}",
+			locator1 = "WCEditWebContent#REPEATED_FIELD_BY_INDEX");
+	}
+
 	macro delete {
 		if (isSet(fieldFieldLabel)) {
 			Click(
@@ -791,18 +805,5 @@ definition {
 			locator1 = "DDMField#NESTED_INPUT",
 			value1 = "${nestedFieldData}");
 	}
-	
-	macro assertFieldRepeated {
-		AssertElementPresent(
-			key_fieldReference = "${fieldReference}",
-			key_index = "${index}",
-			locator1 = "WCEditWebContent#REPEATED_FIELD_BY_INDEX");
-	}
 
-	macro assertFieldRepeatedNotPresent {
-		AssertElementNotPresent(
-			key_fieldReference = "${fieldReference}",
-			key_index = "${index}",
-			locator1 = "WCEditWebContent#REPEATED_FIELD_BY_INDEX");
-	}
 }
