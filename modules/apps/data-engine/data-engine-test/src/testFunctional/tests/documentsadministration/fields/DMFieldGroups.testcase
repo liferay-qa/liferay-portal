@@ -87,9 +87,8 @@ definition {
 		var fieldGroupLabel = "Fields Group";
 
 		ProductMenu.gotoPortlet(
-            category = "Content & Data",
-            portlet = "Documents and Media"
-        );
+			category = "Content & Data",
+			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
 
@@ -103,9 +102,8 @@ definition {
 			targetFieldLabel = "Text");
 
 		DataEngine.editFieldLabel(
-            fieldFieldLabel = "Fields Group",
-            fieldFieldLabelEdit = "Field 1"
-        );
+			fieldFieldLabel = "Fields Group",
+			fieldFieldLabelEdit = "Field 1");
 
 		DataEngine.addFieldNested(
 			fieldFieldLabel = "Numeric",
