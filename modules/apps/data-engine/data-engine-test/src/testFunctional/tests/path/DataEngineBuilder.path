@@ -9,6 +9,11 @@
 </thead>
 <tbody>
 <tr>
+	<td>WEB_CONTENT_REPETABLE_BUTTON_ADD</td>
+	<td>//button[@class ='ddm-form-field-repeatable-add-button p-0 btn btn-sm btn-primary']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>FORM_FIELDS_GROUP</td>
 	<td>xpath=(//div[contains(@class, 'fieldset')]//label[text()='Fields Group'])[2]</td>
 	<td></td>
