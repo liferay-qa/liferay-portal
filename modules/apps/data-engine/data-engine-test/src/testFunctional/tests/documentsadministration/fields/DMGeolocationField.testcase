@@ -190,7 +190,7 @@ definition {
 			dmDocumentTypeFieldNames = "${key_Label}",
 			dmDocumentTypeName = "DM Document Type Name");
 
-		DataEngine.duplicateField(fieldFieldLabel = "${key_Label}");
+		DataEngine.duplicate(fieldFieldLabel = "${key_Label}");
 
 		DDLDataDefinition.save();
 
