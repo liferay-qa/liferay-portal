@@ -133,13 +133,13 @@ definition {
 		PortletEntry.changeLocale(locale = "pt_BR");
 
 		AssertTextEquals(
-            key_fieldLabel = "Text",
-            locator1 = "TextInput#GENERIC_TEXT_INPUT",
-            value1 = "${key_text}");
+			key_fieldLabel = "Text",
+			locator1 = "TextInput#GENERIC_TEXT_INPUT",
+			value1 = "${key_text}");
 
 		AssertTextEquals(
-            locator1 = "TextInput#INPUT",
-            value1 = "${key_value}");
+			locator1 = "TextInput#INPUT",
+			value1 = "${key_value}");
 	}
 
 	@description = "This is a test for LPS-123537. As Content Creator, I want to leverage the structures’ translations with nested field when creating a new Web Content"
