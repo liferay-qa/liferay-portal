@@ -27,7 +27,6 @@ definition {
 	@description = "This is a test for LPS-123537. As Content Creator, I want to leverage the structures’ translations with nested field when creating a new Web Content"
 	@priority = "5"
 	test CheckDuplicatedRepeatableStructureOnWebContent {
-		
 		WebContentNavigator.openWebContentAdmin(siteURLKey = "test-site-name");
 
 		NavItem.gotoStructures();
@@ -44,7 +43,7 @@ definition {
 			fieldFieldLabel = "Text2",
 			fieldName = "Text",
 			targetFieldLabel = "Text");
-		
+
 		DataEngine.editFieldsGroupRepeatable();
 
 		PortletEntry.changeLocale(locale = "pt-BR");
@@ -64,14 +63,14 @@ definition {
 		WebContentNavigator.gotoAddWithStructureCP(structureName = "WC Structure Name");
 
 		WebContent.addWithStructureCP(
-            structureName = "WC Structure Name",
-            webContentTitle = "WC WebContent Title");
-		
+			structureName = "WC Structure Name",
+			webContentTitle = "WC WebContent Title");
+
 		PortletEntry.changeLocale(locale = "pt-BR");
 
-        AssertElementPresent(locator1 = "DataEngineBuilder#WEB_CONTENT_REPETABLE_BUTTON_ADD");
+		AssertElementPresent(locator1 = "DataEngineBuilder#WEB_CONTENT_REPETABLE_BUTTON_ADD");
 
-        Click(locator1 = "DataEngineBuilder#WEB_CONTENT_REPETABLE_BUTTON_ADD");
+		Click(locator1 = "DataEngineBuilder#WEB_CONTENT_REPETABLE_BUTTON_ADD");
 
 		AssertElementPresent(
 			key_fieldsetLabel = "Texto",
@@ -89,6 +88,7 @@ definition {
 		property portal.acceptance = "false";
 
 		// TODO LPS-123537 CheckLanguageSelector pending implementation
+
 	}
 
 	@description = "This is a test for LPS-123537. As Content Creator, I want to leverage the structures’ translations with nested field when creating a new Web Content"
