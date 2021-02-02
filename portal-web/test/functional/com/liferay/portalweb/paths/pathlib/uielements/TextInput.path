@@ -294,6 +294,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>INPUT</td>
+	<td>//input[@value='${key_value}']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>KEY</td>
 	<td>//div[label[contains(.,'Key')]]//input[@type='text']</td>
 	<td></td>
