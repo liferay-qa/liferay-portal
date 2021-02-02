@@ -607,7 +607,6 @@ definition {
 		Check.checkToggleSwitch(
 			checkboxName = "Show Label",
 			locator1 = "Checkbox#ANY_CHECKBOX");
-			
 	}
 
 	macro editFieldTip {
