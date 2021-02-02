@@ -47,18 +47,17 @@ definition {
 	@priority = "4"
 	test DeleteAFieldFromAFieldGroup {
 		property portal.acceptance = "false";
-		
+
 		ProductMenu.gotoPortlet(
-            category = "Content & Data",
-            portlet = "Documents and Media"
-        );
+			category = "Content & Data",
+			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
 
-        DMDocumentType.add(
-			dmDocumentTypeName = "DeletedFieldFromFieldGroup",
+		DMDocumentType.add(
+			dmDocumentTypeDescription = "DeletedFieldFromFieldGroup",
 			dmDocumentTypeFieldNames = "Text",
-            dmDocumentTypeDescription = "DeletedFieldFromFieldGroup");
+			dmDocumentTypeName = "DeletedFieldFromFieldGroup");
 
 		LexiconEntry.openEntryMenu(rowEntry = "DeletedFieldFromFieldGroup");
 
@@ -84,9 +83,9 @@ definition {
 		MenuItem.clickNoError(menuItem = "Edit");
 
 		AssertElementNotPresent(
-			locator1 = "FormViewBuilder#FIELD_LABEL",
-			fieldLabel = "Numeric");
-		
+			fieldLabel = "Numeric",
+			locator1 = "FormViewBuilder#FIELD_LABEL");
+
 		DDLDataDefinition.save();
 
 		DMDocumentType.deletePG(dmDocumentTypeName = "DeletedFieldFromFieldGroup");
