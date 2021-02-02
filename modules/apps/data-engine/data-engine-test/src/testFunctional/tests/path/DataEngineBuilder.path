@@ -24,6 +24,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>FORM_FIELDS_GROUP_NESTED_LABEL</td>
+	<td>//label[contains(text(),'${fieldGroupLabel}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>DUPLICATED_FORM_FIELDS_GROUP_LABEL</td>
 	<td>//input[(@class='form-control ddm-field-text') and (@placeholder='Enter a field label.')]</td>
 	<td></td>
