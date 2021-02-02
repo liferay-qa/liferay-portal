@@ -13,8 +13,6 @@ definition {
 		JSONGroup.addGroup(groupName = "Test Site Name");
 
 		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "test-site-name");
-
-		DMNavigator.gotoDocumentType();
 	}
 
 	tearDown {
@@ -84,6 +82,8 @@ definition {
 	@priority = "4"
 	test DuplicateColorFieldOnBuilder {
 		property portal.acceptance = "false";
+
+		DMNavigator.gotoDocumentType();
 
 		DMDocumentType.add(
 			dmDocumentTypeDescription = "DM Document Type Description",
