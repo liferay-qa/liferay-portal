@@ -44,12 +44,52 @@ definition {
 	}
 
 	@description = "This is a test for LPS-98077. As a Developer, I want to the ability to nest fields"
-	@ignore = "true"
 	@priority = "4"
 	test DeleteAFieldFromAFieldGroup {
 		property portal.acceptance = "false";
+		
+		ProductMenu.gotoPortlet(
+            category = "Content & Data",
+            portlet = "Documents and Media"
+        );
 
-		// TODO LPS-98077 DeleteAFieldFromAFieldGroup pending implementation
+		DMNavigator.gotoDocumentType();
+
+        DMDocumentType.add(
+			dmDocumentTypeName = "DeletedFieldFromFieldGroup",
+			dmDocumentTypeFieldNames = "Text",
+            dmDocumentTypeDescription = "DeletedFieldFromFieldGroup");
+
+		LexiconEntry.openEntryMenu(rowEntry = "DeletedFieldFromFieldGroup");
+
+		MenuItem.clickNoError(menuItem = "Edit");
+
+		DataEngine.addFieldNested(
+			fieldFieldLabel = "Numeric",
+			fieldName = "Numeric",
+			targetFieldLabel = "Text");
+
+		DDLDataDefinition.save();
+
+		LexiconEntry.openEntryMenu(rowEntry = "DeletedFieldFromFieldGroup");
+
+		MenuItem.clickNoError(menuItem = "Edit");
+
+		DataEngine.delete(fieldFieldLabel = "Numeric");
+
+		DDLDataDefinition.save();
+
+		LexiconEntry.openEntryMenu(rowEntry = "DeletedFieldFromFieldGroup");
+
+		MenuItem.clickNoError(menuItem = "Edit");
+
+		AssertElementNotPresent(
+			locator1 = "FormViewBuilder#FIELD_LABEL",
+			fieldLabel = "Numeric");
+		
+		DDLDataDefinition.save();
+
+		DMDocumentType.deletePG(dmDocumentTypeName = "DeletedFieldFromFieldGroup");
 	}
 
 	@description = "This is a test for LPS-98077. As a Developer, I want to the ability to nest fields"
