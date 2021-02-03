@@ -69,6 +69,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>ANY_MODAL</td>
+	<td>//div[contains(@class,'fieldset-modal show')]//*[contains(@class,'btn')][normalize-space(text())='${key_text}']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>ANY_WITH_COLOR</td>
 	<td>//*[contains(@class,'btn-${key_color}')][normalize-space(text())='${key_text}']</td>
 	<td></td>
@@ -396,6 +401,11 @@
 <tr>
 	<td>LOCALIZATION_GENERIC</td>
 	<td>//div[contains(@class,'form-group')]//div[contains(@class,'localized')]//button[contains(@class,'localized')] | //button[contains(@class,'localized')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>LOCALIZATION_MODAL</td>
+	<td>//div[contains(@class,'fieldset-modal show')]//div[contains(@class,'localizable-dropdown')]//button</td>
 	<td></td>
 </tr>
 <tr>
