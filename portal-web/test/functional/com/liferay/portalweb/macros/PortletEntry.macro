@@ -28,6 +28,13 @@ definition {
 		}
 	}
 
+	macro changeLocaleInModal {
+		
+		Click(locator1 = "Button#LOCALIZATION_MODAL");
+
+		Click(locator1 = "Translation#LOCALIZATION_NAME_MODAL", key_locale = "${locale}");
+	}
+
 	macro clickEditFromEllipsis {
 		Click.waitForMenuToggleJSClick(locator1 = "Icon#BODY_VERTICAL_ELLIPSIS");
 
