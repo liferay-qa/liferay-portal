@@ -29,10 +29,11 @@ definition {
 	}
 
 	macro changeLocaleInModal {
-		
 		Click(locator1 = "Button#LOCALIZATION_MODAL");
 
-		Click(locator1 = "Translation#LOCALIZATION_NAME_MODAL", key_locale = "${locale}");
+		Click(
+			key_locale = "${locale}",
+			locator1 = "Translation#LOCALIZATION_NAME_MODAL");
 	}
 
 	macro clickEditFromEllipsis {
