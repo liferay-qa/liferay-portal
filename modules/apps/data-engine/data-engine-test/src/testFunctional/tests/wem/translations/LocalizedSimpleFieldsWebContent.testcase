@@ -37,12 +37,77 @@ definition {
 	}
 
 	@description = "This is a test for LPS-122317. As Content Creator, I want to leverage the structures' translations without nested fields or fieldsets when creating a new Web Content"
-	@ignore = "true"
 	@priority = "5"
 	test CheckDuplicatedRepeatableStructureOnWebContent {
 		property portal.acceptance = "false";
 
-		// TODO LPS-122317 CheckDuplicatedRepeatableStructureOnWebContent pending implementation
+		NavItem.gotoStructures();
+
+		WebContentStructures.addCP(
+			structureDescription = "Structure Description Test",
+			structureName = "Structure Name Test");
+
+		DataEngine.addField(
+			fieldFieldLabel = "Test Text",
+			fieldName = "Text");
+
+		DataEngine.editFieldTip(
+			fieldFieldLabel = "Test Text",
+			fieldHelp = "Test Help");
+
+		DataEngine.editFieldRepeatable(fieldFieldLabel = "Test Text");
+
+		PortletEntry.changeLocale(locale = "pt-BR");
+
+		DataEngine.editFieldLabel(
+			fieldFieldLabel = "Test Text",
+			fieldFieldLabelEdit = "Texto de Teste");
+
+		DataEngine.editFieldTip(
+			fieldFieldLabel = "Texto de Teste",
+			fieldHelp = "Campo de ajuda do Teste");
+
+		WebContentStructures.saveCP();
+
+		NavItem.click(navItem = "Web Content");
+
+		WebContentNavigator.gotoAddWithStructureCP(structureName = "Structure Name Test");
+
+		WebContent.addWithStructureCP(webContentTitle = "Test Title");
+
+		PortletEntry.changeLocale(locale = "pt-BR");
+
+		WebContent.addWithStructureCP(webContentTitle = "Titulo do Teste");
+
+		WebContent.duplicateField(fieldFieldLabel = "Texto de Teste");
+
+		PortletEntry.publish();
+
+		WebContentNavigator.gotoEditCP(webContentTitle = "Test Title");
+
+		PortletEntry.changeLocale(locale = "pt-BR");
+
+		AssertElementPresent(
+			key_fieldFieldLabel = "Texto de Teste",
+			key_index = "1",
+			locator1 = "WCEditWebContent#FIELD_LABEL");
+
+		AssertElementPresent(
+			key_fieldFieldLabel = "Texto de Teste",
+			key_index = "2",
+			locator1 = "WCEditWebContent#FIELD_LABEL");
+
+		AssertElementPresent(
+			key_fieldFieldLabel = "Texto de Teste",
+			key_fieldFieldHelp = "Campo de ajuda do Teste",
+			key_index = "1",
+			locator1 = "WCEditWebContent#FIELD_HELP");
+
+		AssertElementPresent(
+			key_fieldFieldLabel = "Texto de Teste",
+			key_fieldFieldHelp = "Campo de ajuda do Teste",
+			key_index = "2",
+			locator1 = "WCEditWebContent#FIELD_HELP");
 	}
 
 	@description = "This is a test for LPS-122317. As Content Creator, I want to leverage the structures' translations without nested fields or fieldsets when creating a new Web Content"
