@@ -90,6 +90,14 @@ definition {
 		WaitForLiferayEvent.initializeLiferayEventLog();
 	}
 
+	macro clickSaveModal {
+		Click.mouseDownMouseUp(
+			key_text = "${button}",
+			locator1 = "Button#ANY_MODAL");
+
+		WaitForLiferayEvent.initializeLiferayEventLog();
+	}
+
 	macro clickSaveAsDraft {
 		Button.click(button = "Save as Draft");
 	}
