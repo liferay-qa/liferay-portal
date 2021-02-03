@@ -834,7 +834,7 @@ definition {
 			value1 = "${nestedFieldData}");
 	}
 
-	macro validateCantInFieldset {
+	macro viewAdvancedTabNotPresentOnSidebar {
 		var key_fieldLabel = "${key_fieldLabel}";
 
 		Click(locator1 = "FormFields#LABEL");
