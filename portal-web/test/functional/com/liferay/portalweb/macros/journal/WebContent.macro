@@ -977,6 +977,12 @@ definition {
 		Alert.viewSuccessMessage();
 	}
 
+	macro duplicateField {
+		Click(
+			key_fieldFieldLabel = "${fieldFieldLabel}",
+			locator1 = "WCEditWebContent#DUPLICATE_BUTTON");
+	}
+
 	macro editCP {
 		WebContent.addCP(webContentTitle = "${webContentTitleEdit}");
 
