@@ -126,12 +126,77 @@ definition {
 	}
 
 	@description = "This is a test for LPS-123537. As Content Creator, I want to leverage the structures’ translations with nested field when creating a new Web Content"
-	@ignore = "true"
 	@priority = "4"
 	test CheckLocalizationOfWebContentUponLanguageChange {
 		property portal.acceptance = "false";
+  
+		ProductMenu.gotoPortlet(
+			category = "Content & Data",
+			portlet = "Web Content");
+		
+		NavItem.gotoStructures();
 
-		// TODO LPS-123537 CheckLocalizationOfWebContentUponLanguageChange pending implementation
+		WebContentStructures.addCP(
+			structureDescription = "Structure Description",
+			structureName = "Title");
+
+		DataEngine.addField(
+            fieldFieldLabel = "Text",
+            fieldName = "Text");
+
+        DataEngine.addFieldNested(
+            fieldFieldLabel = "Rich Text",
+            fieldName = "Rich Text",
+			targetFieldLabel = "Text");
+			
+		WebContentStructures.saveCP(structureName = "Title");
+
+		Navigator.gotoNavItem(navItem = "Web Content");
+
+		WebContentNavigator.gotoAddWithStructureCP(structureName = "Title");
+
+		PortletEntry.inputText(
+			fieldLabel = "Text",
+			text = "Text");
+
+		WebContent.addWithStructureCP(
+			webContentRichText = "Hello",
+			webContentTitle = "Web Content Title");
+
+		PortletEntry.changeLocale(locale = "pt_BR");
+
+		PortletEntry.inputTitle(title = "Título Web Content");
+
+		PortletEntry.inputText(
+			fieldLabel = "Text",
+			text = "Texto");
+
+		CKEditor.addContentInWebContent(
+			content = "Olá",
+			fieldLabel = "Rich Text");
+		
+		PortletEntry.publish();
+
+		WebContentNavigator.gotoEditCP(webContentTitle = "Web Content Title");
+
+		PortletEntry.changeLocale(locale = "pt_BR");
+
+		AssertTextEquals(
+			locator1 = "TextInput#TITLE",
+			value1 = "Título Web Content");	
+		
+		AssertTextEquals(
+			key_fieldLabel = "Text",
+			locator1 = "TextInput#GENERIC_TEXT_INPUT",
+			value1 = "Texto");
+
+		SelectFrame.selectFrameNoLoading(
+			key_fieldLabel = "Rich Text",
+			locator1 = "CKEditor#BODY_FIELD_IFRAME_WEB_CONTENT_ARTICLE");
+
+		AssertTextEquals(
+			locator1 = "CKEditor#BODY",
+			value1 = "Olá");
 	}
 
 	@description = "This is a test for LPS-123537. As Content Creator, I want to leverage the structures’ translations with nested field when creating a new Web Content"
