@@ -352,7 +352,6 @@ definition {
 	}
 
 	@description = "This is a test for LPS-123537. As Content Creator, I want to leverage the structures’ translations with nested field when creating a new Web Content"
-	@ignore = "true"
 	@priority = "5"
 	test TranslateWebContentToNLanguages {
 		property portal.acceptance = "false";
