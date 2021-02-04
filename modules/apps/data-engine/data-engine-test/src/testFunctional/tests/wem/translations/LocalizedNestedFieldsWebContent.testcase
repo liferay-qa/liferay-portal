@@ -129,11 +129,11 @@ definition {
 	@priority = "4"
 	test CheckLocalizationOfWebContentUponLanguageChange {
 		property portal.acceptance = "false";
-  
+
 		ProductMenu.gotoPortlet(
 			category = "Content & Data",
 			portlet = "Web Content");
-		
+
 		NavItem.gotoStructures();
 
 		WebContentStructures.addCP(
@@ -141,14 +141,14 @@ definition {
 			structureName = "Title");
 
 		DataEngine.addField(
-            fieldFieldLabel = "Text",
-            fieldName = "Text");
+			fieldFieldLabel = "Text",
+			fieldName = "Text");
 
-        DataEngine.addFieldNested(
-            fieldFieldLabel = "Rich Text",
-            fieldName = "Rich Text",
+		DataEngine.addFieldNested(
+			fieldFieldLabel = "Rich Text",
+			fieldName = "Rich Text",
 			targetFieldLabel = "Text");
-			
+
 		WebContentStructures.saveCP(structureName = "Title");
 
 		Navigator.gotoNavItem(navItem = "Web Content");
@@ -174,7 +174,7 @@ definition {
 		CKEditor.addContentInWebContent(
 			content = "Olá",
 			fieldLabel = "Rich Text");
-		
+
 		PortletEntry.publish();
 
 		WebContentNavigator.gotoEditCP(webContentTitle = "Web Content Title");
@@ -183,8 +183,8 @@ definition {
 
 		AssertTextEquals(
 			locator1 = "TextInput#TITLE",
-			value1 = "Título Web Content");	
-		
+			value1 = "Título Web Content");
+
 		AssertTextEquals(
 			key_fieldLabel = "Text",
 			locator1 = "TextInput#GENERIC_TEXT_INPUT",
