@@ -557,7 +557,7 @@ definition {
 			locator1 = "WCEditWebContent#FIELDSET_LOCALIZATION_LANGUAGE_BUTTON");
 	}
 
-	macro changeFiledsetName {
+	macro changeFieldsetName {
 		Type(
 			locator1 = "FormViewBuilder#FIELD_SET_NAME",
 			value1 = "${fieldsetName}");
