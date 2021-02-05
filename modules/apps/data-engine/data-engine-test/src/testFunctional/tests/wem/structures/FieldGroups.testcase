@@ -542,6 +542,7 @@ definition {
 			fieldFieldLabel = "Numeric",
 			fieldName = "Numeric",
 			targetFieldLabel = "Text");
+
 		if (!(isSet(fieldsGroupLabel))) {
 			var fieldsGroupLabel = "Fields Group";
 		}
@@ -550,6 +551,7 @@ definition {
 			key_fieldFieldLabel = "${fieldsGroupLabel}",
 			locator1 = "DDMEditStructure#FORM_FIELD_CONTAINER_LABEL",
 			value1 = "${fieldsGroupLabel}");
+
 		if (IsElementNotPresent(locator1 = "NavTab#ACTIVE_TAB_LINK", key_tab = "Basic")) {
 			Navigator.gotoNavTab(navTab = "Basic");
 		}
