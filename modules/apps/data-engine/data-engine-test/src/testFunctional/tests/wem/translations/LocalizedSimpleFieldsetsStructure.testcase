@@ -377,7 +377,7 @@ definition {
 		DataEngine.editFieldLabel(
 			fieldFieldLabel = "Text",
 			fieldFieldLabelEdit = "${fieldLabel1EN}");
-	
+
 		DataEngine.addFieldNested(
 			fieldFieldLabel = "${fieldLabel2EN}",
 			fieldName = "Text",
@@ -394,7 +394,7 @@ definition {
 		DataEngine.editFieldLabel(
 			fieldFieldLabel = "${fieldLabel2EN}",
 			fieldFieldLabelEdit = "${fieldLabel2PT}");
-		
+
 		DataEngine.changeFieldsetLocale(locale = "de-DE");
 
 		DataEngine.changeFieldsetName(fieldsetName = "${testFieldsetDE}");
@@ -406,7 +406,7 @@ definition {
 		DataEngine.editFieldLabel(
 			fieldFieldLabel = "${fieldLabel2EN}",
 			fieldFieldLabelEdit = "${fieldLabel2DE}");
-		
+
 		DataEngine.changeFieldsetLocale(locale = "ja-JP");
 
 		DataEngine.changeFieldsetName(fieldsetName = "${testFieldsetJP}");
@@ -426,7 +426,7 @@ definition {
 		DoubleClick(
 			key_fieldName = "${testFieldsetEN}",
 			locator1 = "Sidebar#ADD_FIELD_NAME");
-			
+
 		WebContentStructures.saveCP();
 
 		WebContentNavigator.gotoEditStructure(structureName = "${structureName}");
@@ -450,7 +450,7 @@ definition {
 		AssertElementPresent(
 			key_fieldFieldLabel = "${fieldLabel2DE}",
 			locator1 = "DDMEditStructure#FORM_FIELD_CONTAINER");
-		
+
 		PortletEntry.changeLocale(locale = "ja_JP");
 
 		AssertElementPresent(
@@ -461,4 +461,5 @@ definition {
 			key_fieldFieldLabel = "${fieldLabel2JP}",
 			locator1 = "DDMEditStructure#FORM_FIELD_CONTAINER");
 	}
+
 }

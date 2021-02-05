@@ -549,6 +549,20 @@ definition {
 			locator1 = "WCEditWebContent#REPEATED_FIELD");
 	}
 
+	macro changeFieldsetLocale {
+		Click(locator1 = "WCEditWebContent#FIELDSET_LOCALIZATION_DROPDOWN_BUTTON");
+
+		Click(
+			key_locale = "${locale}",
+			locator1 = "WCEditWebContent#FIELDSET_LOCALIZATION_LANGUAGE_BUTTON");
+	}
+
+	macro changeFieldsetName {
+		Type(
+			locator1 = "FormViewBuilder#FIELD_SET_NAME",
+			value1 = "${fieldsetName}");
+	}
+
 	macro configureFieldsetsShowOrHideLabel {
 		AssertClick.assertPartialTextClickAt(
 			key_fieldFieldLabel = "${fieldFieldLabel}",
@@ -1157,6 +1171,18 @@ definition {
 			locator1 = "Sidebar#FIELDSET_ITEM_ELLIPSIS");
 	}
 
+	macro gotoNewFieldset {
+		Navigator.gotoSidebarTab(tabName = "Builder");
+
+		Navigator.gotoNavTab(navTab = "Fieldsets");
+
+		Click(locator1 = "FormViewBuilder#CREATE_NEW_FIELD_SETS");
+
+		Type(
+			locator1 = "FormViewBuilder#FIELD_SET_NAME",
+			value1 = "${fieldsetName}");
+	}
+
 	macro viewField {
 		var key_fieldFieldLabel = "${fieldFieldLabel}";
 		var key_text = "${fieldName}";
@@ -1258,29 +1284,4 @@ definition {
 			value1 = "${nestedFieldData}");
 	}
 
-	macro changeFieldsetLocale {
-		Click(locator1 = "WCEditWebContent#FIELDSET_LOCALIZATION_DROPDOWN_BUTTON");
-
-		Click(
-			key_locale = "${locale}",
-			locator1 = "WCEditWebContent#FIELDSET_LOCALIZATION_LANGUAGE_BUTTON");
-	}
-
-	macro changeFieldsetName {
-		Type(
-			locator1 = "FormViewBuilder#FIELD_SET_NAME",
-			value1 = "${fieldsetName}");
-	}
-
-	macro gotoNewFieldset {
-		Navigator.gotoSidebarTab(tabName = "Builder");
-
-		Navigator.gotoNavTab(navTab = "Fieldsets");
-
-		Click(locator1 = "FormViewBuilder#CREATE_NEW_FIELD_SETS");
-
-		Type(
-			locator1 = "FormViewBuilder#FIELD_SET_NAME",
-			value1 = "${fieldsetName}");
-	}
 }
