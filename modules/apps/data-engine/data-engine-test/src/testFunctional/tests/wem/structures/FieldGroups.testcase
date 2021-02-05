@@ -543,9 +543,7 @@ definition {
 			fieldName = "Numeric",
 			targetFieldLabel = "Text");
 
-		if (!(isSet(fieldsGroupLabel))) {
-			var fieldsGroupLabel = "Fields Group";
-		}
+		var fieldsGroupLabel = "Fields Group";
 
 		AssertClick.assertPartialTextClickAt(
 			key_fieldFieldLabel = "${fieldsGroupLabel}",
