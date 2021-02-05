@@ -117,7 +117,7 @@
 </tr>
 <tr>
 	<td>WEB_CONTENT_TRANSLATION_SPAN_LANGUAGE_ENGLISH</td>
-    <td>//div[contains(@class, 'input-localized-palette')]//li//span[contains(@id,'qfkd')]</td>
+    <td>//a[contains(@id,'titleMap')]//span[@class='taglib-text-icon' and contains(text(),'en-US')]</td>
     <td></td>
 </tr>
 <tr>
