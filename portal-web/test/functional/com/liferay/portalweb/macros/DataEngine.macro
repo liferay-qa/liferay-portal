@@ -550,10 +550,10 @@ definition {
 	}
 
 	macro changeFieldsetLocale {
-		Click(locator1 = "WCEditWebContent#FIELDSET_LOCALIZATION_DROPDOWN_BUTTON");
+		Click(locator1 = "FormViewBuilder#FIELDSET_LOCALIZATION_DROPDOWN_BUTTON");
 		Click(
 			key_locale = "${locale}",
-			locator1 = "WCEditWebContent#FIELDSET_LOCALIZATION_LANGUAGE_BUTTON");
+			locator1 = "FormViewBuilder#FIELDSET_LOCALIZATION_LANGUAGE_BUTTON");
 	}
 
 	macro changeFiledsetName {
@@ -1172,8 +1172,11 @@ definition {
 
 	macro gotoNewFieldset {
 		Navigator.gotoSidebarTab(tabName = "Builder");
+
 		Navigator.gotoNavTab(navTab = "Fieldsets");
+
 		Click(locator1 = "FormViewBuilder#CREATE_NEW_FIELD_SETS");
+
 		Type(
 			locator1 = "FormViewBuilder#FIELD_SET_NAME",
 			value1 = "${fieldsetName}");
