@@ -359,7 +359,9 @@ definition {
 
 		DataEngine.gotoNewFieldset(fieldsetName = "Name Fieldset Test");
 
-		DataEngine.addFields(fieldNameList = "Text");
+		DataEngine.addField(
+			fieldFieldLabel = "Text",
+			fieldName = "Text");
 
 		DataEngine.editFieldLabel(
 			fieldFieldLabel = "Text",
