@@ -648,11 +648,11 @@ definition {
 			webContentTitle = "WC English");
 
 		Type(
-			locator1 = "WCD#WEB_CONTENT_TEXT_INPUT_LOCATOR",
+			locator1 = "WCEditWebContent#WEB_CONTENT_TEXT_INPUT_LOCATOR",
 			value1 = "Text English");
 
 		Type(
-			locator1 = "WCD#WEB_CONTENT_NUMERIC_INPUT_LOCATOR",
+			locator1 = "WCEditWebContent#WEB_CONTENT_NUMERIC_INPUT_LOCATOR",
 			value1 = "1234");
 
 		PortletEntry.changeLocale(locale = "pt-BR");
@@ -660,11 +660,11 @@ definition {
 		PortletEntry.inputTitle(title = "WC Português");
 
 		Type(
-			locator1 = "WCD#WEB_CONTENT_TEXT_INPUT_LOCATOR",
+			locator1 = "WCEditWebContent#WEB_CONTENT_TEXT_INPUT_LOCATOR",
 			value1 = "Texto Portugês");
 
 		Type(
-			locator1 = "WCD#WEB_CONTENT_NUMERIC_INPUT_LOCATOR",
+			locator1 = "WCEditWebContent#WEB_CONTENT_NUMERIC_INPUT_LOCATOR",
 			value1 = "4321");
 
 		PortletEntry.publish();
@@ -674,11 +674,11 @@ definition {
 		PortletEntry.changeLocale(locale = "pt-BR");
 
 		Type(
-			locator1 = "WCD#WEB_CONTENT_TEXT_INPUT_LOCATOR",
+			locator1 = "WCEditWebContent#WEB_CONTENT_TEXT_INPUT_LOCATOR",
 			value1 = "Texto Português Editado");
 
 		Type(
-			locator1 = "WCD#WEB_CONTENT_NUMERIC_INPUT_LOCATOR",
+			locator1 = "WCEditWebContent#WEB_CONTENT_NUMERIC_INPUT_LOCATOR",
 			value1 = "9876");
 
 		PortletEntry.publish();
@@ -686,21 +686,21 @@ definition {
 		LexiconEntry.gotoEntry(rowEntry = "WC English");
 
 		AssertTextEquals(
-			locator1 = "WCD#WEB_CONTENT_TEXT_INPUT_LOCATOR",
+			locator1 = "WCEditWebContent#WEB_CONTENT_TEXT_INPUT_LOCATOR",
 			value1 = "Text English");
 
 		AssertTextEquals(
-			locator1 = "WCD#WEB_CONTENT_NUMERIC_INPUT_LOCATOR",
+			locator1 = "WCEditWebContent#WEB_CONTENT_NUMERIC_INPUT_LOCATOR",
 			value1 = "1234");
 
 		PortletEntry.changeLocale(locale = "pt-BR");
 
 		AssertTextEquals(
-			locator1 = "WCD#WEB_CONTENT_TEXT_INPUT_LOCATOR",
+			locator1 = "WCEditWebContent#WEB_CONTENT_TEXT_INPUT_LOCATOR",
 			value1 = "Texto Português Editado");
 
 		AssertTextEquals(
-			locator1 = "WCD#WEB_CONTENT_NUMERIC_INPUT_LOCATOR",
+			locator1 = "WCEditWebContent#WEB_CONTENT_NUMERIC_INPUT_LOCATOR",
 			value1 = "9876");
 	}
 

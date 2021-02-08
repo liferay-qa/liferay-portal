@@ -159,6 +159,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>WEB_CONTENT_TEXT_INPUT_LOCATOR</td>
+	<td>//input[contains(@class,'form-control ddm')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WEB_CONTENT_NUMERIC_INPUT_LOCATOR</td>
+	<td>//input[(@class='form-control')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>USER_SEGMENT_DETAIL_TITLE</td>
 	<td>//label[contains(.,'${key_userSegmentDetailTitle}')]</td>
 	<td></td>
