@@ -364,7 +364,7 @@ definition {
 
 		DataEngine.changeFieldsetLocale(locale = "pt-BR");
 
-		DataEngine.changeFiledsetName(fieldsetName = "Texto Fieldset Nome de Teste");
+		DataEngine.changeFieldsetName(fieldsetName = "Texto Fieldset Nome de Teste");
 
 		DataEngine.editFieldLabel(
 			fieldFieldLabel = "Text Test",
