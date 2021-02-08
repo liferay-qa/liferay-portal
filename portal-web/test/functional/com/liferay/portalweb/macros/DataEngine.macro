@@ -551,6 +551,7 @@ definition {
 
 	macro changeFieldsetLocale {
 		Click(locator1 = "FormViewBuilder#FIELDSET_LOCALIZATION_DROPDOWN_BUTTON");
+
 		Click(
 			key_locale = "${locale}",
 			locator1 = "FormViewBuilder#FIELDSET_LOCALIZATION_LANGUAGE_BUTTON");
