@@ -519,6 +519,18 @@
 </tr>
 
 <tr>
+	<td>FIELDSET_LOCALIZATION_DROPDOWN_BUTTON</td>
+	<td>//div[contains(@class,'localizable-dropdown')]/button</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>FIELDSET_LOCALIZATION_LANGUAGE_BUTTON</td>
+	<td>//ul[contains(@class,'localizable-dropdown-ul')]//button[contains(.,'${key_locale}')]</td>
+	<td></td>
+</tr>
+
+<tr>
 	<td>LOCALIZATION_LIST_FIELD_SET</td>
 	<td>xpath=(//span[contains(@class, 'autofit-section') and contains(., '${key_localizationList}')])[2]</td>
 	<td></td>
