@@ -1289,4 +1289,11 @@ definition {
 			value1 = "${nestedFieldData}");
 	}
 
+	macro changeFieldsetLocale {
+		Click(locator1 = "WCEditWebContent#FIELDSET_LOCALIZATION_DROPDOWN_BUTTON");
+		Click(
+			key_locale = "${locale}",
+			locator1 = "WCEditWebContent#FIELDSET_LOCALIZATION_LANGUAGE_BUTTON");
+	}
+
 }

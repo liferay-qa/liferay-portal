@@ -260,6 +260,27 @@
 	<td>xpath=//div[contains(@class,'ddm-field') and contains(@data-field-name,'${key_fieldReference}')][${key_index}]</td>
 	<td></td>
 </tr>
+WCEditWebContent.path
+<tr>
+	<td>FIELD_HELP</td>
+	<td>xpath=(//label[normalize-space(text())='${key_fieldFieldLabel}']/following-sibling::span[contains(@class,'form-text')][text()='${key_fieldFieldHelp}'])[${key_index}]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FIELD_LABEL</td>
+	<td>xpath=(//label[normalize-space(text())='${key_fieldFieldLabel}'])[${key_index}]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FIELDSET_LOCALIZATION_DROPDOWN_BUTTON</td>
+	<td>//div[contains(@class,'localizable-dropdown')]/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FIELDSET_LOCALIZATION_LANGUAGE_BUTTON</td>
+	<td>//ul[contains(@class,'localizable-dropdown-ul')]//button[contains(.,'${key_locale}')]</td>
+	<td></td>
+</tr>
 </tbody>
 </table>
 </body>
