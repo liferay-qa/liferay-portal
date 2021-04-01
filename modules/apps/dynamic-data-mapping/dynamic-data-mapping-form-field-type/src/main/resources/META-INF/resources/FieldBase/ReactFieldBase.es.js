@@ -24,12 +24,17 @@ import {
 	useFormState,
 } from 'dynamic-data-mapping-form-renderer';
 import {EVENT_TYPES as CORE_EVENT_TYPES} from 'dynamic-data-mapping-form-renderer/js/core/actions/eventTypes.es';
-import moment from 'moment';
+import moment from 'moment/min/moment-with-locales';
 import React, {useMemo} from 'react';
 
-const convertInputValue = (fieldType, value) => {
+const convertInputValue = (fieldType, locale, value) => {
 	if (fieldType === 'date') {
-		const date = moment(value).toDate();
+		const momentLocale = moment().locale(locale);
+
+		const date = moment(value, [
+			momentLocale.localeData().longDateFormat('L'),
+			'YYYY-MM-DD',
+		]).toDate();
 
 		if (moment(date).isValid()) {
 			return moment(date).format('YYYY-MM-DD');
@@ -108,23 +113,24 @@ function FieldBase({
 	const dispatch = useForm();
 	const inputEditedName = name + '_edited';
 
-	const localizedValueArray = useMemo(() => {
-		const languageValues = [];
+	const hiddenTranslations = useMemo(() => {
+		const array = [];
 
 		if (!localizedValue) {
-			return languageValues;
+			return array;
 		}
 
 		Object.keys(localizedValue).forEach((key) => {
 			if (key !== editingLanguageId) {
-				languageValues.push({
-					name: name.replace(editingLanguageId, key),
+				array.push({
+					inputName: name.replace(editingLanguageId, key),
+					locale: key,
 					value: localizedValue[key],
 				});
 			}
 		});
 
-		return languageValues;
+		return array;
 	}, [localizedValue, editingLanguageId, name]);
 
 	const renderLabel =
@@ -257,15 +263,19 @@ function FieldBase({
 
 			{!renderLabel && children}
 
-			{localizedValueArray.length > 0 &&
-				localizedValueArray.map((language) => (
+			{hiddenTranslations.length > 0 &&
+				hiddenTranslations.map((translation) => (
 					<input
-						key={language.name}
-						name={language.name}
+						key={translation.inputName}
+						name={translation.inputName}
 						type="hidden"
 						value={
-							language.value
-								? convertInputValue(type, language.value)
+							translation.value
+								? convertInputValue(
+										type,
+										translation.locale,
+										translation.value
+								  )
 								: ''
 						}
 					/>
