@@ -128,18 +128,11 @@ public class ContentUtil {
 			HttpServletResponse httpServletResponse, long plid)
 		throws PortalException {
 
-		if (FFLayoutContentPageEditorConfigurationUtil.
-				contentBrowsingEnabled()) {
-
-			return JSONUtil.concat(
-				_getLayoutClassedModelPageContentsJSONArray(
-					httpServletRequest, plid),
-				AssetListEntryUsagesUtil.getPageContentsJSONArray(
-					httpServletRequest, httpServletResponse, plid));
-		}
-
-		return _getLayoutClassedModelPageContentsJSONArray(
-			httpServletRequest, plid);
+		return JSONUtil.concat(
+			_getLayoutClassedModelPageContentsJSONArray(
+				httpServletRequest, plid),
+			AssetListEntryUsagesUtil.getPageContentsJSONArray(
+				httpServletRequest, httpServletResponse, plid));
 	}
 
 	private static String _generateUniqueLayoutClassedModelUsageKey(
@@ -522,11 +515,7 @@ public class ContentUtil {
 
 		long classPK = jsonObject.getLong("classPK");
 
-		if (classPK <= 0) {
-			return null;
-		}
-
-		if (mappedClassPKs.contains(classPK)) {
+		if ((classPK <= 0) || mappedClassPKs.contains(classPK)) {
 			return null;
 		}
 
@@ -563,12 +552,8 @@ public class ContentUtil {
 				layoutStructure.getLayoutStructureItems()) {
 
 			if (!(layoutStructureItem instanceof
-					ContainerStyledLayoutStructureItem)) {
-
-				continue;
-			}
-
-			if (ListUtil.exists(
+					ContainerStyledLayoutStructureItem) ||
+				ListUtil.exists(
 					layoutStructure.getDeletedLayoutStructureItems(),
 					deletedLayoutStructureItem ->
 						deletedLayoutStructureItem.containsItemId(

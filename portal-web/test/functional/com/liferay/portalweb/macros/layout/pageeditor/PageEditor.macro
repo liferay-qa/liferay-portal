@@ -242,7 +242,7 @@ definition {
 				key_position = "${position}",
 				locator1 = "PageEditor#GRID_COLUMN_NESTED_ELEMENT");
 
-			PageEditor.gotoTab(tabName = "Contents");
+			PageEditor.gotoTab(tabName = "Browser");
 
 			PageEditor.gotoTab(tabName = "Fragments and Widgets");
 
@@ -344,7 +344,7 @@ definition {
 				key_position = "${position}",
 				locator1 = "PageEditor#CONTAINER_CONTAINER_NESTED_ELEMENT");
 
-			PageEditor.gotoTab(tabName = "Contents");
+			PageEditor.gotoTab(tabName = "Browser");
 
 			PageEditor.gotoTab(tabName = "Fragments and Widgets");
 
@@ -432,7 +432,7 @@ definition {
 				key_inFragmentName = "Dropdown",
 				locator1 = "Fragment#FRAGMENT_BODY_IN_FRAGMENT");
 
-			PageEditor.gotoTab(tabName = "Contents");
+			PageEditor.gotoTab(tabName = "Browser");
 
 			PageEditor.gotoTab(tabName = "Fragments and Widgets");
 
@@ -532,7 +532,7 @@ definition {
 				key_inFragmentName = "Tabs",
 				locator1 = "Fragment#FRAGMENT_BODY_IN_FRAGMENT");
 
-			PageEditor.gotoTab(tabName = "Contents");
+			PageEditor.gotoTab(tabName = "Browser");
 
 			PageEditor.gotoTab(tabName = "Fragments and Widgets");
 
@@ -872,7 +872,7 @@ definition {
 			fieldValue = "${videoLink}");
 
 		Click(
-			key_sidebarButton = "Selection",
+			key_sidebarButton = "Browser",
 			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
 		PageEditor.waitForAutoSave();
@@ -995,7 +995,7 @@ definition {
 			key_fragmentName = "${portletName}",
 			locator1 = "Fragment#FRAGMENT_HEADER");
 
-		PageEditor.gotoTab(tabName = "Contents");
+		PageEditor.gotoTab(tabName = "Browser");
 
 		PageEditor.gotoTab(tabName = "Fragments and Widgets");
 
@@ -1128,17 +1128,22 @@ definition {
 	}
 
 	macro clickEditableField {
-		var key_fragmentName = "${fragmentName}";
+		if (!(isSet(index))) {
+			var index = "1";
+		}
 
-		if (IsNotVisible(locator1 = "Fragment#FRAGMENT_HEADER")) {
-			Click.clickNoWaitForVisible(locator1 = "Fragment#FRAGMENT_HEADER");
+		var key_fragmentName = "${fragmentName}";
+		var key_index = "${index}";
+
+		if (IsNotVisible(locator1 = "Fragment#FRAGMENT_HEADER_ANY")) {
+			Click.clickNoWaitForVisible(locator1 = "Fragment#FRAGMENT_HEADER_ANY");
 		}
 
 		if ("${contributed}" == "false") {
-			Click(locator1 = "Fragment#EDITABLE_FIELD");
+			Click(locator1 = "Fragment#EDITABLE_FIELD_ANY");
 		}
 		else {
-			Click(locator1 = "Fragment#CONTRIBUTED_FRAGMENT_EDITABLE_FIELD");
+			Click(locator1 = "Fragment#CONTRIBUTED_FRAGMENT_EDITABLE_FIELD_ANY");
 		}
 	}
 
@@ -1297,7 +1302,7 @@ definition {
 				value1 = "${numberOfTabs}");
 
 			Click(
-				key_sidebarButton = "Selection",
+				key_sidebarButton = "Browser",
 				locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
 			AssertTextEquals(
@@ -1456,12 +1461,11 @@ definition {
 			Click.clickNoWaitForVisible(locator1 = "Fragment#FRAGMENT_HEADER_ANY");
 		}
 
-		PageEditor.gotoTab(tabName = "Selection");
+		AssertVisible(
+			key_sidebarButton = "Browser",
+			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
-		AssertClick(
-			key_navItem = "General",
-			locator1 = "PageEditor#NAV_ITEM_BUTTON",
-			value1 = "General");
+		Navigator.gotoNavTab(navTab = "General");
 
 		if (isSet(selectedName)) {
 			AssertElementPresent(
@@ -1574,7 +1578,7 @@ definition {
 				value1 = "${maxNumberOfItems}");
 
 			Click(
-				key_sidebarButton = "Selection",
+				key_sidebarButton = "Browser",
 				locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
 			AssertTextEquals(
@@ -1600,12 +1604,11 @@ definition {
 			Click.clickNoWaitForVisible(locator1 = "Fragment#FRAGMENT_HEADER");
 		}
 
-		PageEditor.gotoTab(tabName = "Selection");
+		AssertVisible(
+			key_sidebarButton = "Browser",
+			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
-		AssertClick(
-			key_navItem = "General",
-			locator1 = "PageEditor#NAV_ITEM_BUTTON",
-			value1 = "General");
+		Navigator.gotoNavTab(navTab = "General");
 
 		if (isSet(selectedName)) {
 			AssertElementPresent(
@@ -1714,12 +1717,11 @@ definition {
 			Click.clickNoWaitForVisible(locator1 = "Fragment#FRAGMENT_HEADER");
 		}
 
-		PageEditor.gotoTab(tabName = "Selection");
+		AssertVisible(
+			key_sidebarButton = "Browser",
+			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
-		AssertClick(
-			key_navItem = "General",
-			locator1 = "PageEditor#NAV_ITEM_BUTTON",
-			value1 = "General");
+		Navigator.gotoNavTab(navTab = "General");
 
 		if (isSet(inCollectionDisplay)) {
 			Select(
@@ -1872,14 +1874,11 @@ definition {
 		}
 
 		AssertVisible(
-			key_sidebarButton = "Selection",
+			key_sidebarButton = "Browser",
 			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
 		if ("${panel}" == "General") {
-			AssertClick(
-				key_navItem = "General",
-				locator1 = "PageEditor#NAV_ITEM_BUTTON",
-				value1 = "General");
+			Navigator.gotoNavTab(navTab = "General");
 
 			if (isSet(displayedBehavior)) {
 				while (IsNotChecked.isNotCheckedNotVisible(checkboxName = "${displayedBehavior}", locator1 = "Checkbox#ANY_CHECKBOX")) {
@@ -1972,14 +1971,7 @@ definition {
 			fragmentName = "${fragmentName}",
 			id = "${id}");
 
-		PageEditor.gotoTab(tabName = "Selection");
-
-		AssertClick(
-			key_navItem = "Image Source",
-			locator1 = "PageEditor#NAV_ITEM_BUTTON",
-			value1 = "Image Source");
-
-		Pause(locator1 = "3000");
+		Navigator.gotoNavTab(navTab = "Image Source");
 
 		if (!(IsSelectedLabel(key_fieldLabel = "Source Selection", locator1 = "Select#GENERIC_SELECT_FIELD", value1 = "Direct"))) {
 			Select(
@@ -2045,7 +2037,7 @@ definition {
 				value1 = "${imageDescription}");
 
 			Click(
-				key_sidebarButton = "Selection",
+				key_sidebarButton = "Browser",
 				locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
 			PageEditor.waitForAutoSave();
@@ -2058,10 +2050,48 @@ definition {
 	}
 
 	macro editFragmentText {
+		if (!(isSet(index))) {
+			var index = "1";
+		}
+
 		PageEditor.gotoEditableFieldEdit(
 			contributed = "${contributed}",
 			fragmentName = "${fragmentName}",
-			id = "${id}");
+			id = "${id}",
+			index = "${index}");
+
+		if (isSet(text)) {
+			Type(
+				key_editor = "content",
+				locator1 = "AlloyEditor#EDITOR",
+				value1 = "${text}");
+		}
+
+		if (isSet(style)) {
+			SelectFieldText(
+				key_editor = "content",
+				locator1 = "AlloyEditor#EDITOR");
+
+			Click(locator1 = "AlloyEditor#TEXT_FORMATTING_STYLE");
+
+			Click(
+				key_styleFormat = "${style}",
+				locator1 = "AlloyEditor#TEXT_FORMATTING_STYLE_DROPDOWN");
+		}
+
+		PageEditor.clickManagementBar();
+
+		PageEditor.waitForAutoSave();
+	}
+
+	macro editFragmentTextViaPageContentPanel {
+		Click.clickAtNotVisible(
+			key_itemName = "${itemName}",
+			locator1 = "PageEditor#PAGE_CONTENTS_ITEM_EDIT_PENCIL");
+
+		AssertElementPresent(
+			key_text = "Edit Inline Text",
+			locator1 = "Button#ANY_DISABLED");
 
 		if (isSet(text)) {
 			Type(
@@ -2101,13 +2131,12 @@ definition {
 			Click.clickNoWaitForVisible(locator1 = "PageEditor#LAYOUT_ELEMENTS_HEADER");
 		}
 
-		PageEditor.gotoTab(tabName = "Selection");
+		AssertVisible(
+			key_sidebarButton = "Browser",
+			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
 		if ("${panel}" == "Styles") {
-			AssertClick(
-				key_navItem = "Styles",
-				locator1 = "PageEditor#NAV_ITEM_BUTTON",
-				value1 = "Styles");
+			Navigator.gotoNavTab(navTab = "Styles");
 
 			if (isSet(backgroundColor)) {
 				PageEditor.selectColorSwatchItem(
@@ -2242,7 +2271,7 @@ definition {
 					value1 = "${borderWidth}");
 
 				Click(
-					key_sidebarButton = "Selection",
+					key_sidebarButton = "Browser",
 					locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
 				Pause(locator1 = "3000");
@@ -2303,7 +2332,7 @@ definition {
 					value1 = "${height}");
 
 				Click(
-					key_sidebarButton = "Selection",
+					key_sidebarButton = "Browser",
 					locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 			}
 
@@ -2359,7 +2388,7 @@ definition {
 					value1 = "${opacity}");
 
 				Click(
-					key_sidebarButton = "Selection",
+					key_sidebarButton = "Browser",
 					locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
 				Pause(locator1 = "3000");
@@ -2407,10 +2436,7 @@ definition {
 		}
 
 		if ("${panel}" == "General") {
-			AssertClick(
-				key_navItem = "General",
-				locator1 = "PageEditor#NAV_ITEM_BUTTON",
-				value1 = "General");
+			Navigator.gotoNavTab(navTab = "General");
 
 			if ("${link}" == "Mapped URL") {
 				Select(
@@ -2443,7 +2469,7 @@ definition {
 					value1 = "${url}");
 
 				Click(
-					key_sidebarButton = "Selection",
+					key_sidebarButton = "Browser",
 					locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 			}
 
@@ -2478,13 +2504,12 @@ definition {
 			Click.clickNoWaitForVisible(locator1 = "PageEditor#LAYOUT_ELEMENTS_HEADER");
 		}
 
-		PageEditor.gotoTab(tabName = "Selection");
+		AssertVisible(
+			key_sidebarButton = "Browser",
+			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
 		if ("${panel}" == "General") {
-			AssertClick(
-				key_navItem = "General",
-				locator1 = "PageEditor#NAV_ITEM_BUTTON",
-				value1 = "General");
+			Navigator.gotoNavTab(navTab = "General");
 
 			if (isSet(columnCount)) {
 				Select(
@@ -2512,10 +2537,7 @@ definition {
 			}
 		}
 		else if ("${panel}" == "Styles") {
-			AssertClick(
-				key_navItem = "Styles",
-				locator1 = "PageEditor#NAV_ITEM_BUTTON",
-				value1 = "Styles");
+			Navigator.gotoNavTab(navTab = "Styles");
 
 			if (isSet(layout)) {
 				Select(
@@ -2567,14 +2589,11 @@ definition {
 		}
 
 		AssertVisible(
-			key_sidebarButton = "Selection",
+			key_sidebarButton = "Browser",
 			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
 		if ("${panel}" == "General") {
-			AssertClick(
-				key_navItem = "General",
-				locator1 = "PageEditor#NAV_ITEM_BUTTON",
-				value1 = "General");
+			Navigator.gotoNavTab(navTab = "General");
 
 			if (isSet(siteMenus)) {
 				Click(
@@ -2628,10 +2647,7 @@ definition {
 			}
 		}
 		else if ("${panel}" == "Styles") {
-			AssertClick(
-				key_navItem = "Styles",
-				locator1 = "PageEditor#NAV_ITEM_BUTTON",
-				value1 = "Styles");
+			Navigator.gotoNavTab(navTab = "Styles");
 
 			if (isSet(hoveredItemColor)) {
 				PageEditor.selectColorSwatchItem(
@@ -2728,16 +2744,15 @@ definition {
 	macro gotoConfiguration {
 		PageEditor.clickConfigurableField(fragmentName = "${fragmentName}");
 
-		PageEditor.gotoTab(tabName = "Selection");
+		AssertVisible(
+			key_sidebarButton = "Browser",
+			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
 		AssertElementPresent(
 			key_nodeName = "${fragmentName}",
 			locator1 = "Treeview#PAGE_STRUCTURE_TREE_NODE_ACTIVE");
 
-		AssertClick(
-			key_navItem = "General",
-			locator1 = "PageEditor#NAV_ITEM_BUTTON",
-			value1 = "General");
+		Navigator.gotoNavTab(navTab = "General");
 	}
 
 	macro gotoContentConfiguration {
@@ -2756,12 +2771,11 @@ definition {
 				locator1 = "Fragment#CONTENT_FRAGMENT_BODY");
 		}
 
-		PageEditor.gotoTab(tabName = "Selection");
+		AssertVisible(
+			key_sidebarButton = "Browser",
+			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
-		AssertClick(
-			key_navItem = "General",
-			locator1 = "PageEditor#NAV_ITEM_BUTTON",
-			value1 = "General");
+		Navigator.gotoNavTab(navTab = "General");
 	}
 
 	macro gotoDuplicate {
@@ -2775,19 +2789,24 @@ definition {
 	}
 
 	macro gotoEditableFieldEdit {
+		if (!(isSet(index))) {
+			var index = "1";
+		}
+
 		id = "${id}";
 		key_fragmentName = "${fragmentName}";
 
 		PageEditor.clickEditableField(
 			contributed = "${contributed}",
 			fragmentName = "${fragmentName}",
-			id = "${id}");
+			id = "${id}",
+			index = "${index}");
 
 		if ("${contributed}" == "false") {
-			DoubleClick(locator1 = "Fragment#EDITABLE_FIELD");
+			DoubleClick(locator1 = "Fragment#EDITABLE_FIELD_ANY");
 		}
 		else {
-			DoubleClick(locator1 = "Fragment#CONTRIBUTED_FRAGMENT_EDITABLE_FIELD");
+			DoubleClick(locator1 = "Fragment#CONTRIBUTED_FRAGMENT_EDITABLE_FIELD_ANY");
 		}
 	}
 
@@ -2797,6 +2816,16 @@ definition {
 			locator1 = "PageEditor#ITEM_SELECTOR_DROPDOWN_TOGGLE");
 
 		MenuItem.click(menuItem = "${menuItem}");
+	}
+
+	macro gotoEllipsisMenuItemInPageContentPanel {
+		PageEditor.gotoTab(tabName = "Browser");
+
+		Navigator.gotoNavTab(navTab = "Page Content");
+
+		LexiconEntry.gotoFragmentPageContentEllipsisMenuItem(
+			menuItem = "${menuItem}",
+			rowEntry = "${itemName}");
 	}
 
 	macro gotoSaveAsFragment {
@@ -2812,12 +2841,11 @@ definition {
 	macro gotoSelectPanel {
 		PageEditor.clickConfigurableField(fragmentName = "${fragmentName}");
 
-		PageEditor.gotoTab(tabName = "Selection");
+		AssertVisible(
+			key_sidebarButton = "Browser",
+			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
-		AssertClick(
-			key_navItem = "General",
-			locator1 = "PageEditor#NAV_ITEM_BUTTON",
-			value1 = "General");
+		Navigator.gotoNavTab(navTab = "General");
 
 		WaitForElementPresent(
 			key_fieldLabel = "Item",
@@ -2844,16 +2872,11 @@ definition {
 	macro gotoStyle {
 		PageEditor.clickConfigurableField(fragmentName = "${fragmentName}");
 
-		PageEditor.gotoTab(tabName = "Selection");
-
 		AssertElementPresent(
 			key_nodeName = "${fragmentName}",
 			locator1 = "Treeview#PAGE_STRUCTURE_TREE_NODE_ACTIVE");
 
-		AssertClick(
-			key_navItem = "Styles",
-			locator1 = "PageEditor#NAV_ITEM_BUTTON",
-			value1 = "Styles");
+		Navigator.gotoNavTab(navTab = "Styles");
 	}
 
 	macro gotoTab {
@@ -2911,7 +2934,9 @@ definition {
 	}
 
 	macro removeFragmentViaPageStructure {
-		PageEditor.gotoTab(tabName = "Selection");
+		PageEditor.gotoTab(tabName = "Browser");
+
+		Navigator.gotoNavTab(navTab = "Page Elements");
 
 		if (IsElementNotPresent(key_nodeName = "${fragmentName}", locator1 = "Treeview#PAGE_STRUCTURE_TREE_NODE_ACTIVE")) {
 			Click(
@@ -2974,10 +2999,6 @@ definition {
 		PageEditor.clickConfigurableField(fragmentName = "${fragmentName}");
 
 		AssertElementPresent(
-			key_tabName = "Selection",
-			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TAB_BUTTON_ACTIVE");
-
-		AssertElementPresent(
 			key_nodeName = "${fragmentName}",
 			locator1 = "Treeview#PAGE_STRUCTURE_TREE_NODE_ACTIVE");
 
@@ -3018,6 +3039,14 @@ definition {
 			value1 = "${fragmentName}");
 	}
 
+	macro searchInPageContentPanel {
+		Navigator.gotoNavTab(navTab = "Page Content");
+
+		Type(
+			locator1 = "PageEditor#WIDGETS_APPLICATION_SEARCH_FIELD",
+			value1 = "${searchTerm}");
+	}
+
 	macro selectColorSwatchItem {
 		Click(
 			key_fieldLabel = "${fieldLabel}",
@@ -3026,6 +3055,20 @@ definition {
 		Click(
 			key_colorSwatchItem = "${colorSwatchItem}",
 			locator1 = "Button#COLOR_SWATCH_ITEM");
+	}
+
+	macro selectContentFilter {
+		AssertVisible(
+			key_sidebarButton = "Browser",
+			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
+
+		Click(locator1 = "PageEditor#PAGE_CONTENTS_CONTENT_FILTER_TOGGLE");
+
+		DropdownMenuItem.click(menuItem = "${filter}");
+
+		AssertTextEquals(
+			locator1 = "PageEditor#PAGE_CONTENTS_CONTENT_FILTER_TOGGLE",
+			value1 = "${filter}");
 	}
 
 	macro viewAutoSaveMessage {

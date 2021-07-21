@@ -231,6 +231,53 @@ definition {
 		}
 	}
 
+	@description = "LPS-117341 Create a label for one of the categories and add another one with the text "..." and tooltip or popover with all theF categories left"
+	@priority = "5"
+	test CheckForMoreCategories {
+		property portal.acceptance = "true";
+
+		task ("Create a list of Audiences") {
+			for (var count : list "1,2,3") {
+				JSONCategory.addCategory(
+					groupName = "Global",
+					title = "test ${count}",
+					vocabularyName = "Audience");
+			}
+		}
+
+		task ("Create a Web Content") {
+			JSONWebcontent.addWebContent(
+				content = "test content",
+				groupName = "Test Site Name",
+				title = "WC");
+		}
+
+		task ("select of audiences ") {
+			WebContentNavigator.openWebContentAdmin(siteURLKey = "test-site-name");
+
+			WebContentNavigator.gotoEditCP(webContentTitle = "WC");
+
+			for (var count : list "1,2,3") {
+				WebContent.selectCategory(
+					categoryName = "test ${count}",
+					vocabularyName = "Audience");
+			}
+
+			PortletEntry.publish();
+		}
+
+		task ("Nagigate to Content Dashboard and check if there's a label with '...' indicating 'more categories' ") {
+			ApplicationsMenu.gotoPortlet(
+				category = "Content",
+				panel = "Applications",
+				portlet = "Content Dashboard");
+
+			AssertElementPresent(
+				locator1 = "ContentDashboard#AUDIENCE_LIST_DASHBOARD",
+				value = "...");
+		}
+	}
+
 	@description = "LPS-133716 When in Content Dashboard, a column with the Site / assetLibraty header is shown."
 	@priority = "2"
 	test CheckSiteAssertLibraryColumn {

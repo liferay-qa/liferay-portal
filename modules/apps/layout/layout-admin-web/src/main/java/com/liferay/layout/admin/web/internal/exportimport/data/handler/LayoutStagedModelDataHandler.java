@@ -2562,11 +2562,8 @@ public class LayoutStagedModelDataHandler
 		Layout masterLayout = _layoutLocalService.fetchLayout(
 			layout.getMasterLayoutPlid());
 
-		if (masterLayout == null) {
-			return;
-		}
-
-		if (Validator.isNotNull(
+		if ((masterLayout == null) ||
+			Validator.isNotNull(
 				layoutElement.attributeValue("master-layout-uuid"))) {
 
 			return;

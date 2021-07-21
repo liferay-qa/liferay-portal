@@ -2012,4 +2012,10 @@ definition {
 			value1 = "${fieldLabel}");
 	}
 
+	macro viewValidationValueFieldNotPresent {
+		var key_fieldLabel = "${fieldLabel}";
+
+		AssertElementNotPresent(locator1 = "FormFields#VALIDATION_VALUE_FIELD");
+	}
+
 }

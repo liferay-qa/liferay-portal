@@ -49,12 +49,7 @@ definition {
 			fragmentName = "${fragmentName}",
 			id = "${id}");
 
-		PageEditor.gotoTab(tabName = "Selection");
-
-		AssertClick(
-			key_navItem = "Link",
-			locator1 = "PageEditor#NAV_ITEM_BUTTON",
-			value1 = "Link");
+		Navigator.gotoNavTab(navTab = "Link");
 	}
 
 	macro mapEditableFieldToPage {
@@ -142,7 +137,7 @@ definition {
 			value1 = "${url}");
 
 		Click(
-			key_sidebarButton = "Selection",
+			key_sidebarButton = "Browser",
 			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
 		if ("${target}" == "Blank") {

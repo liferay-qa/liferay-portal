@@ -2058,7 +2058,7 @@ definition {
 				fragmentName = "Collection Display");
 		}
 
-		task ("Select the dynamic collection, Bordered List as List Style and Abstract as List Item Style") {
+		task ("Select the Highest Rated Assets, Bordered List as List Style and Abstract as List Item Style") {
 			PageEditor.editCollectionDisplay(
 				fragmentName = "Collection Display",
 				infoListProviderName = "Highest Rated Assets",
@@ -2520,12 +2520,11 @@ definition {
 
 		PageEditor.clickConfigurableField(fragmentName = "Content Display");
 
-		PageEditor.gotoTab(tabName = "Selection");
+		AssertVisible(
+			key_sidebarButton = "Browser",
+			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
-		AssertClick(
-			key_navItem = "General",
-			locator1 = "PageEditor#NAV_ITEM_BUTTON",
-			value1 = "General");
+		Navigator.gotoNavTab(navTab = "General");
 
 		AssertSelectedLabel(
 			key_fieldLabel = "Template",
@@ -2598,12 +2597,11 @@ definition {
 
 		PageEditor.clickConfigurableField(fragmentName = "Content Display");
 
-		PageEditor.gotoTab(tabName = "Selection");
+		AssertVisible(
+			key_sidebarButton = "Browser",
+			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
-		AssertClick(
-			key_navItem = "General",
-			locator1 = "PageEditor#NAV_ITEM_BUTTON",
-			value1 = "General");
+		Navigator.gotoNavTab(navTab = "General");
 
 		AssertSelectedLabel(
 			key_fieldLabel = "Template",
@@ -2961,7 +2959,7 @@ definition {
 				fragmentName = "Collection Display");
 		}
 
-		task ("Select the dynamic collection, Bordered List as List Style and Full Content as List Item Style") {
+		task ("Select the Highest Rated Assets, Bordered List as List Style and Full Content as List Item Style") {
 			PageEditor.editCollectionDisplay(
 				fragmentName = "Collection Display",
 				infoListProviderName = "Highest Rated Assets",
@@ -5442,12 +5440,11 @@ definition {
 
 		PageEditor.clickConfigurableField(fragmentName = "Content Display");
 
-		PageEditor.gotoTab(tabName = "Selection");
+		AssertVisible(
+			key_sidebarButton = "Browser",
+			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
-		AssertClick(
-			key_navItem = "General",
-			locator1 = "PageEditor#NAV_ITEM_BUTTON",
-			value1 = "General");
+		Navigator.gotoNavTab(navTab = "General");
 
 		AssertSelectedLabel(
 			key_fieldLabel = "Template",
@@ -5561,12 +5558,11 @@ definition {
 
 		PageEditor.clickConfigurableField(fragmentName = "Content Display");
 
-		PageEditor.gotoTab(tabName = "Selection");
+		AssertVisible(
+			key_sidebarButton = "Browser",
+			locator1 = "PageEditor#FRAGMENT_SIDEBAR_TITLE");
 
-		AssertClick(
-			key_navItem = "General",
-			locator1 = "PageEditor#NAV_ITEM_BUTTON",
-			value1 = "General");
+		Navigator.gotoNavTab(navTab = "General");
 
 		AssertSelectedLabel(
 			key_fieldLabel = "Template",

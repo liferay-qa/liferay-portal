@@ -155,8 +155,8 @@ definition {
 				value1 = "Content Editing");
 		}
 
-		task ("Assert only Selection, Contents and Comments are shown in sidebar") {
-			for (var tabName : list "Selection,Contents,Comments") {
+		task ("Assert only Browser and Comments are shown in sidebar") {
+			for (var tabName : list "Browser,Comments") {
 				AssertVisible(
 					key_tabName = "${tabName}",
 					locator1 = "PageEditor#FRAGMENT_SIDEBAR_TAB_BUTTON");
@@ -199,13 +199,7 @@ definition {
 				key_fragmentName = "paragraph",
 				locator1 = "Fragment#CONTRIBUTED_FRAGMENT_EDITABLE_FIELD_WITHOUT_TOPPER");
 
-			PageEditor.gotoTab(tabName = "Selection");
-
-			var key_navItem = "Mapping";
-
-			AssertClick(
-				locator1 = "PageEditor#NAV_ITEM_BUTTON",
-				value1 = "Mapping");
+			Navigator.gotoNavTab(navTab = "Mapping");
 
 			AssertVisible(
 				key_fieldLabel = "Item",
@@ -233,7 +227,9 @@ definition {
 
 		task ("Edit Web Content Article and Blogs Entry via Contents panel") {
 			for (var title : list "Web Content Title,Blogs Entry Title") {
-				PageEditor.gotoTab(tabName = "Contents");
+				PageEditor.gotoTab(tabName = "Browser");
+
+				Navigator.gotoNavTab(navTab = "Page Content");
 
 				LexiconEntry.gotoFragmentPageContentEllipsisMenuItem(
 					menuItem = "Edit",

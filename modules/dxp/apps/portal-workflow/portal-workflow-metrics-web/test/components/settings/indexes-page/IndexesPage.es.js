@@ -9,8 +9,7 @@
  * distribution rights of the Software.
  */
 
-import {waitForElementToBeRemoved} from '@testing-library/dom';
-import {cleanup, fireEvent, render} from '@testing-library/react';
+import {act, cleanup, fireEvent, render} from '@testing-library/react';
 import React from 'react';
 
 import '@testing-library/jest-dom/extend-expect';
@@ -51,7 +50,7 @@ describe('The IndexesPage component should', () => {
 			patch: jest.fn().mockRejectedValueOnce().mockResolvedValue(),
 		};
 
-		beforeAll(() => {
+		beforeAll(async () => {
 			jest.useFakeTimers();
 
 			const renderResult = render(
@@ -66,10 +65,15 @@ describe('The IndexesPage component should', () => {
 			getAllByRole = renderResult.getAllByRole;
 			getAllByText = renderResult.getAllByText;
 			getByText = renderResult.getByText;
+
 			window.location.hash = '/settings/indexes';
+
+			await act(async () => {
+				jest.runAllTimers();
+			});
 		});
 
-		test('Render information correctly ', () => {
+		it('Render information correctly ', async () => {
 			const pageTitle = getByText('workflow-index-actions');
 			const reindexAllLabel = getByText('workflow-indexes');
 			const reindexAllBtn = getAllByText('reindex-all')[0];
@@ -79,9 +83,13 @@ describe('The IndexesPage component should', () => {
 			expect(reindexAllBtn).toBeTruthy();
 
 			fireEvent.click(reindexAllBtn);
+
+			await act(async () => {
+				jest.runAllTimers();
+			});
 		});
 
-		test('Render error toast when dispatch any reindex action with error', () => {
+		it('Render error toast when dispatch any reindex action with error', () => {
 			const alertToast = getByText('your-request-has-failed');
 			const alertClose = container.querySelector('button.close');
 
@@ -90,7 +98,7 @@ describe('The IndexesPage component should', () => {
 			fireEvent.click(alertClose);
 		});
 
-		test('Render with items correctly', () => {
+		it('Render with items correctly', () => {
 			indexesItems = getAllByRole('listitem');
 
 			expect(indexesItems[1]).toHaveTextContent('metrics');
@@ -111,10 +119,14 @@ describe('The IndexesPage component should', () => {
 			expect(indexesItems[6].children[1].children[0]).not.toBeDisabled();
 		});
 
-		test('Render progress status when dispatch any reindex action', async () => {
+		it('Render progress status when dispatch any reindex action', async () => {
 			const reindexAllBtn = getAllByText('reindex-all')[0];
 
-			await fireEvent.click(reindexAllBtn);
+			fireEvent.click(reindexAllBtn);
+
+			await act(async () => {
+				jest.runAllTimers();
+			});
 
 			const reindexAllStatus = container.querySelectorAll(
 				'.progress-group'
@@ -127,11 +139,9 @@ describe('The IndexesPage component should', () => {
 
 			expect(reindexAllStatus.children[1]).toHaveTextContent('0%');
 
-			await jest.runOnlyPendingTimers();
-
-			await waitForElementToBeRemoved(() =>
-				document.querySelector('div.progress')
-			);
+			await act(async () => {
+				jest.runOnlyPendingTimers();
+			});
 
 			let alertToast = getByText('all-x-have-reindexed-successfully');
 
@@ -141,7 +151,9 @@ describe('The IndexesPage component should', () => {
 			expect(indexesItems[5].children[1].children[0]).not.toBeDisabled();
 			expect(indexesItems[6].children[1].children[0]).not.toBeDisabled();
 
-			await jest.runOnlyPendingTimers();
+			await act(async () => {
+				jest.runOnlyPendingTimers();
+			});
 
 			const alertContainer = document.querySelector('.alert-container');
 			expect(alertContainer.children[0].children.length).toBe(0);
@@ -153,11 +165,9 @@ describe('The IndexesPage component should', () => {
 			expect(indexesItems[6].children[1].children[0]).not.toBeDisabled();
 			expect(indexesItems[2]).toHaveTextContent('0%');
 
-			await jest.runOnlyPendingTimers();
-
-			await waitForElementToBeRemoved(() =>
-				document.querySelector('div.progress')
-			);
+			await act(async () => {
+				jest.runOnlyPendingTimers();
+			});
 
 			alertToast = getByText('all-x-have-reindexed-successfully');
 
@@ -174,11 +184,9 @@ describe('The IndexesPage component should', () => {
 			expect(indexesItems[3].children[1].children[0]).not.toBeDisabled();
 			expect(indexesItems[5]).toHaveTextContent('0%');
 
-			await jest.runOnlyPendingTimers();
-
-			await waitForElementToBeRemoved(() =>
-				document.querySelector('div.progress')
-			);
+			await act(async () => {
+				jest.runOnlyPendingTimers();
+			});
 
 			alertToast = getByText('all-x-have-reindexed-successfully');
 
@@ -237,7 +245,7 @@ describe('The IndexesPage component should', () => {
 			},
 		];
 
-		beforeAll(() => {
+		beforeAll(async () => {
 			cleanup();
 
 			const renderResult = render(
@@ -253,9 +261,13 @@ describe('The IndexesPage component should', () => {
 
 			container = renderResult.container;
 			getAllByRole = renderResult.getAllByRole;
+
+			await act(async () => {
+				jest.runAllTimers();
+			});
 		});
 
-		test('Render all indexes on progress', () => {
+		it('Render all indexes on progress', () => {
 			const indexActions = getAllByRole('listitem');
 
 			const reindexAllStatus = container.querySelectorAll(

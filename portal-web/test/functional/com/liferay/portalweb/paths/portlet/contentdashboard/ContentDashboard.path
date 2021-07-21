@@ -11,6 +11,11 @@
 
 <tbody>
 <tr>
+	<td>AUDIENCE_LIST_DASHBOARD</td>
+	<td>//span[contains(@class,'label-secondary') and contains (.,'${value}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>AUDIT_GRAPH_CATEGORY_CHECKBOX</td>
 	<td>//label/descendant-or-self::*[contains(text(),'${auditGraphCheckboxName}']</td>
 	<td></td>

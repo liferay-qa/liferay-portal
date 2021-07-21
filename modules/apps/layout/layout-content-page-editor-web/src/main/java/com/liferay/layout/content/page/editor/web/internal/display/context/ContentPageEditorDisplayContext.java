@@ -283,9 +283,6 @@ public class ContentPageEditorDisplayContext {
 					_resourceBundleLoader.loadResourceBundle(
 						themeDisplay.getLocale()))
 			).put(
-				"contentBrowsingEnabled",
-				_ffLayoutContentPageEditorConfiguration.contentBrowsingEnabled()
-			).put(
 				"defaultEditorConfigurations", _getDefaultConfigurations()
 			).put(
 				"defaultLanguageId",
@@ -1085,11 +1082,9 @@ public class ContentPageEditorDisplayContext {
 			_fragmentRendererTracker.getFragmentRenderers();
 
 		for (FragmentRenderer fragmentRenderer : fragmentRenderers) {
-			if (!fragmentRenderer.isSelectable(httpServletRequest)) {
-				continue;
-			}
+			if (!fragmentRenderer.isSelectable(httpServletRequest) ||
+				!_isAllowedFragmentEntryKey(fragmentRenderer.getKey())) {
 
-			if (!_isAllowedFragmentEntryKey(fragmentRenderer.getKey())) {
 				continue;
 			}
 
