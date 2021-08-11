@@ -49,9 +49,29 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test AssertBlogsPageTImeFilter180Days {
+		task ("Switch to new property in AC") {
+			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 
-		// TODO LRAC-8384 AssertBlogsPageTImeFilter180Days
+			ACUtils.launchAC();
 
+			ACProperties.switchProperty(propertyName = "${propertyName}");
+		}
+
+		task ("Go to Blogs assets") {
+			ACNavigation.goToAssets();
+
+			ACNavigation.switchTab(tabName = "Blogs");
+		}
+
+		task ("Assert 'Last 180 days' time filter") {
+			ACTimeFilter.clickTimeFilterButton();
+
+			ACTimeFilter.clickMorePresetPeriods();
+
+			ACTimeFilter.setLast180Days();
+
+			ACTimeFilter.assertCurrentTimeFilterRange(timeFilterRange = "Last 180 days");
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8374 | Test Summary: Blogs audience card shows expected amount of know and anonymous individuals"
