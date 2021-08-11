@@ -159,9 +159,31 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test CanUseCustomRangeBlogsAssetsPage {
+		task ("Switch to new property in AC") {
+			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 
-		// TODO LRAC-8383 CanUseCustomRangeBlogsAssetsPage
+			ACUtils.launchAC();
 
+			ACProperties.switchProperty(propertyName = "${propertyName}");
+		}
+
+		task ("Go to Blogs assets") {
+			ACNavigation.goToAssets();
+
+			ACNavigation.switchTab(tabName = "Blogs");
+		}
+
+		task ("Assert custom time filter") {
+			ACTimeFilter.setCustomRange(
+				endDay = "13",
+				endMonth = "July",
+				endYear = "2020",
+				startDay = "1",
+				startMonth = "July",
+				startYear = "2020");
+
+			ACTimeFilter.assertCurrentTimeFilterRange(timeFilterRange = "Jul 1, 2020 - Jul 13, 2020");
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8114 | Test Summary: Blogs known individuals list shows individuals who have viewed the blog"
