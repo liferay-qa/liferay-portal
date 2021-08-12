@@ -82,7 +82,6 @@ definition {
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8396 | Test Summary: Documents list is searchable"
-	@ignore = "true"
 	@priority = "4"
 	test CanDocumentsAndMediaListSearchable {
 		var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
