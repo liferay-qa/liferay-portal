@@ -223,14 +223,11 @@ definition {
 
 		Open(locator1 = "${analyticsCloudURL}");
 
-		Navigator.openSpecificURL(url = "https://analytics-uat.liferay.com/workspace/uat/474600301348251904/sites");
-
 		if (IsElementPresent(locator1 = "ACLogin#EMAIL_LOGIN_FIELD")) {
 			ACLogin.loginAs();
 		}
 
-		//ACWorkspace.openWorkspace();
-
+		ACWorkspace.openWorkspace();
 	}
 
 	macro launchDXP {
