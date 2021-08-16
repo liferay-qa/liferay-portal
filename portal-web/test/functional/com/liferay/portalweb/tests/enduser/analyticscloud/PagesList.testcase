@@ -118,6 +118,22 @@ definition {
 		}
 	}
 
+	@description = "Feature ID: Legacy | Automation ID: LRAC-8340 | Test Summary: Filter Page Table by last 180 days"
+	@priority = "3"
+	test PeriodFilter180DaysPageTable {
+		task ("Open Analytics Cloud as active window") {
+			ACUtils.launchAC();
+		}
+
+		task ("Select Pages tab and change default period range from Last 30 days to Last 180 days") {
+			ACPages.navigateToPages();
+
+			ACPages.filterPagesListBySelectPeriod(
+				currentPeriod = "Last 30 days",
+				selectPeriod = "Last 180");
+		}
+	}
+
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8111 | Test Summary: Assert the pages list shows a list of pages"
 	@ignore = "true"
 	@priority = "5"
