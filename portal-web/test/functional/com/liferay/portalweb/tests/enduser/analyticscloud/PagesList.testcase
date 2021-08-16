@@ -118,6 +118,29 @@ definition {
 		}
 	}
 
+	@description = "Feature ID: Legacy | Automation ID: LRAC-8340 | Test Summary: Filter Page Table by last 180 days"
+	@priority = "3"
+	test PeriodFilter180DaysPageTable {
+		property portal.upstream = "quarantine";
+
+		// AC Refactor: Test needs data from past dates to assert
+		// AC Refactor ticket: LRAC-8933
+
+		task ("Open Analytics Cloud as active window") {
+			ACUtils.launchAC();
+		}
+
+		task ("Select Pages tab and change default period range from Last 30 days to Last 180 days") {
+			ACNavigation.switchTab(tabName = "Pages");
+
+			ACTimeFilter.clickTimeFilterButton();
+
+			// Need past data
+
+			ACTimeFilter.setLast180Days();
+		}
+	}
+
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8341 | Test Summary: Filter Page Table by Last Year"
 	@priority = "3"
 	test PeriodFilterLastYearPageTable {
