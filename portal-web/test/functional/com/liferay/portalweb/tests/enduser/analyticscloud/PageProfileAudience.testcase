@@ -30,12 +30,12 @@ definition {
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8351 | Test Summary: Page profile audience card shows known and anonymous individuals as well as segmented/unsegmented individuals"
-	@ignore = "true"
 	@priority = "5"
 	test ShowsKnownAnonymousIndividualsAsWellAsSegmentedUnsegmentedIndividuals {
+		task ("Go to the site and assert that Audience Card shows Known/Anonymous and Segmented/Unsegmented Individuals") {
+			ACUtils.launchAC();
 
-		// TODO LRAC-8351 ShowsKnownAnonymousIndividualsAsWellAsSegmentedUnsegmentedIndividuals
-
+			ACSites.assertAudienceCardItems(siteName = "Order History");
+		}
 	}
-
 }
