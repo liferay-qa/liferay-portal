@@ -177,21 +177,150 @@ definition {
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8578 | Test Summary: Order the Segment List By Membership"
-	@ignore = "true"
 	@priority = "4"
 	test OrderSegmentListByMembership {
+		task ("connect DXP to AC") {
+			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud();
+		}
 
-		// OrderSegmentListByMembership
+		task ("Add a new user in DXP") {
+			for (var name : list "ac1,ac2,ac3") {
+				JSONUser.addUser(
+					userEmailAddress = "${name}@liferay.com",
+					userFirstName = "${name}",
+					userLastName = "${name}",
+					userScreenName = "${name}");
+			}
+		}
 
+		task ("Sync the Contact Data") {
+			ACDXPSettings.syncNewContactData();
+		}
+
+		task ("Switch to new property in AC") {
+			ACUtils.launchAC();
+
+			ACProperties.switchProperty(propertyName = "${propertyName}");
+		}
+
+		task ("Add 3 new Static Segments") {
+			for (var segmentName : list "Static Segment Test1,Static Segment Test2,Static Segment Test3") {
+				ACNavigation.goToSegments();
+
+				ACSegments.createStaticSegment();
+
+				ACSegments.nameSegment(segmentName = "${segmentName}");
+
+				if ("${segmentName}" == "Static Segment Test1") {
+					ACSegments.addStaticMultiMember(tableMember = "ac1 ac1,ac2 ac2,ac3 ac3");
+				}
+
+				if ("${segmentName}" == "Static Segment Test2") {
+					ACSegments.addStaticMultiMember(tableMember = "ac1 ac1,ac2 ac2");
+				}
+
+				if ("${segmentName}" == "Static Segment Test3") {
+					ACSegments.addStaticMultiMember(tableMember = "ac1 ac1");
+				}
+
+				ACSegments.saveSegment();
+			}
+		}
+
+		task ("Go to Segments and filter by "Membership"") {
+			ACNavigation.goToSegments();
+
+			ACSegments.filterAndOrderForSegLists(filterName = "Membership");
+		}
+
+		task ("Assert 3 segments filter by membership display") {
+			for (var segmentName : list "Static Segment Test3,Static Segment Test2,Static Segment Test1") {
+				ACSegments.assertSegmentPresent(segmentName = "${segmentName}");
+			}
+		}
+
+		task ("Check descending arrow descending of table title of Membership") {
+			ACUtils.orderTableTitleArrow(type = "down");
+		}
+
+		task ("Assert 3 segments display descending order of Mebership") {
+			for (var segmentName : list "Static Segment Test1,Static Segment Test2,Static Segment Test3") {
+				ACSegments.assertSegmentPresent(segmentName = "${segmentName}");
+			}
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8460 | Test Summary: Order the Segment List By Name"
-	@ignore = "true"
 	@priority = "4"
 	test OrderSegmentListByName {
+		task ("connect DXP to AC") {
+			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud();
+		}
 
-		// OrderSegmentListByName
+		task ("Add a new user in DXP") {
+			JSONUser.addUser(
+				userEmailAddress = "userea@liferay.com",
+				userFirstName = "userfn",
+				userLastName = "userln",
+				userScreenName = "usersn");
 
+			JSONUser.setFirstPassword(
+				agreeToTermsAndAnswerReminderQuery = "true",
+				requireReset = "false",
+				userEmailAddress = "userea@liferay.com");
+		}
+
+		task ("Sync the Contact Data") {
+			ACDXPSettings.syncNewContactData();
+		}
+
+		task ("Switch to new property in AC") {
+			ACUtils.launchAC();
+
+			ACProperties.switchProperty(propertyName = "${propertyName}");
+		}
+
+		task ("Add 3 new Static Segments") {
+			for (var segmentName : list "Static Segment Test1,Static Segment Test2,Static Segment Test3") {
+				ACNavigation.goToSegments();
+
+				ACSegments.createStaticSegment();
+
+				ACSegments.nameSegment(segmentName = "${segmentName}");
+
+				ACSegments.addStaticMember(tableMember = "Kitty Katadin");
+
+				ACSegments.saveSegment();
+			}
+		}
+
+		task ("Go to Segments and filter by "Name"") {
+			ACNavigation.goToSegments();
+
+			ACSegments.filterAndOrderForSegLists(filterName = "Name");
+		}
+
+		task ("Assert 3 segments filter by name display") {
+			ACNavigation.goToSegments();
+
+			for (var segmentName : list "Static Segment Test1,Static Segment Test2,Static Segment Test3") {
+				ACSegments.assertSegmentPresent(segmentName = "${segmentName}");
+			}
+		}
+
+		task ("Go to Segments and filter by descending order of "Name"") {
+			ACNavigation.goToSegments();
+
+			ACUtils.orderArrow(type = "descending");
+		}
+
+		task ("Assert 3 segments display descending order of name") {
+			ACNavigation.goToSegments();
+
+			for (var segmentName : list "Static Segment Test3,Static Segment Test2,Static Segment Test1") {
+				ACSegments.assertSegmentPresent(segmentName = "${segmentName}");
+			}
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8461 | Test Summary: Paginate Segment list"
