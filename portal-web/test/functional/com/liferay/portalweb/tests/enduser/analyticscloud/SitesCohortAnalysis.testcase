@@ -72,10 +72,10 @@ definition {
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.getAssignedPropertyName(siteName = "Site Name");
 		}
-		
+
 		task ("Sign in as first user") {
 			ACUtils.launchDXP();
-			
+
 			User.logoutAndLoginPG(
 				userLoginEmailAddress = "userea@liferay.com",
 				userLoginFullName = "userfn userln");
@@ -104,6 +104,5 @@ definition {
 				value1 = "100.00%");
 		}
 	}
-
 
 }
