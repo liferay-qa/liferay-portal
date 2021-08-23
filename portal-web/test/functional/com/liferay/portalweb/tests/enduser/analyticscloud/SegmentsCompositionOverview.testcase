@@ -30,12 +30,45 @@ definition {
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8494 | Test Summary: Assert Segment Overview shows include anonymous"
-	@ignore = "true"
 	@priority = "3"
 	test AssertSegmentOverviewShowsIncludeAnonymous {
+		task ("Open Analytics Cloud as active window") {
+			ACUtils.launchAC();
+		}
 
-		// TODO LRAC-8494 PENDING IMPLEMENTATION
+		task ("Add a new dynamic segment") {
+			ACNavigation.goToSegments();
 
+			ACSegments.createDynamicSegment();
+
+			ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+
+			ACSegments.includeAnonymous();
+		}
+
+		task ("Add a criteria for dyamic segment") {
+			ACSegments.goToSidebarAttributes(criterion = "Individual Attributes");
+
+			ACSegments.addSegmentField(segmentField = "email");
+
+			ACSegments.selectOperator(operator = "contains");
+
+			ACSegments.editTextCriterion(textInput = "liferay.com");
+
+			ACSegments.saveSegment();
+		}
+
+		task ("Access newly created segment") {
+			ACNavigation.goToSegments();
+
+			ACUtils.searchBar(searchItem = "Dynamic Segment Test");
+
+			ACSegments.accessSegment(segmentName = "Dynamic Segment Test");
+		}
+
+		task ("Assert the Include Anonymous Label is present") {
+			ACSegments.viewIncludeAnonymousLabel();
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8493 | Test Summary: Segment Composition shows Active and Known individuals"
