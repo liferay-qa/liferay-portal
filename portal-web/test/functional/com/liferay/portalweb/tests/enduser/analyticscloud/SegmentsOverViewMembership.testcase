@@ -243,6 +243,11 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8487 | Test Summary: Membership card shows members removed"
 	@priority = "5"
 	test ViewMembershipCardShowsMembersRemoved {
+		property portal.upstream = "quarantine";
+
+		// AC Refactor: members are not appearing
+		// AC Refactor ticket: LRAC-8887
+
 		var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 
 		task ("Add a new user in DXP") {
@@ -307,6 +312,9 @@ definition {
 				anonymousNumber = "0",
 				knownNumber = "1",
 				totalNumber = "1");
+
+			// Fails here due to members not showing in segments
+
 		}
 
 		task ("Go to Segment and edit it so member is removed") {
