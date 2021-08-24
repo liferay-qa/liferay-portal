@@ -2,13 +2,10 @@ definition {
 
 	macro assetUniqueVisitors {
 		AssertTextEquals(
-			value1 = "${uniqueVisitors}",
 			key_uniqueVisitors = "${uniqueVisitors}",
-			locator1 = "ACSites#ASSET_UNIQUE_VISITORS_NUMBER");
+			locator1 = "ACSites#ASSET_UNIQUE_VISITORS_NUMBER",
+			value1 = "${uniqueVisitors}");
 	}
-
-
-
 
 	macro viewGeomapAnalyticsLocationNames {
 		for (var locationName : list "${locationList}") {

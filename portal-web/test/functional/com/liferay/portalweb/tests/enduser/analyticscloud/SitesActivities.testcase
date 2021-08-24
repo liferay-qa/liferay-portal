@@ -556,7 +556,6 @@ definition {
 		}
 
 		task ("Interation with pages") {
-
 			Navigator.gotoSitePage(
 				pageName = "AC Page",
 				siteName = "Site Name");
@@ -566,16 +565,12 @@ definition {
 			Pause(locator1 = "5000");
 
 			ACUtils.closeAllSessions();
-
-			
 		}
 
 		task ("AC launch") {
 			ACUtils.launchAC();
 
 			ACProperties.switchProperty(propertyName = "${propertyName}");
-
-	
 		}
 
 		task ("Asset unique visitors label show on the tabs of pages dashboards") {
@@ -593,10 +588,6 @@ definition {
 			ACAssets.viewAssets(assetName = "AC Page - Site Name - Liferay DXP");
 
 			ACSites.assetUniqueVisitors(uniqueVisitors = "1");
-
-			
-
-
 		}
 	}
 
