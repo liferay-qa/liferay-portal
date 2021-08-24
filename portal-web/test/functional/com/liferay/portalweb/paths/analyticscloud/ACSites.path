@@ -57,6 +57,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>ASSET_UNIQUE_VISITORS_NUMBER</td>
+	<td>//tbody//tr//td[2][contains(@class,'table-column-text-end') and text()='${key_uniqueVisitors}']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SESSIONS_BY_LOCATION_CARD</td>
 	<td>//div[contains(@class,'locations')]//h5[text()='Sessions by Location']</td>
 	<td></td>
