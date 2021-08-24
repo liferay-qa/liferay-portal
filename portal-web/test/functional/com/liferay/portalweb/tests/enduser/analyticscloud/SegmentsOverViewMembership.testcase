@@ -231,12 +231,89 @@ definition {
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8488 | Test Summary: Membership card shows anonymous users"
-	@ignore = "true"
 	@priority = "5"
 	test ViewMembershipCardShowsAnonymousUsers {
+		var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 
-		// TODO LRAC-8488 PENDING IMPLEMENTATION
+		task ("Switch to new property in AC") {
+			ACUtils.launchAC();
 
+			ACProperties.switchProperty(propertyName = "${propertyName}");
+		}
+
+		task ("Add a new dynamic segment that includes anonymous users") {
+			ACNavigation.goToSegments();
+
+			ACSegments.createDynamicSegment();
+
+			ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+
+			ACSegments.includeAnonymous();
+
+			ACSegments.goToSidebarAttributes(criterion = "Individual Attributes");
+
+			ACSegments.addSegmentField(segmentField = "givenName");
+
+			ACSegments.selectOperator(operator = "is unknown");
+
+			ACSegments.saveSegment();
+		}
+
+		task ("Add a new user in DXP") {
+			ACUtils.launchDXP();
+
+			JSONUser.addUser(
+				userEmailAddress = "user1@liferay.com",
+				userFirstName = "user1",
+				userLastName = "user1",
+				userScreenName = "user1");
+
+			JSONUser.setFirstPassword(
+				agreeToTermsAndAnswerReminderQuery = "true",
+				requireReset = "false",
+				userEmailAddress = "user1@liferay.com");
+		}
+
+		task ("Sync the Contact Data") {
+			ACDXPSettings.syncNewContactData();
+		}
+
+		task ("Sign in as new user and view the site page") {
+			for (var n : list "1,2") {
+				User.logoutAndLoginPG(
+					userLoginEmailAddress = "user1@liferay.com",
+					userLoginFullName = "user1 user1");
+
+				Navigator.gotoSitePage(
+					pageName = "AC Page",
+					siteName = "Site Name");
+			}
+		}
+
+		task ("Close sessions") {
+			ACUtils.closeAllSessionsAndWait();
+		}
+
+		task ("Open AC and view the segment") {
+			ACUtils.launchAC();
+
+			ACNavigation.goToSegments();
+
+			ACSegments.accessSegment(segmentName = "Dynamic Segment Test");
+		}
+
+		task ("Assert Membership card exists") {
+			AssertTextPresent(
+				locator1 = "ACSegments#SEGMENT_MEMBERSHIP_CARD",
+				value1 = "Segment Membership");
+		}
+
+		task ("Show anonymous users") {
+			ACSegments.viewSegmentMembershipLegendNumbers(
+				anonymousNumber = "1",
+				knownNumber = "0",
+				totalNumber = "1");
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8487 | Test Summary: Membership card shows members removed"
