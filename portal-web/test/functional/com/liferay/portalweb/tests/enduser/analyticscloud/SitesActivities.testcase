@@ -542,12 +542,62 @@ definition {
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8290 | Test Summary: Unique Visitors label is shown on the tabs of Pages dashboards"
-	@ignore = "true"
 	@priority = "3"
 	test CanUniqueVisitorsLabelShowPagesDashboards {
+		property portal.upstream = "quarantine";
 
-		// TODO LRAC-8290 CanUniqueVisitorsLabelShowPagesDashboards
+		// AC Refactor: the issue is due to data not appearing on time
+		// AC Refactor ticket: LRAC-8827
 
+		task ("Site and blogs creation and connection with AC") {
+			ACUtils.createBlogsAndAddToPage();
+
+			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
+		}
+
+		task ("Interation with pages") {
+
+			Navigator.gotoSitePage(
+				pageName = "AC Page",
+				siteName = "Site Name");
+
+			BlogsNavigator.gotoPG(entryTitle = "Blogs AC Title");
+
+			Pause(locator1 = "5000");
+
+			ACUtils.closeAllSessions();
+
+			
+		}
+
+		task ("AC launch") {
+			ACUtils.launchAC();
+
+			ACProperties.switchProperty(propertyName = "${propertyName}");
+
+	
+		}
+
+		task ("Asset unique visitors label show on the tabs of pages dashboards") {
+
+			// Unable to perform the declaration because the data does not appear at the time
+
+			ACNavigation.switchTab(tabName = "Pages");
+
+			ACTimeFilter.clickTimeFilterButton();
+
+			ACTimeFilter.setLast24Hours();
+
+			ACUtils.searchBar(searchItem = "AC Page");
+
+			ACAssets.viewAssets(assetName = "AC Page - Site Name - Liferay DXP");
+
+			ACSites.assetUniqueVisitors(uniqueVisitors = "1");
+
+			
+
+
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8288 | Test Summary: Unique Visitors label is shown on the tabs of Sites dashboards"
