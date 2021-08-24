@@ -222,6 +222,60 @@ definition {
 
 	}
 
+	@description = "Automation ID: LRAC-8837 | Test Summary: Invalid OAuth Credentials"
+	@ignore = "true"
+	@priority = "2"
+	test InvalidOAuthKey {
+
+		// TODO LRAC-8837 InvalidOAuthKey
+
+	}
+
+	@description = "Automation ID: LRAC-8838 | Test Summary: Invalid OAuth2 Secret"
+	@ignore = "true"
+	@priority = "2"
+	test InvalidOAuthSecret {
+
+		// TODO LRAC-8838 InvalidOAuthSecret
+
+	}
+
+	@description = "Automation ID: LRAC-8128 | Test Summary: View asset added by DXP data source"
+	@ignore = "true"
+	@priority = "5"
+	test ViewAssetAddedByDXPDataSource {
+
+		// TODO LRAC-8128 ViewAssetAddedByDXPDataSource
+
+	}
+
+	@description = "Automation ID: LRAC-8127 | Test Summary: View page added by DXP data source"
+	@ignore = "true"
+	@priority = "5"
+	test ViewPageAddedByDXPDataSource {
+
+		// TODO LRAC-8127 ViewPageAddedByDXPDataSource
+
+	}
+
+	@description = "Automation ID: LRAC-8820 | Test Summary: There is a list of connected data sources including a table of properties/status"
+	@ignore = "true"
+	@priority = "5"
+	test ListOfConnectedDataSourcesIncludingTablePropertiesStatus {
+
+		// TODO LRAC-8820 ListOfConnectedDataSourcesIncludingTablePropertiesStatus
+
+	}
+
+	@description = "Automation ID: LRAC-8833 | Test Summary: Preview number of contacts to be added when configuring contacts"
+	@ignore = "true"
+	@priority = "5"
+	test PreviewNumberOfContactsToAddedWhenSyncContacts {
+
+		// TODO LRAC-8833 PreviewNumberOfContactsToAddedWhenSyncContacts
+
+	}
+
 	@description = "Automation ID: LRAC-8822 | Test Summary: Sync Liferay Data Source Contacts by User Groups"
 	@ignore = "true"
 	@priority = "4"
