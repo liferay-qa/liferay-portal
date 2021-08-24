@@ -81,4 +81,18 @@ definition {
 			locator1 = "ACSites#TOP_PAGES_INDEXES");
 	}
 
+	macro viewTopVisitedPages {
+		AssertElementPresent(
+			key_entryName = "${key_entry}",
+			key_resultNumber = "${key_result}",
+			locator1 = "ACSites#TOP_VISITED_PAGES");
+	}
+
+	macro noViewTopVisitedPages {
+		AssertElementNotPresent(
+			key_entryName = "${key_entry}",
+			key_resultNumber = "${key_result}",
+			locator1 = "ACSites#TOP_VISITED_PAGES");
+	}
+
 }
