@@ -1,5 +1,15 @@
 definition {
 
+	macro assetUniqueVisitors {
+		AssertTextEquals(
+			value1 = "${uniqueVisitors}",
+			key_uniqueVisitors = "${uniqueVisitors}",
+			locator1 = "ACSites#ASSET_UNIQUE_VISITORS_NUMBER");
+	}
+
+
+
+
 	macro viewGeomapAnalyticsLocationNames {
 		for (var locationName : list "${locationList}") {
 			AssertElementPresent(
