@@ -12,6 +12,13 @@ definition {
 		Click(locator1 = "ACCards#CARD_FILTER_BY_WEEK");
 	}
 
+	macro noViewTopVisitedPages {
+		AssertElementNotPresent(
+			key_entryName = "${key_entry}",
+			key_resultNumber = "${key_result}",
+			locator1 = "ACSites#TOP_VISITED_PAGES");
+	}
+
 	macro viewCards {
 		var key_cardTitle = "${cardTitle}";
 
@@ -83,13 +90,6 @@ definition {
 
 	macro viewTopVisitedPages {
 		AssertElementPresent(
-			key_entryName = "${key_entry}",
-			key_resultNumber = "${key_result}",
-			locator1 = "ACSites#TOP_VISITED_PAGES");
-	}
-
-	macro noViewTopVisitedPages {
-		AssertElementNotPresent(
 			key_entryName = "${key_entry}",
 			key_resultNumber = "${key_result}",
 			locator1 = "ACSites#TOP_VISITED_PAGES");

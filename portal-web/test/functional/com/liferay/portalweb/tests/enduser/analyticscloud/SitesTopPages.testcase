@@ -17,17 +17,18 @@ definition {
 		ACUtils.launchDXP();
 	}
 
-	// tearDown {
-	// 	var testPortalInstance = PropsUtil.get("test.portal.instance");
+	//tearDown {
+	//	var testPortalInstance = PropsUtil.get("test.portal.instance");
 
-	// 	ACUtils.tearDownDXP();
+	//	ACUtils.tearDownDXP();
 
-	// 	if ("${testPortalInstance}" == "true") {
-	// 		PortalInstances.tearDownCP();
-	// 	}
+	//	if ("${testPortalInstance}" == "true") {
+	//		PortalInstances.tearDownCP();
 
-	// 	ACUtils.tearDownAC();
-	// }
+	//}
+
+	//	ACUtils.tearDownAC();
+	//}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8304 | Test Summary: Assert Sites Top Pages Card Entrance Pages Highest Entrances"
 	@ignore = "true"
@@ -142,7 +143,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8294 | Test Summary: Show Top 5 Visited Pages"
 	@priority = "5"
 	test ShowTop5VisitedPages {
-
 		property portal.upstream = "quarantine";
 
 		// AC Refactor: This test is flaky due to timing issues
@@ -169,7 +169,6 @@ definition {
 		}
 
 		task ("Interation with pages") {
-
 			for (var n : list "1,2,3,4,5") {
 				Navigator.gotoSitePage(
 					pageName = "AC Page",
@@ -183,7 +182,6 @@ definition {
 				userLoginEmailAddress = "test1@liferay.com",
 				userLoginFullName = "test1 test1");
 
-
 			for (var n : list "1,2,3,4") {
 				Navigator.gotoSitePage(
 					pageName = "AC Page",
@@ -191,10 +189,9 @@ definition {
 
 				BlogsNavigator.gotoPG(entryTitle = "Test Blog ${n}");
 				Pause(locator1 = "5000");
-			}	
-			
+			}
 		}
-		task ("Close all sessions") {		
+		task ("Close all sessions") {
 			ACUtils.closeAllSessions();
 
 			Pause(locator1 = "30000");
@@ -224,8 +221,8 @@ definition {
 					key_result = "");
 			}
 			ACCards.noViewTopVisitedPages(
-				key_entry = "Test Blog 5",
-				kay_result = "");
+				kay_result = "",
+				key_entry = "Test Blog 5");
 		}
 	}
 
