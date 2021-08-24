@@ -17,17 +17,17 @@ definition {
 		ACUtils.launchDXP();
 	}
 
-	tearDown {
-		var testPortalInstance = PropsUtil.get("test.portal.instance");
+	// tearDown {
+	// 	var testPortalInstance = PropsUtil.get("test.portal.instance");
 
-		ACUtils.tearDownDXP();
+	// 	ACUtils.tearDownDXP();
 
-		if ("${testPortalInstance}" == "true") {
-			PortalInstances.tearDownCP();
-		}
+	// 	if ("${testPortalInstance}" == "true") {
+	// 		PortalInstances.tearDownCP();
+	// 	}
 
-		ACUtils.tearDownAC();
-	}
+	// 	ACUtils.tearDownAC();
+	// }
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8304 | Test Summary: Assert Sites Top Pages Card Entrance Pages Highest Entrances"
 	@ignore = "true"
@@ -140,12 +140,93 @@ definition {
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8294 | Test Summary: Show Top 5 Visited Pages"
-	@ignore = "true"
 	@priority = "5"
 	test ShowTop5VisitedPages {
 
-		// TODO LRAC-8294 ShowTop5VisitedPages pending implementation
+		property portal.upstream = "quarantine";
 
+		// AC Refactor: This test is flaky due to timing issues
+		// AC Refactor ticket: LRAC-8764
+
+		task ("Site, users and blogs creation then connect with AC") {
+			ACUtils.addSiteAndPage();
+
+			var n = "1,2,3,4,5";
+
+			for (var x : list "${n}") {
+				ACUtils.createBlogsAndAddToPage(entryTitle = "Test Blog ${x}");
+			}
+
+			JSONUser.addUser(
+				userEmailAddress = "test1@liferay.com",
+				userFirstName = "test1",
+				userLastName = "test1",
+				userScreenName = "test1");
+
+			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
+
+			ACDXPSettings.syncNewContactData();
+		}
+
+		task ("Interation with pages") {
+
+			for (var n : list "1,2,3,4,5") {
+				Navigator.gotoSitePage(
+					pageName = "AC Page",
+					siteName = "Site Name");
+
+				BlogsNavigator.gotoPG(entryTitle = "Test Blog ${n}");
+				Pause(locator1 = "5000");
+			}
+
+			User.logoutAndLoginPG(
+				userLoginEmailAddress = "test1@liferay.com",
+				userLoginFullName = "test1 test1");
+
+
+			for (var n : list "1,2,3,4") {
+				Navigator.gotoSitePage(
+					pageName = "AC Page",
+					siteName = "Site Name");
+
+				BlogsNavigator.gotoPG(entryTitle = "Test Blog ${n}");
+				Pause(locator1 = "5000");
+			}	
+			
+		}
+		task ("Close all sessions") {		
+			ACUtils.closeAllSessions();
+
+			Pause(locator1 = "30000");
+		}
+		task ("AC launch") {
+			ACUtils.launchAC();
+
+			ACProperties.switchProperty(propertyName = "${propertyName}");
+		}
+		task ("Asset top 5 entrances pages") {
+
+			// Unable to perform the declaration because the data does not appear at the time
+
+			ACTimeFilter.clickTimeFilterButton(cardName = "Top Pages");
+
+			ACTimeFilter.setLast24Hours();
+
+			ClickNoError(locator1 = "ACSites#TOP_PAGES_ENTRANCES_BUTTON");
+
+			ACCards.viewTopVisitedPages(
+				key_entry = "AC Page",
+				key_result = "");
+
+			for (var n : list "1,2,3,4") {
+				ACCards.viewTopVisitedPages(
+					key_entry = "Test Blog ${n}",
+					key_result = "");
+			}
+			ACCards.noViewTopVisitedPages(
+				key_entry = "Test Blog 5",
+				kay_result = "");
+		}
 	}
 
 }
