@@ -147,6 +147,14 @@ definition {
 			value1 = "${keyword}");
 	}
 
+	macro assertKeywordNotPresent {
+		var key_KeywordName = "${keyword}";
+
+		AssertElementNotPresent(
+			locator1 = "ACSettings#KEYWORD_NAME",
+			value1 = "${keyword}");
+	}
+
 	@summary = "Asserts the page views usage value \
 	@param pageViewsUsageValue"
 	macro assertPageViewsUsage() {
