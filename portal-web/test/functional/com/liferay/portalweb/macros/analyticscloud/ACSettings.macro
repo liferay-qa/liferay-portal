@@ -139,18 +139,18 @@ definition {
 			value1 = "${individualUsageValue}");
 	}
 
-	macro assertKeywords {
-		var key_KeywordName = "${keyword}";
-
-		AssertTextEquals(
-			locator1 = "ACSettings#KEYWORD_NAME",
-			value1 = "${keyword}");
-	}
-
 	macro assertKeywordNotPresent {
 		var key_KeywordName = "${keyword}";
 
 		AssertElementNotPresent(
+			locator1 = "ACSettings#KEYWORD_NAME",
+			value1 = "${keyword}");
+	}
+
+	macro assertKeywords {
+		var key_KeywordName = "${keyword}";
+
+		AssertTextEquals(
 			locator1 = "ACSettings#KEYWORD_NAME",
 			value1 = "${keyword}");
 	}
@@ -377,10 +377,10 @@ definition {
 	macro deleteKeywordCheckbox {
 		var key_KeywordName = "${keyword}";
 
-		if (IsVisible(locator1 = "ACSettings#KEYWORD_NAME")) {			
+		if (IsVisible(locator1 = "ACSettings#KEYWORD_NAME")) {
 			KeyPress(
-			locator1 = "ACSettings#KEYWORD_CHECKBOX",
-			value1 = "\SPACE");
+				locator1 = "ACSettings#KEYWORD_CHECKBOX",
+				value1 = "\SPACE");
 
 			Click(locator1 = "ACSettings#DELETE_FROM_TOOLBAR");
 
