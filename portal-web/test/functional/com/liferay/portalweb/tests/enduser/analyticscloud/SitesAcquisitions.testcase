@@ -50,12 +50,63 @@ definition {
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8344 | Test Summary: Site overview acquisition card shows which channels individuals are coming from"
-	@ignore = "true"
 	@priority = "5"
 	test AssertShowsChannelsIndividualsComingFrom {
+		task ("Get site assigned property name") {
+			var propertyName = ACDXPSettings.getAssignedPropertyName(siteName = "Site Name");
+		}
 
-		// TODO LRAC-8344 AssertShowsChannelsIndividualsComingFrom
+		task ("Sign out then sign in as Test Test") {
+			User.logoutAndLoginPG(
+				userLoginEmailAddress = "test@liferay.com",
+				userLoginFullName = "Test Test");
+		}
 
+		task ("View the site page") {
+			Navigator.gotoSitePage(
+				pageName = "AC Page",
+				siteName = "Site Name");
+		}
+
+		task ("Wait for page loading") {
+			WaitForPageLoad();
+		}
+
+		task ("Close session") {
+			ACUtils.closeAllSessions();
+
+			Pause(locator1 = "30000");
+		}
+
+		task ("Switch to new property in AC") {
+			ACUtils.launchAC();
+
+			ACProperties.switchProperty(propertyName = "${propertyName}");
+		}
+
+		task ("Navigate to the Overview in Sites dashboard") {
+			ACNavigation.goToSites();
+
+			ACIndividualsDashboard.goToOverviewTab();
+		}
+
+		task ("Select the Last 24 hours in Acquisitions report") {
+			ACTimeFilter.clickTimeFilterButton(cardName = "Acquisitions");
+
+			ACTimeFilter.setLast24Hours();
+		}
+
+		task ("Navigate to Channels tab in Acquisitions report") {
+			ACNavigation.switchTabInCard(tabName = "Channels");
+		}
+
+		task ("Assert that the channel the visitor came from is shown") {
+			ACCards.viewTableEntryInfo(
+				cardTitle = "Acquisitions",
+				column = "cell-expand",
+				entryInfo = "1",
+				entryName = "direct");
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8346 | Test Summary: Assert Sites Acquisition card Channels highest session"
