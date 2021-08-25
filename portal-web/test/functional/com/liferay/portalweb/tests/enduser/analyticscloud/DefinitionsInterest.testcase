@@ -84,13 +84,41 @@ definition {
 
 	}
 
-	@description = "Feature ID: Legacy | Automation ID: LRAC-8791 | Test Summary: Delete keyword using the check box"
-	@ignore = "true"
+	@description = "Feature ID: Legacy | Automation ID: LRAC-8790 | Test Summary: Delete keyword using the check box"
 	@priority = "3"
 	test DeleteKeywordUsingTheCheckBox {
+		var words = "ac keyword 1,ac keyword 2";
 
-		// TODO LRAC-8791 DeleteKeywordUsingTheCheckBox pending implementation
+		task ("Launch AC") {
+			ACUtils.launchAC();
+		}
 
+		task ("Go to settings, definitions and definitions type") {
+			ACNavigation.goToSettings();
+
+			ACSettings.goToDefinitions();
+
+			ACDefinitions.goToDefinitionType(definitionType = "Interests");
+		}
+
+		task ("Add two new keywords") {
+			for (var word : list "${words}") {
+				ACSettings.addKeywords(keyword = "${word}");
+				ACSettings.assertKeywords(keyword = "${word}");
+			}
+		}
+
+		task ("Delete the keyword, assert deletion") {
+			ACSettings.deleteKeywordCheckbox(keyword = "ac keyword 1");
+
+			ACSettings.assertKeywordNotPresent(keyword = "ac keyword 1");
+
+			ACSettings.assertKeywords(keyword = "ac keyword 2");
+
+			ACSettings.deleteKeywordCheckbox(keyword = "ac keyword 2");
+
+			ACSettings.assertKeywordNotPresent(keyword = "ac keyword 2");
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8792 | Test Summary: Delete multiple keywords"
