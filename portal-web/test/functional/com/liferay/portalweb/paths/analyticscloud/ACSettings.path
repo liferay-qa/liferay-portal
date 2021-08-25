@@ -105,6 +105,31 @@
 	<td>//div[contains(@class,'sheet')]//span[contains(@class,'loading-animation')]</td>
 	<td></td>
 </tr>
+<tr>
+	<td>SALESFORCE_ADD_BUTTON</td>
+	<td>//div[contains(@class,'details')]//div//h4[text()='Salesforce']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SALESFORCE_INPUT_NAME</td>
+	<td>//input[@id='dataSourceName']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SALESFORCE_INPUT_CONSUMER_KEY</td>
+	<td>//input[@id='consumerKey']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SALESFORCE_INPUT_CONSUMER_SECRET</td>
+	<td>//input[@type='password']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SALESFORCE_LEAVE_PAGE_BUTTON</td>
+	<td>//button[text()='Leave Page']</td>
+	<td></td>
+</tr>
 <!-- DELETE DATA SOURCE SCREEN -->
 <tr>
 	<td>DELETE_BUTTON_DATA_SOURCE</td>
