@@ -139,6 +139,7 @@ definition {
 			ACUtils.viewNoResultsMessage(noResultMessage = "No visitor data received from your assets");
 
 			// Is not possible to assert the blog because this test needs data from the past.
+
 		}
 	}
 
@@ -558,6 +559,7 @@ definition {
 			ACUtils.viewNoResultsMessage(noResultMessage = "No visitor data received from your assets");
 
 			// Is not possible to assert the blog because this test needs data from the past.
+
 		}
 	}
 
