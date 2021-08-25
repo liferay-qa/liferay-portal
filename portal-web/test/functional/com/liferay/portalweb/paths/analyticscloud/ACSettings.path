@@ -55,8 +55,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>KEYWORD_DELETE_CHECKBOX</td>
-	<td>//h4[text()='${key_KeywordName}']/parent::td/preceding-sibling::td/input</td>
+	<td>KEYWORD_CHECKBOX</td>
+	<td>//h4[text()='${key_KeywordName}']/parent::td/preceding-sibling::td//input</td>
 	<td></td>
 </tr>
 <tr>
