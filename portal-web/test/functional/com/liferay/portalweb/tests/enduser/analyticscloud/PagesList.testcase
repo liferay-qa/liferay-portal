@@ -124,7 +124,7 @@ definition {
 		property portal.upstream = "quarantine";
 
 		// AC Refactor: Test needs data from past dates to assert
-		// AC Refactor ticket: LRAC-8747
+		// AC Refactor ticket: LRAC-8934
 
 		task ("Open Analytics Cloud as active window") {
 			ACUtils.launchAC();
