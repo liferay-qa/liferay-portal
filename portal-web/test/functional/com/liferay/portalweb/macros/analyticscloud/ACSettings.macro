@@ -67,6 +67,34 @@ definition {
 			locator1 = "Header#H3_TITLE");
 	}
 
+	macro addSalesforceAndCancel {
+		var key_salesforceName = "${salesforceName}";
+		var key_consumerKey = "${consumerKey}";
+		var key_consumerSecret = "${consumerSecret}";
+
+		
+        Click(locator1 = "AnalyticsCloudConnection#ANALYTICS_CLOUD_SETTINGS_BUTTON");
+
+        Click(locator1 = "AnalyticsCloudConnection#ANALYTICS_CLOUD_ADD_DATA_SOURCE_BUTTON");
+
+        Click(locator1 = "ACSettings#SALESFORCE_ADD_BUTTON");
+
+        Type(
+            locator1 = "ACSettings#SALESFORCE_INPUT_NAME",
+            value1 = "${key_salesforceName}");
+        Type(
+            locator1 = "ACSettings#SALESFORCE_INPUT_CONSUMER_KEY",
+            value1 = "${key_consumerKey}");
+        Type(
+            locator1 = "ACSettings#SALESFORCE_INPUT_CONSUMER_SECRET",
+            value1 = "${key_consumerSecret}");
+
+		Click(locator1 = "Button#CANCEL");
+
+		Click(locator1 = "ACSettings#SALESFORCE_LEAVE_PAGE_BUTTON");
+		
+	}
+
 	macro addKeywords {
 		Click(locator1 = "ACSettings#KEYWORD_BUTTON");
 
