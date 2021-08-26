@@ -27,7 +27,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8785 | Test Summary: Add a keyword that already exists"
 	@priority = "3"
 	test AddKeywordAlreadyExists {
-
 		task ("Enter in the Interests from Settings Definitions") {
 			var word = "ac keyword";
 
@@ -53,7 +52,6 @@ definition {
 				index = "2",
 				keywordName = "${word}");
 		}
-
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8786 | Test Summary: Add keyword when there are none"
@@ -83,13 +81,48 @@ definition {
 
 	}
 
-	@description = "Feature ID: Legacy | Automation ID: LRAC-8789 | Test Summary: View only selected keywords"
-	@ignore = "true"
+	@description = "Feature ID: Legacy | Automation ID: LRAC-8788 | Test Summary: View only selected keywords"
 	@priority = "3"
 	test AssertSelectedKeywords {
+		var keywordsList = "ac keyword 1,ac keyword 2,ac keyword 3,ac keyword 4";
+		var list1 = "ac keyword 1,ac keyword 3";
+		var list2 = "ac keyword 2,ac keyword 4";
 
-		// TODO LRAC-8789 AssertSelectedKeywords pending implementation
+		task ("Go to settings > definitions > interests") {
+			ACNavigation.goToSettings();
 
+			ACSettings.goToDefinitions();
+
+			ACDefinitions.goToDefinitionType(definitionType = "Interests");
+		}
+
+		task ("Create keywords") {
+			for (var keywords : list "${keywordsList}") {
+				ACSettings.addKeywords(keyword = "${keywords}");
+			}
+		}
+
+		task ("Click in two checkboxes") {
+			for (var listChecked : list "${list1}") {
+				ACInterests.clickKeywordCheckbox(keyword = "${listChecked}");
+			}
+		}
+
+		task ("View the keywords selected") {
+			Click(locator1 = "ACSettings#VIEW_SELECTED_KEYWORDS");
+		}
+
+		task ("Assert element is present") {
+			for (var listChecked : list "${list1}") {
+				ACSettings.assertKeywords(keyword = "${listChecked}");
+			}
+		}
+
+		task ("Assert element not present") {
+			for (var listUnchecked : list "${list2}") {
+				ACSettings.assertKeywordNotPresent(keyword = "${listUnchecked}");
+			}
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8790 | Test Summary: Delete a keyword block"
@@ -161,7 +194,7 @@ definition {
 		}
 
 		task ("Add new keywords") {
-				ACSettings.addMultiplesKeywords(keywordList = "${words}");
+			ACSettings.addMultiplesKeywords(keywordList = "${words}");
 		}
 
 		ACSettings.assertKeywords(keyword = "${words}");
@@ -178,22 +211,19 @@ definition {
 
 		task ("Change the pagination to 5") {
 			ACUtils.changePagination(itemsPerPage = "5");
-
 		}
 
 		task ("Assert the keywords in the page") {
 			var words = "ac keyword 1,ac keyword 2,ac keyword 3,ac keyword 4,ac keyword 5";
 
-			ACSettings.assertKeywords(keyword = "${words}");
-		
-			var key_KeywordName = "ac keyword 6";
+			var word = "ac keyword 6";
 
-			AssertElementNotPresent(
-				locator1 = "ACSettings#KEYWORD_NAME",
-				value1 = "ac keyword 6");
+			ACSettings.assertKeywords(keyword = "${words}");
+
+			ACSettings.assertKeywordNotPresent(keyword = "${word}");
 		}
 
-		task("Assert the amount of entries in the page") {
+		task ("Assert the amount of entries in the page") {
 			ACUtils.viewResultsMessage(results = "Showing 1 to 5 of 6 entries.");
 
 			ACUtils.viewResultsPages(pageNumber = "1");
