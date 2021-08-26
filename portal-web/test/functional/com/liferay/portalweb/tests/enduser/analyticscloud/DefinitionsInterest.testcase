@@ -130,13 +130,71 @@ definition {
 
 	}
 
-	@description = "Feature ID: Legacy | Automation ID: LRAC-8793 | Test Summary: Paginate keyword block list"
-	@ignore = "true"
+	@description = "Feature ID: Legacy | Automation ID: LRAC-8792 | Test Summary: Paginate keyword block list"
 	@priority = "3"
 	test PaginateKeywordBlockList {
+		var words = "ac keyword 1,ac keyword 2,ac keyword 3,ac keyword 4,ac keyword 5,ac keyword 6";
 
-		// TODO LRAC-8793 PaginateKeywordBlockList pending implementation
+		task ("Go to settings, definitions and definitions type") {
+			ACNavigation.goToSettings();
 
+			ACSettings.goToDefinitions();
+
+			ACDefinitions.goToDefinitionType(definitionType = "Interests");
+		}
+
+		task ("Add new keywords") {
+				ACSettings.addMultiplesKeywords(keywordList = "${words}");
+		}
+
+		ACSettings.assertKeywords(keyword = "${words}");
+
+		task ("Assert default pagination display "20 Items" message and page number") {
+			AssertTextEquals.assertText(
+				locator1 = "ACUtils#PAGINATION_ITEMS_PER_PAGE_SELECT",
+				value1 = "20 Items");
+
+			ACUtils.viewResultsMessage(results = "Showing 1 to 6 of 6 entries.");
+
+			ACUtils.viewResultsPages(pageNumber = "1");
+		}
+
+		task ("Change the pagination to 5") {
+			ACUtils.changePagination(itemsPerPage = "5");
+
+		}
+
+		task ("Assert the keywords in the page") {
+			var words = "ac keyword 1,ac keyword 2,ac keyword 3,ac keyword 4,ac keyword 5";
+
+			ACSettings.assertKeywords(keyword = "${words}");
+		
+			var key_KeywordName = "ac keyword 6";
+
+			AssertElementNotPresent(
+				locator1 = "ACSettings#KEYWORD_NAME",
+				value1 = "ac keyword 6");
+		}
+
+		task("Assert the amount of entries in the page") {
+			ACUtils.viewResultsMessage(results = "Showing 1 to 5 of 6 entries.");
+
+			ACUtils.viewResultsPages(pageNumber = "1");
+
+			ACUtils.viewResultsPages(pageNumber = "2");
+		}
+
+		task ("Page number display 1 2, check previous next button and assert the keyword displayed in the page") {
+			ACUtils.checkPreviousNextButton(nextButton = "true");
+
+			ACSettings.assertKeywords(keyword = "ac keyword 6");
+
+			ACUtils.viewResultsMessage(results = "Showing 6 to 6 of 6 entries.");
+
+			ACUtils.checkPreviousNextButton(previousButton = "true");
+
+			ACUtils.viewResultsMessage(results = "Showing 1 to 5 of 6 entries.");
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8795 | Test Summary: Search for a blocked keyword"
