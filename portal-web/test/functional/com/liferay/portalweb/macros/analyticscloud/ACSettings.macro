@@ -148,10 +148,15 @@ definition {
 	}
 
 	macro assertKeywords {
-		var key_KeywordName = "${keyword}";
+		for (var word : list "${keyword}") {
+			var key_KeywordName = "${word}";
 
-		AssertTextEquals(
+			AssertTextEquals(
 			locator1 = "ACSettings#KEYWORD_NAME",
+			value1 = "${word}");
+		}
+	}
+	
 			value1 = "${keyword}");
 	}
 
