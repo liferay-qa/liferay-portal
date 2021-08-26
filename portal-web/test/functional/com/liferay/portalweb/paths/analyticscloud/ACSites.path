@@ -91,6 +91,11 @@
 	<td>//tr[@class='analytics-tooltip-chart-row']//div[text()='${key_visitors}']/ancestor::tr//div[text()='${key_value}']</td>
 	<td></td>
 </tr>
+<tr>
+	<td>VISITED_TOP_PAGES_CARD</td>
+	<td>//tr[${key_index}]//div[contains(@class,'text-truncate')]//div[contains(@class,'table-title')]</td>
+	<td></td>
+</tr>
 </tbody>
 </table>
 </body>
