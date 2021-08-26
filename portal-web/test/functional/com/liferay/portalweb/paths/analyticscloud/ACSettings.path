@@ -60,6 +60,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>KEYWORD_NAME_BY_INDEX</td>
+	<td>//tr[${key_index}]//*[contains(@class,'table-title') and (text()='${key_KeywordName}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>KEYWORD_DELETE_ICON</td>
 	<td>//h4[text()='${key_KeywordName}']/parent::td/following-sibling::td[contains(@class,'row-inline-actions')]/span/button</td>
 	<td></td>
