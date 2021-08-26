@@ -1,5 +1,19 @@
 definition {
 
+	macro assertKeywordNotPresentByIndex {
+		var key_KeywordName = "${keywordName}";
+		var key_index = "${index}";
+
+		AssertElementNotPresent(locator1 = "ACSettings#KEYWORD_NAME_BY_INDEX");
+	}
+
+	macro assertKeywordPresentByIndex {
+		var key_KeywordName = "${keywordName}";
+		var key_index = "${index}";
+
+		AssertElementPresent(locator1 = "ACSettings#KEYWORD_NAME_BY_INDEX");
+	}
+
 	macro assertNoCurrentInterests {
 		AssertVisible(
 			key_cardTitle = "Interests",
@@ -10,6 +24,16 @@ definition {
 		var key_interestTopic = "${interestTopic}";
 
 		Click(locator1 = "ACInterests#INTEREST_TOPIC");
+	}
+	
+	macro clickKeywordCheckbox {
+		var key_KeywordName = "${keyword}";
+
+		if (IsVisible(locator1 = "ACSettings#KEYWORD_NAME")) {			
+			KeyPress(
+			locator1 = "ACSettings#KEYWORD_CHECKBOX",
+			value1 = "\SPACE");
+		}
 	}
 
 	macro switchTab {
@@ -87,18 +111,5 @@ definition {
 				value1 = "${userAccount}");
 		}
 	}
-	
-	macro assertKeywordPresentByIndex {
-		var key_KeywordName = "${keywordName}";
-		var key_index = "${index}";
 
-		AssertElementPresent(locator1 = "ACSettings#KEYWORD_NAME_BY_INDEX");
-	}
-
-	macro assertKeywordNotPresentByIndex {
-		var key_KeywordName = "${keywordName}";
-		var key_index = "${index}";
-
-		AssertElementNotPresent(locator1 = "ACSettings#KEYWORD_NAME_BY_INDEX");
-	}
 }
