@@ -93,7 +93,12 @@ definition {
 		var key_index = "${index}";
 
 		AssertElementPresent(locator1 = "ACSettings#KEYWORD_NAME_BY_INDEX");
-
 	}
 
+	macro assertKeywordNotPresentByIndex {
+		var key_KeywordName = "${keywordName}";
+		var key_index = "${index}";
+
+		AssertElementNotPresent(locator1 = "ACSettings#KEYWORD_NAME_BY_INDEX");
+	}
 }
