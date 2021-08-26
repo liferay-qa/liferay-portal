@@ -87,5 +87,13 @@ definition {
 				value1 = "${userAccount}");
 		}
 	}
+	
+	macro assertKeywordPresentByIndex {
+		var key_KeywordName = "${keywordName}";
+		var key_index = "${index}";
+
+		AssertElementPresent(locator1 = "ACSettings#KEYWORD_NAME_BY_INDEX");
+
+	}
 
 }
