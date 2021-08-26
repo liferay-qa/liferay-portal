@@ -118,6 +118,37 @@ definition {
 		}
 	}
 
+	@description = "Feature ID: Legacy | Automation ID: LRAC-8342 | Test Summary: Custom Range time period filter in Page table"
+	@priority = "5"
+	test CanTimeFilterUseCustomRangeInPageTable {
+		property portal.upstream = "quarantine";
+
+		// AC Refactor: Test needs data from past dates to assert
+		// AC Refactor ticket: LRAC-8957
+
+		task ("Open Analytics Cloud as active window") {
+			ACUtils.launchAC();
+		}
+
+		task ("Select Pages tab and set time period filter to Last Year") {
+			ACNavigation.switchTab(tabName = "Pages");
+
+			ACTimeFilter.clickTimeFilterButton();
+		}
+
+		// Can't assert that the filter is working properly without past data
+
+		task ("Set time filter use Custom Range") {
+			ACTimeFilter.setCustomRange(
+				endDay = "30",
+				endMonth = "August",
+				endYear = "2021",
+				startDay = "1",
+				startMonth = "July",
+				startYear = "2021");
+		}
+	}
+
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8341 | Test Summary: Filter Page Table by Last Year"
 	@priority = "3"
 	test PeriodFilterLastYearPageTable {
