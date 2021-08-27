@@ -232,11 +232,28 @@ definition {
 	}
 
 	@description = "Automation ID: LRAC-8823 | Test Summary: Sync Liferay Data Source Contacts by Organizations"
-	@ignore = "true"
 	@priority = "4"
 	test SyncDataSourceContactsByOrganizations {
 
-		// TODO LRAC-8823 SyncDataSourceContactsByOrganizations
+	  
+
+
+		ApplicationsMenu.gotoPortlet(
+            category = "Users",
+            panel = "Control Panel",
+            portlet = "Users and Organizations");
+
+        Organization.addCP(
+            orgName = "Organization Name",
+            orgType = "Organization");
+
+        ApplicationsMenu.gotoPortlet(
+            category = "Users",
+            panel = "Control Panel",
+            portlet = "Users and Organizations");
+
+		ACDXPSettings.syncByOrganizations();
+
 
 	}
 
