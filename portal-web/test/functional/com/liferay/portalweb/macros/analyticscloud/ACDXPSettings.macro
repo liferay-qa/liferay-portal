@@ -176,4 +176,25 @@ definition {
 		Alert.viewSuccessMessage();
 	}
 
+	macro syncContactSingleUserGroupData {
+
+		Click(locator1 = "ACDXPSettings#SYNC_CONTACTS_OPTION");
+
+		Click(
+			key_option = "Sync by User Groups",
+			locator1 = "ACDXPSettings#CONTACT_SYNC_OPTIONS");
+
+		Click(
+			key_entry = "${userGroup}",
+			locator1 = "ACDXPSettings#USER_GROUP_OPTION_CHECKBOX");
+
+		Click(
+			key_text = "Save and Next",
+			locator1 = "Button#ANY");
+
+		Button.clickSave();
+
+		Alert.viewSuccessMessage();
+	}
+
 }
