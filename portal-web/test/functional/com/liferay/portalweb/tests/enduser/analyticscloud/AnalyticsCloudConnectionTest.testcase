@@ -225,7 +225,6 @@ definition {
 	@description = "Automation ID: LRAC-8822 | Test Summary: Sync Liferay Data Source Contacts by User Groups"
 	@priority = "4"
 	test SyncDataSourceContactsByGroups {
-
 		ApplicationsMenu.gotoPortlet(
 			category = "Users",
 			panel = "Control Panel",
@@ -238,7 +237,6 @@ definition {
 		ACDXPSettings.navToSyncedContactDataMenu();
 
 		ACDXPSettings.syncContactSingleUserGroupData(userGroup = "User Group Name");
-
 	}
 
 	@description = "Automation ID: LRAC-8823 | Test Summary: Sync Liferay Data Source Contacts by Organizations"
