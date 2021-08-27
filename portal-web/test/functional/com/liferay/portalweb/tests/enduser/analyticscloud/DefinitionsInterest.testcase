@@ -63,6 +63,26 @@ definition {
 
 	}
 
+	@description = "Feature ID: Legacy | Automation ID: LRAC-8787 | Test Summary: Add multiple keywords"
+	@priority = "3"
+	test AddMultipleKeywords {
+		task ("Go to settings > definitions > interests") {
+			var keywords = "ac keyword 1,ac keyword 2,ac keyword 3,ac keyword 4";
+
+			ACNavigation.goToSettings();
+
+			ACSettings.goToDefinitions();
+
+			ACDefinitions.goToDefinitionType(definitionType = "Interests");
+		}
+
+		task ("Add multiple keywords") {
+			ACSettings.addMultiplesKeywords(keywordList = "${keywords}");
+
+			ACSettings.assertKeywords(keyword = "${keywords}");
+		}
+	}
+
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8795 | Test Summary: Add multiple of the same keyword"
 	@priority = "3"
 	test AddMultipleSameKeyword {
