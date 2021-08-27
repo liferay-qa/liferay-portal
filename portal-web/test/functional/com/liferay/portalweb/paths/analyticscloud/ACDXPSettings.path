@@ -124,6 +124,16 @@
 	<td>//fieldset//*[contains(@href, 'synced-contact-data')]</td>
 	<td></td>
 </tr>
+<tr>
+	<td>CONTACT_SYNC_OPTIONS</td>
+	<td>//p[contains(@class,'list-group-title') and contains (text(),'${key_option}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>USER_GROUP_OPTION_CHECKBOX</td>
+	<td>//td[contains(text(),'${key_entry}')]/../../tr//td//input[contains(@type,'checkbox')]</td>
+	<td></td>
+</tr>
 </tbody>
 </table>
 </body>
