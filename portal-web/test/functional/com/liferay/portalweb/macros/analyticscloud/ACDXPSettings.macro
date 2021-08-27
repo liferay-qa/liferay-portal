@@ -32,39 +32,6 @@ definition {
 		return "${assignedPropertyName}";
 	}
 
-	macro syncByOrganizations {
-		
-
-		ACDXPSettings.goToInstanceSettingsAC();
-
-		Click(locator1 = "ACDXPSettings#TOKEN_INPUT_FIELD");
-
-		Paste(locator1 = "ACDXPSettings#TOKEN_INPUT_FIELD");
-
-		Click(locator1 = "ACDXPSettings#CONNECT_DISCONNECT_BUTTON");
-
-		ACDXPSettings.assertSuccessfulConnection();
-
-		
-
-		ACDXPSettings.navToSyncedContactDataMenu();
-
-		
-
-		Click(locator1 = "ACDXPSettings#SYNC_CONTACTS_OPTION");
-
-		Click(locator1 = "ACDXPSettings#SYNC_BY_ORGANIZATIONS_BUTTON");
-		
-
-		Click(locator1 = "ACDXPSettings#AC_GENERIC_CHECKBOX");
-
-		Click(locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON");
-
-		Click(locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON");
-
-		Alert.viewSuccessMessage();
-	}
-
 	macro createCombinedProperties {
 		var siteName = "${siteName}";
 
@@ -163,6 +130,32 @@ definition {
 		Click(locator1 = "ACDXPSettings#AVAILABLE_PROPERTY_NAME");
 
 		Click(locator1 = "ACDXPSettings#AC_GENERIC_CHECKBOX");
+	}
+
+	macro syncByOrganizations {
+		ACDXPSettings.goToInstanceSettingsAC();
+
+		Click(locator1 = "ACDXPSettings#TOKEN_INPUT_FIELD");
+
+		Paste(locator1 = "ACDXPSettings#TOKEN_INPUT_FIELD");
+
+		Click(locator1 = "ACDXPSettings#CONNECT_DISCONNECT_BUTTON");
+
+		ACDXPSettings.assertSuccessfulConnection();
+
+		ACDXPSettings.navToSyncedContactDataMenu();
+
+		Click(locator1 = "ACDXPSettings#SYNC_CONTACTS_OPTION");
+
+		Click(locator1 = "ACDXPSettings#SYNC_BY_ORGANIZATIONS_BUTTON");
+
+		Click(locator1 = "ACDXPSettings#AC_GENERIC_CHECKBOX");
+
+		Click(locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON");
+
+		Click(locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON");
+
+		Alert.viewSuccessMessage();
 	}
 
 	macro syncContactData {
