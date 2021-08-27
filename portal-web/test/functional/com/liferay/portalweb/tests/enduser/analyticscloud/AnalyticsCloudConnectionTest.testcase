@@ -177,13 +177,13 @@ definition {
 
 		ACNavigation.goToSettings();
 
-		ACSettings.goToDataSources();	
+		ACSettings.goToDataSources();
 
 		ACUtils.searchBar(searchItem = "Liferay DXP");
 
 		AssertElementPresent(
-			locator1 = "ACSettings#ITEM_ON_LIST",
-			itemName = "Liferay DXP");
+			itemName = "Liferay DXP",
+			locator1 = "ACSettings#ITEM_ON_LIST");
 	}
 
 	@description = "Automation ID: LRAC-8837 | Test Summary: Invalid OAuth Credentials"
