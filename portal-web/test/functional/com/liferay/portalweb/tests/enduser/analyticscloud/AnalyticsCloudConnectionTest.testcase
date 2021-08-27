@@ -74,13 +74,13 @@ definition {
 	}
 
 	@description = "Automation ID: LRAC-8835 | Test Summary: Assert Liferay Data Source Contact Count Preview"
-	@ignore = "true"
 	@priority = "4"
 	test AssertLiferayDataSourceContactCountPreview {
-
-		// TODO LRAC-8835 AssertLiferayDataSourceContactCountPreview
-
+		task("Go to AC/DXP Settings and assert the number of contacts") {
+			ACDXPSettings.assertDXPContactCountPreview(numberContacts = "1");
+		}
 	}
+
 
 	@description = "Automation ID: LRAC-8834 | Test Summary: Assert the Liferay DXP Data Source Status"
 	@ignore = "true"
