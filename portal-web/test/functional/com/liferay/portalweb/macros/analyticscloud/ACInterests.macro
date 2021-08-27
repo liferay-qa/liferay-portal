@@ -25,14 +25,14 @@ definition {
 
 		Click(locator1 = "ACInterests#INTEREST_TOPIC");
 	}
-	
+
 	macro clickKeywordCheckbox {
 		var key_KeywordName = "${keyword}";
 
-		if (IsVisible(locator1 = "ACSettings#KEYWORD_NAME")) {			
+		if (IsVisible(locator1 = "ACSettings#KEYWORD_NAME")) {
 			KeyPress(
-			locator1 = "ACSettings#KEYWORD_CHECKBOX",
-			value1 = "\SPACE");
+				locator1 = "ACSettings#KEYWORD_CHECKBOX",
+				value1 = "\SPACE");
 		}
 	}
 

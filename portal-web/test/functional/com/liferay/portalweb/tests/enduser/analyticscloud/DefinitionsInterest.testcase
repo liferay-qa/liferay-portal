@@ -63,22 +63,30 @@ definition {
 
 	}
 
-	@description = "Feature ID: Legacy | Automation ID: LRAC-8787 | Test Summary: Add multiple keywords"
-	@ignore = "true"
-	@priority = "3"
-	test AddMultipleKeywords {
-
-		// TODO LRAC-8787 AddMultipleKeywords pending implementation
-
-	}
-
-	@description = "Feature ID: Legacy | Automation ID: LRAC-8788 | Test Summary: Add multiple of the same keyword"
-	@ignore = "true"
+	@description = "Feature ID: Legacy | Automation ID: LRAC-8795 | Test Summary: Add multiple of the same keyword"
 	@priority = "3"
 	test AddMultipleSameKeyword {
+		task ("Enter in the Interests from Settings Definitions") {
+			var keywords = "ac keyword,ac keyword,ac keyword,ac keyword,ac keyword";
 
-		// TODO LRAC-8788 AddMultipleSameKeyword pending implementation
+			ACNavigation.goToSettings();
 
+			ACSettings.goToDefinitions();
+
+			ACDefinitions.goToDefinitionType(definitionType = "Interests");
+		}
+
+		task ("make a keyword and check if it exist") {
+			ACSettings.addMultiplesKeywords(keywordList = "${keywords}");
+
+			ACInterests.assertKeywordPresentByIndex(
+				index = "1",
+				keywordName = "ac keyword");
+
+			ACInterests.assertKeywordNotPresentByIndex(
+				index = "2",
+				keywordName = "ac keyword");
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8788 | Test Summary: View only selected keywords"
@@ -242,15 +250,6 @@ definition {
 
 			ACUtils.viewResultsMessage(results = "Showing 1 to 5 of 6 entries.");
 		}
-	}
-
-	@description = "Feature ID: Legacy | Automation ID: LRAC-8795 | Test Summary: Search for a blocked keyword"
-	@ignore = "true"
-	@priority = "3"
-	test SearchForBlockedKeyword {
-
-		// TODO LRAC-8795 SearchForBlockedKeyword pending implementation
-
 	}
 
 }
