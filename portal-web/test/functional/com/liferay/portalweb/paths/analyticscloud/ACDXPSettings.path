@@ -120,6 +120,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SYNC_BY_ORGANIZATIONS_BUTTON</td>
+	<td>//fieldset//a[2]//div[2]//p[contains(@class,'list-group-title')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SYNC_CONTACTS_OPTION</td>
 	<td>//fieldset//*[contains(@href, 'synced-contact-data')]</td>
 	<td></td>
