@@ -223,11 +223,21 @@ definition {
 	}
 
 	@description = "Automation ID: LRAC-8822 | Test Summary: Sync Liferay Data Source Contacts by User Groups"
-	@ignore = "true"
 	@priority = "4"
 	test SyncDataSourceContactsByGroups {
 
-		// TODO LRAC-8822 SyncDataSourceContactsByGroups
+		ApplicationsMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "User Groups");
+
+		UserGroup.addCP(userGroupName = "User Group Name");
+
+		var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud();
+
+		ACDXPSettings.navToSyncedContactDataMenu();
+
+		ACDXPSettings.syncContactSingleUserGroupData(userGroup = "User Group Name");
 
 	}
 
