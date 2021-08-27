@@ -169,12 +169,21 @@ definition {
 	}
 
 	@description = "Automation ID: LRAC-8821 | Test Summary: Data Source list is searchable"
-	@ignore = "true"
 	@priority = "5"
 	test DataSourceListIsSearchable {
+		var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud();
 
-		// TODO LRAC-8821 DataSourceListIsSearchable
+		ACUtils.launchAC();
 
+		ACNavigation.goToSettings();
+
+		ACSettings.goToDataSources();	
+
+		ACUtils.searchBar(searchItem = "Liferay DXP");
+
+		AssertElementPresent(
+			locator1 = "ACSettings#ITEM_ON_LIST",
+			itemName = "Liferay DXP");
 	}
 
 	@description = "Automation ID: LRAC-8837 | Test Summary: Invalid OAuth Credentials"
