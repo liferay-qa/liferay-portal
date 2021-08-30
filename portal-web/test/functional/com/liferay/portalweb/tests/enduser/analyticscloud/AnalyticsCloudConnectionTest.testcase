@@ -132,19 +132,10 @@ definition {
 		}
 
 		task ("Assert the data source list if a new data source has not been created") {
-
 			AssertElementNotPresent(
-				locator1 = "ACSettings#ITEM_ON_LIST",
-				itemName = "Liferay");
-
+				itemName = "Liferay",
+				locator1 = "ACSettings#ITEM_ON_LIST");
 		}
-
-
-
-
-
-
-
 	}
 
 	@description = "Automation ID: LRAC-8107 | Test Summary: Navigates to data source page"
