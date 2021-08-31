@@ -143,25 +143,18 @@ definition {
 	macro syncByOrganizations {
 		Click(locator1 = "ACDXPSettings#SYNC_CONTACTS_OPTION");
 
-		
-
-
-
 		Click(locator1 = "ACDXPSettings#SYNC_BY_ORGANIZATIONS_BUTTON");
 
 		ACDXPSettings.searchACItem(searchItem = "${orgName}");
 
 		if (isSet(index)) {
 			Click(
-				locator1 = "ACDXPSettings#AC_CHECKBOX_INDEX",
-				key_index = "${index}");
+				key_index = "${index}",
+				locator1 = "ACDXPSettings#AC_CHECKBOX_INDEX");
 		}
 		else {
-			Click(
-				locator1 = "ACDXPSettings#AC_GENERIC_CHECKBOX");
+			Click(locator1 = "ACDXPSettings#AC_GENERIC_CHECKBOX");
 		}
-
-		
 
 		Click(locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON");
 

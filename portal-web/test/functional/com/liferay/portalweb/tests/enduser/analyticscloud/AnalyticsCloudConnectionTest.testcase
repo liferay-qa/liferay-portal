@@ -272,8 +272,6 @@ definition {
 		}
 
 		task ("Create a new organization and assign the organization for the created user") {
-			
-
 			ApplicationsMenu.gotoPortlet(
 				category = "Users",
 				panel = "Control Panel",
@@ -302,29 +300,19 @@ definition {
 		}
 
 		task ("Connect to AC") {
-
 			ACDXPSettings.goToInstanceSettingsAC();
 
 			ACDXPSettings.navToSyncedContactDataMenu();
 
 			ACDXPSettings.syncByOrganizations(
-				orgName = "Organization Name 2",
-				index = "2");
-
-
-
-
-
-
+				index = "2",
+				orgName = "Organization Name 2");
 		}
 
 		task ("Assert preview the number of Organization contacts to sync") {
-		
-
 			ACDXPSettings.navToSyncedContactDataMenu();
 
 			Click(locator1 = "ACDXPSettings#SYNC_CONTACTS_OPTION");
-
 
 			AssertTextEquals(
 				locator1 = "ACDXPSettings#SYNC_BY_ORGANIZATIONS_PREVIEW",
