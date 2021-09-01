@@ -9,6 +9,9 @@ definition {
 	property testray.main.component.name = "Analytics Cloud";
 
 	setUp {
+		// Note to consider refactoring of the currently lengthy setup process that is currently written to provide tests with enough data
+		// May need to consider using a faster method of injecting data directly to AC
+
 		task ("Copy the token from AC") {
 			ACUtils.launchAC();
 
