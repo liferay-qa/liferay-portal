@@ -89,6 +89,10 @@
 <tr>
 	<td>DROPDOWN_ITEM</td>
 	<td>//div[contains(@class, 'dropdown-menu show')]//*[text()='${key_dropdownItem}']</td>
+</tr>
+<tr>
+	<td>GENERIC_BUTTON</td>
+	<td>//button[contains(@class,'button-root')and text()='${key_buttonName}']</td>
 	<td></td>
 </tr>
 </tbody>
