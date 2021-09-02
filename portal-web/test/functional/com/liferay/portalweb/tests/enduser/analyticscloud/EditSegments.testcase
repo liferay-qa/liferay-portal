@@ -530,12 +530,87 @@ definition {
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8590 | Test Summary: Undo Adding a Segment Member in the Edit Modal"
-	@ignore = "true"
 	@priority = "4"
 	test UndoAddingSegmentMemberInTheEditModal {
+		task ("Get site assigned property name") {
+			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
+		}
 
-		// TODO LRAC-8590 UndoAddingSegmentMemberInTheEditModal pending implementation
+		task ("Add a new user in DXP") {
+			for (var name : list "ac,liferay") {
+				JSONUser.addUser(
+					userEmailAddress = "${name}@liferay.com",
+					userFirstName = "${name}",
+					userLastName = "${name}",
+					userScreenName = "${name}");
+			}
+		}
 
+		task ("Sync the Contact Data") {
+			ACDXPSettings.syncNewContactData();
+		}
+
+		task ("Sign in with the new user to visit the site pages") {
+			for (var name : list "ac,liferay") {
+				User.logoutAndLoginPG(
+					userLoginEmailAddress = "${name}@liferay.com",
+					userLoginFullName = "${name} ${name}");
+
+				Navigator.gotoSitePage(
+					pageName = "AC Page",
+					siteName = "Site Name");
+
+				Pause(locator1 = "5000");
+			}
+		}
+
+		task ("Switch to new property in AC") {
+			ACUtils.closeAllSessionsAndWait();
+
+			ACUtils.launchAC();
+
+			ACProperties.switchProperty(propertyName = "${propertyName}");
+		}
+
+		task ("Go to Segments and add a new segment") {
+			ACNavigation.goToSegments();
+
+			ACSegments.createStaticSegment();
+
+			ACSegments.nameSegment(segmentName = "New Segment Test");
+
+			ACSegments.addStaticMember(tableMember = "ac ac");
+
+			ACSegments.saveSegment();
+		}
+
+		task ("Go to Segments and edit") {
+			ACNavigation.goToSegments();
+
+			ACSegments.editSegment(searchTerm = "New Segment Test");
+
+			ACSegments.viewEditorLabel(labelName = "Static Segment");
+		}
+
+		task ("Add new Segment member and undo adding") {
+			ACSegments.addStaticMember(tableMember = "liferay liferay");
+
+			ACUtils.clickAnyButton(button = "View Added Members");
+
+			ACUtils.clickAnyButton(button = "Undo");
+
+			ACSegments.saveSegment();
+		}
+
+		task ("Assert undo adding Segment member") {
+			ACNavigation.goToSegments();
+
+			ACSegments.editSegment(searchTerm = "New Segment Test");
+
+			AssertElementNotPresent(
+				categoryName = "liferay liferay",
+				locator1 = "ContentDashboard#CATEGORY_NAME_ELEMENT");
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8591 | Test Summary: Undo all members from being added"
