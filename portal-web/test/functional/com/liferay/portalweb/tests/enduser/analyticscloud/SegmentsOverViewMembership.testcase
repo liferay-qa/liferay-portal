@@ -303,9 +303,7 @@ definition {
 		}
 
 		task ("Assert Membership card exists") {
-			AssertTextPresent(
-				locator1 = "ACSegments#SEGMENT_MEMBERSHIP_CARD",
-				value1 = "Segment Membership");
+			ACCards.viewCards(cardTitle = "Segment Membership");
 		}
 
 		task ("Show anonymous users") {
