@@ -349,6 +349,37 @@ definition {
 			locator1 = "ACSettings#USER_ROLE_BY_EMAIL");
 	}
 
+	macro changeMultipleUsersPermissions {
+		for (var userEmail : list "${userEmail}") {
+			Click(
+				key_userEmail = "${userEmail}",
+				locator1 = "ACSettings#CHECKBOX_BY_EMAIL");
+		}
+
+		Click(
+			locator1 = "Button#ANY",
+			key_text = "Change Permissions");
+
+		Click(
+			locator1 = "Button#ANY",
+			key_text = "Select Permission");
+
+		Click(
+			key_siteRole = "${permissionType}",
+			locator1 = "ACSettings#SELECT_SITE_ROLE");
+
+		Button.clickSave();
+
+		Alert.viewSuccessMessage();
+
+		for (var userEmail : list "${userEmail}") {
+			AssertElementPresent(
+				key_permissionType = "${permissionType}",
+				key_userEmail = "${userEmail}",
+				locator1 = "ACSettings#USER_ROLE_BY_EMAIL");
+		}
+	}
+
 	macro clickGenericAddOrConfirmationButton {
 		Click(locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON");
 	}
