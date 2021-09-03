@@ -284,12 +284,26 @@ definition {
 	}
 
 	@description = "Automation ID: LRAC-9092 | Test Summary: Owner can change user permissions"
-	@ignore = "true"
 	@priority = "5"
 	test OwnerCanChangeUserPermissions {
+		var userEmail = "ac@liferay.com";
 
-		// TODO LRAC-9092 OwnerCanChangeUserPermissions
+		task ("Go to User Management") {
+			ACNavigation.goToSettings();
 
+			ACSettings.goToUserManagement();
+		}
+
+		task ("Invite user") {
+			ACSettings.addUser(userInvite = "${userEmail}");
+		}
+
+		task ("Change user permission") {
+			ACSettings.changeUserRole(
+				newRole = "Administrator",
+				permissionType = "Member",
+				userEmail = "${userEmail}");
+		}
 	}
 
 	@description = "Automation ID: LRAC-9091 | Test Summary: Owner can remove data sources"
