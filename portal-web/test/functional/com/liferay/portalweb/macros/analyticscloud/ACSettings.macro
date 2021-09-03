@@ -311,6 +311,37 @@ definition {
 			locator1 = "ACSettings#USER_LIST_EMAIL",
 			value1 = "${userEmail}");
 	}
+	
+	macro changeMultipleUsersPermissions {
+		for (var userEmail : list "${userEmail}") {
+			Click(
+				key_userEmail = "${userEmail}",
+				locator1 = "ACSettings#CHECKBOX_BY_EMAIL");
+		}
+
+		Click(
+			key_text = "Change Permissions",
+			locator1 = "Button#ANY");
+
+		Click(
+			key_text = "Select Permission",
+			locator1 = "Button#ANY");
+
+		Click(
+			key_siteRole = "${permissionType}",
+			locator1 = "ACSettings#SELECT_SITE_ROLE");
+
+		Button.clickSave();
+
+		Alert.viewSuccessMessage();
+
+		for (var userEmail : list "${userEmail}") {
+			AssertElementPresent(
+				key_permissionType = "${permissionType}",
+				key_userEmail = "${userEmail}",
+				locator1 = "ACSettings#USER_ROLE_BY_EMAIL");
+		}
+	}
 
 	macro changeRetentionPeriodTo7Months {
 		Click(locator1 = "OpenIDConnectLogin#OPENID_CONNECT_DROPDOWN_MENU");
@@ -347,37 +378,6 @@ definition {
 			key_permissionType = "${newRole}",
 			key_userEmail = "${userEmail}",
 			locator1 = "ACSettings#USER_ROLE_BY_EMAIL");
-	}
-
-	macro changeMultipleUsersPermissions {
-		for (var userEmail : list "${userEmail}") {
-			Click(
-				key_userEmail = "${userEmail}",
-				locator1 = "ACSettings#CHECKBOX_BY_EMAIL");
-		}
-
-		Click(
-			locator1 = "Button#ANY",
-			key_text = "Change Permissions");
-
-		Click(
-			locator1 = "Button#ANY",
-			key_text = "Select Permission");
-
-		Click(
-			key_siteRole = "${permissionType}",
-			locator1 = "ACSettings#SELECT_SITE_ROLE");
-
-		Button.clickSave();
-
-		Alert.viewSuccessMessage();
-
-		for (var userEmail : list "${userEmail}") {
-			AssertElementPresent(
-				key_permissionType = "${permissionType}",
-				key_userEmail = "${userEmail}",
-				locator1 = "ACSettings#USER_ROLE_BY_EMAIL");
-		}
 	}
 
 	macro clickGenericAddOrConfirmationButton {
