@@ -311,7 +311,16 @@ definition {
 			locator1 = "ACSettings#USER_LIST_EMAIL",
 			value1 = "${userEmail}");
 	}
-	
+
+	macro assertUserPermission {
+		for (var userEmail : list "${userEmail}") {
+			AssertElementPresent(
+				key_permissionType = "${permissionType}",
+				key_userEmail = "${userEmail}",
+				locator1 = "ACSettings#USER_ROLE_BY_EMAIL");
+		}
+	}
+
 	macro changeMultipleUsersPermissions {
 		for (var userEmail : list "${userEmail}") {
 			Click(
@@ -334,15 +343,6 @@ definition {
 		Button.clickSave();
 
 		Alert.viewSuccessMessage();
-	}
-
-	macro assertUserPermission {
-		for (var userEmail : list "${userEmail}") {
-			AssertElementPresent(
-				key_permissionType = "${permissionType}",
-				key_userEmail = "${userEmail}",
-				locator1 = "ACSettings#USER_ROLE_BY_EMAIL");
-		}
 	}
 
 	macro changeRetentionPeriodTo7Months {

@@ -288,6 +288,16 @@ definition {
 	test OwnerCanChangeUserPermissions {
 		var userEmail = "ac@liferay.com";
 
+		task ("Login with another Owner User") {
+			ACWorkspace.signOut();
+
+			ACLogin.loginAs(
+				emailAddress = "test@faro.io",
+				password = "test");
+
+			ACWorkspace.openWorkspace();
+		}
+
 		task ("Go to User Management") {
 			ACNavigation.goToSettings();
 
@@ -302,6 +312,12 @@ definition {
 			ACSettings.changeUserRole(
 				newRole = "Administrator",
 				permissionType = "Member",
+				userEmail = "${userEmail}");
+		}
+
+		task ("Assert user permission") {
+			ACSettings.assertUserPermission(
+				permissionType = "Administrator",
 				userEmail = "${userEmail}");
 		}
 	}
@@ -323,8 +339,16 @@ definition {
 			var dataSource = StringUtil.replace("${propertyName}", " Combined Property", "");
 		}
 
-		task ("Go to AC") {
+		task ("Go to AC and login with another Owner User") {
 			ACUtils.launchAC();
+
+			ACWorkspace.signOut();
+
+			ACLogin.loginAs(
+				emailAddress = "test@faro.io",
+				password = "test");
+
+			ACWorkspace.openWorkspace();
 		}
 
 		task ("Delete the data source and check if it has been deleted") {
@@ -358,8 +382,9 @@ definition {
 		}
 
 		task ("Invite user") {
-			ACSettings.addUser(userInvite = "${firstUser}");
-			ACSettings.addUser(userInvite = "${secondUser}");
+			for (var users : list "${firstUser},${secondUser}") {
+				ACSettings.addUser(userInvite = "${users}");
+			}
 		}
 
 		task ("Change user permission") {
@@ -369,10 +394,24 @@ definition {
 				userEmail = "${firstUser}");
 		}
 
+		task ("Assert user permission") {
+			ACSettings.assertUserPermission(
+				permissionType = "Administrator",
+				userEmail = "${firstUser}");
+		}
+
 		task ("Change user permission") {
 			ACSettings.changeMultipleUsersPermissions(
 				permissionType = "Member",
 				userEmail = "${firstUser},${secondUser}");
+		}
+
+		task ("Assert user permission") {
+			for (var users : list "${firstUser},${secondUser}") {
+				ACSettings.assertUserPermission(
+					permissionType = "Member",
+					userEmail = "${users}");
+			}
 		}
 	}
 
