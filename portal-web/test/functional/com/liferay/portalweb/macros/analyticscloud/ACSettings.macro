@@ -545,6 +545,26 @@ definition {
 		Click(locator1 = "ACSettings#DISCONNECT_CONFIRMATION_BUTTON");
 	}
 
+	macro editUserPermission {
+		ACUtils.searchBar(searchItem = "${userEmail}");
+
+		AssertClick(
+			locator1 = "Button#EDIT",
+			value1 = "Edit");
+
+		Click(locator1 = "ACSettings#SELECT_EDIT_PERMISSION_DROPDOWN");
+
+		Click(
+			key_userPermission = "${userPermission}",
+			locator1 = "ACSettings#SELECT_EDIT_PERMISSION_DROPDOWN_OPTION");
+
+		AssertClick(
+			locator1 = "Button#SAVE",
+			value1 = "Save");
+
+		Alert.viewSuccessMessage();
+	}
+
 	macro getDXPInstanceId {
 		ACSettings.goToDataSources();
 
@@ -630,26 +650,6 @@ definition {
 
 	macro verifyCannotAddUser {
 		AssertElementNotPresent(locator1 = "ACSettings#INVITE_USERS_BUTTON");
-	}
-
-	macro editUserPermission {
-		ACUtils.searchBar(searchItem = "${userEmail}");
-
-		AssertClick(
-			locator1 = "Button#EDIT",
-			value1 = "Edit");
-
-		Click(locator1 = "ACSettings#SELECT_EDIT_PERMISSION_DROPDOWN");
-
-		Click(
-			locator1 = "ACSettings#SELECT_EDIT_PERMISSION_DROPDOWN_OPTION",
-			key_userPermission = "${userPermission}");
-
-		AssertClick(
-			locator1 = "Button#SAVE",
-			value1 = "Save");
-
-		Alert.viewSuccessMessage();
 	}
 
 }

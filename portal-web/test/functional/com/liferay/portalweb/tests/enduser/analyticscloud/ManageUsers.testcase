@@ -19,12 +19,29 @@ definition {
 	}
 
 	@description = "Automation ID: LRAC-9051 | Test Summary: Admin can be edited or removed"
-	@ignore = "true"
 	@priority = "3"
 	test AdminCanBeEditedOrRemoved {
+		task ("Create a new user and change your permission to adm") {
+			ACNavigation.goToSettings();
 
-		// TODO LRAC-9051 AdminCanBeEditedOrRemoved
+			ACSettings.goToUserManagement();
 
+			ACSettings.addUser(userInvite = "user@liferay.com");
+
+			ACSettings.editUserPermission(
+				userEmail = "user@liferay.com",
+				userPermission = "Administrator");
+		}
+
+		task ("Change your permission to adm and delete this user") {
+			ACSettings.editUserPermission(
+				userEmail = "user@liferay.com",
+				userPermission = "Member");
+
+			ACSettings.deleteUser(userDelete = "user@liferay.com");
+
+			Alert.viewSuccessMessage();
+		}
 	}
 
 	@description = "Automation ID: LRAC-9052 | Test Summary: Admin can be selected in the user list"
@@ -46,12 +63,25 @@ definition {
 	}
 
 	@description = "Automation ID: LRAC-9053 | Test Summary: Member can be edited or removed"
-	@ignore = "true"
 	@priority = "3"
 	test MemberCanBeEditedOrRemoved {
+		task ("Create a new user as a member ") {
+			ACNavigation.goToSettings();
 
-		// TODO LRAC-9053 MemberCanBeEditedOrRemoved
+			ACSettings.goToUserManagement();
 
+			ACSettings.addUser(userInvite = "user@liferay.com");
+		}
+
+		task ("Change your permission to adm and delete this user") {
+			ACSettings.editUserPermission(
+				userEmail = "user@liferay.com",
+				userPermission = "Administrator");
+
+			ACSettings.deleteUser(userDelete = "user@liferay.com");
+
+			Alert.viewSuccessMessage();
+		}
 	}
 
 	@description = "Automation ID: LRAC-9054 | Test Summary: Member can be selected in the user list"
