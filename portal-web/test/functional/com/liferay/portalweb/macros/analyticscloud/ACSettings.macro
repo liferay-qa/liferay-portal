@@ -1,5 +1,28 @@
 definition {
 
+	macro changeUserRole {
+		Click(
+			locator1 = "ACSettings#EDIT_BUTTON_BY_EMAIL",
+			key_userEmail = "${userEmail}");
+
+		Click(
+			locator1 = "ACSettings#PERMISSION_DROPDOWN",
+			key_permissionType = "${permissionType}");
+
+		Click(
+			locator1 = "ACSettings#SELECT_SITE_ROLE",
+			key_siteRole = "${newRole}");
+
+		Button.clickSave();
+
+		Alert.viewSuccessMessage();
+
+		AssertElementPresent(
+			locator1 = "ACSettings#USER_ROLE_BY_EMAIL",
+			key_userEmail = "${userEmail}",
+			key_permissionType = "${newRole}");
+	}
+
 	macro addCSVDataSource {
 		ACSettings.goToDataSources();
 
