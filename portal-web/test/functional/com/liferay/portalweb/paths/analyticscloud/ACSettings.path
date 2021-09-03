@@ -262,6 +262,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SELECT_EDIT_PERMISSION_DROPDOWN</td>
+	<td>//div[contains(@class,'dropdown dropdown-root')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SELECT_EDIT_PERMISSION_DROPDOWN_OPTION</td>
+	<td>//button[contains(@class,'button-root') and text()='${key_userPermission}']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>USER_LIST_EMAIL</td>
 	<td>//h4[contains(@class,'table')]/parent::td/following-sibling::td</td>
 	<td></td>
