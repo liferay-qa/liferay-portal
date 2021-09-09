@@ -35,12 +35,41 @@ definition {
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9201 | Test Summary: Create a Dynamic Accounts Segment"
-	@ignore = "true"
 	@priority = "5"
 	test CanCreateDynamicSegmentAccountsAttributes {
+		task ("Go to AC and go to segments") {
+			ACUtils.launchAC();
 
-		// TODO LRAC-9201 CanCreateDynamicSegmentAccountsAttributes pending implementation
+			ACNavigation.goToSegments();
+		}
 
+		task ("Add a new dynamic segment that includes anonymous users") {
+			ACSegments.createDynamicSegment();
+
+			ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+
+			ACSegments.includeAnonymous();
+		}
+
+		task ("Select Account Attributes and add a segment field") {
+			ACSegments.goToSidebarAttributes(criterion = "Account Attributes");
+
+			ACSegments.addSegmentField(segmentField = "accountName");
+
+			ACSegments.selectOperator(operator = "is unknown");
+
+			ACSegments.saveSegment();
+		}
+
+		task ("Go to segments and assert that the segment was created") {
+			ACNavigation.goToSegments();
+
+			ACUtils.searchBar(searchItem = "Dynamic Segment Test");
+
+			AssertElementPresent(
+				key_assetName = "Dynamic Segment Test",
+				locator1 = "ACAssets#ASSETS_TABLE");
+		}
 	}
 
 }
