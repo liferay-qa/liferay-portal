@@ -535,7 +535,7 @@ definition {
 	}
 
 	@priority = "5"
-	test ConflictingPublicationsNeedManualResolution {
+	test AssertDeletionModificationConflictDisplays {
 		property portal.acceptance = "true";
 
 		JSONWebcontent.addWebContent(
@@ -543,9 +543,9 @@ definition {
 			groupName = "Guest",
 			title = "WC WebContent Title");
 
-		JSONPublications.addPublication(publicationName = "Publication Name");
+		JSONPublications.addPublication(publicationName = "Publication 1 Name");
 
-		JSONPublications.selectPublication(publicationName = "Publication Name");
+		JSONPublications.selectPublication(publicationName = "Publication 1 Name");
 
 		Navigator.openURL();
 
@@ -577,7 +577,7 @@ definition {
 
 		Publications.gotoReviewChanges(
 			gotoManagePublications = "true",
-			publicationName = "Publication Name");
+			publicationName = "Publication 1 Name");
 
 		PublicationsChanges.viewChangesViaChangesStyle(
 			changeCategory = "Web Content Article",
@@ -591,11 +591,9 @@ definition {
 			changeDescription = "Test Test deleted a Web Content Article in Guest",
 			changeTitle = "WC WebContent Title");
 
-		JSONPublications.publishPublication(publicationName = "Publication Name");
+		JSONPublications.publishPublication(publicationName = "Publication 1 Name");
 
-		Publications.viewPublicationPublished(publicationName = "Publication Name");
-
-		JSONPublications.selectPublication(publicationName = "Publication 2 Name");
+		Publications.viewPublicationPublished(publicationName = "Publication 1 Name");
 
 		Navigator.gotoNavTab(navTab = "History");
 
@@ -605,9 +603,20 @@ definition {
 			changeTitle = "WC WebContent Title",
 			changeType = "Deleted",
 			changeUser = "Test Test",
+			publicationName = "Publication 1 Name",
 			publishedPublication = "true");
 
-		Publications.gotoReviewChanges();
+		WebContentNavigator.openWebContentAdmin(siteURLKey = "guest");
+
+		WebContent.viewNotPresentCP(webContentTitle = "WC WebContent Title");
+
+		JSONPublications.selectPublication(publicationName = "Publication 2 Name");
+
+		WebContentNavigator.openWebContentAdmin(siteURLKey = "guest");
+
+		WebContent.viewTitle(webContentTitle = "WC WebContent Title 2 Edit");
+
+		Publications.gotoReviewChanges(publicationName = "Publication 2 Name");
 
 		PublicationsChanges.viewChangesViaChangesStyle(
 			changeCategory = "Web Content Article",
@@ -625,7 +634,7 @@ definition {
 
 		Publications.viewNeedsManualResolution(
 			entryTitle = "WC WebContent Title 2 Edit",
-			warningMessage = "Modification conflicts with a deletion.");
+			warningMessage = "Deletion Modification Conflict: Modification conflicts with a deletion.");
 
 		Publications.gotoViewChangeDiffInConflictingPublications(entryTitle = "WC WebContent Title 2 Edit");
 
@@ -634,40 +643,6 @@ definition {
 			columnValueInPublication = "WC WebContent Title 2 Edit",
 			entryDeletedInProduction = "true",
 			publicationName = "Publication 2 Name");
-
-		IFrame.closeFrame();
-
-		Pause(locator1 = "3000");
-
-		Publications.discardChanges(
-			changeCategory = "Asset",
-			changeTitle = "WC WebContent Title 2 Edit",
-			conflictingChanges = "true",
-			entryTitle = "WC WebContent Title 2 Edit");
-
-		Navigator.openURL();
-
-		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
-			portlet = "Web Content");
-
-		WebContent.viewNotPresentCP(webContentTitle = "WC WebContent Title 2 Edit");
-
-		WebContent.viewNotPresentCP(webContentTitle = "WC WebContent Title");
-
-		JSONPublications.publishPublication(publicationName = "Publication 2 Name");
-
-		Publications.viewPublicationPublished(publicationName = "Publication 2 Name");
-
-		Navigator.openURL();
-
-		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
-			portlet = "Web Content");
-
-		AssertTextEquals(
-			locator1 = "Message#EMPTY_INFO",
-			value1 = "No web content was found.");
 	}
 
 	@priority = "4"
