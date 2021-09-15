@@ -44,6 +44,8 @@ definition {
 
 			ACSettings.takeTokenFromAnalyticsCloud();
 
+			TestCase.setUpPortalInstance();
+
 			ACUtils.launchDXP();
 		}
 
@@ -541,6 +543,8 @@ definition {
 			ACSettings.goToDataSources();
 
 			ACSettings.takeTokenFromAnalyticsCloud();
+
+			TestCase.setUpPortalInstance();
 
 			ACUtils.launchDXP();
 		}
