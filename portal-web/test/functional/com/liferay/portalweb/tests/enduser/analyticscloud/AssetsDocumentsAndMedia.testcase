@@ -707,6 +707,8 @@ definition {
 				siteName = "Site Name");
 
 			DMNavigator.gotoDocumentCP(dmDocumentTitle = "${documentTitle}");
+
+			Pause(locator1 = "5000");
 		}
 
 		ACUtils.closeAllSessionsAndWait();
