@@ -27,6 +27,8 @@ definition {
 	@description = "Automation ID: LRAC-9093 | Test Summary: Admin can add data sources"
 	@priority = "4"
 	test AdminCanAddDataSources {
+		property portal.upstream = "nilo";
+
 		task ("Logout AC and login as an admin user") {
 			ACWorkspace.signOut();
 
@@ -527,6 +529,8 @@ definition {
 	@description = "Automation ID: LRAC-9090 | Test Summary: Owner can add data sources"
 	@priority = "5"
 	test OwnerCanAddDataSources {
+		property portal.upstream = "nilo";
+
 		task ("Logout and login as an owner user") {
 			ACWorkspace.signOut();
 
