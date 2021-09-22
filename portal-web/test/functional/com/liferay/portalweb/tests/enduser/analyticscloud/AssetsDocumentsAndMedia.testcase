@@ -364,11 +364,15 @@ definition {
 
 			DMNavigator.gotoDocumentPG(dmDocumentTitle = "DM AC Title");
 
+			Pause(locator1 = "5000");
+
 			Navigator.gotoSitePage(
 				pageName = "AC Page",
 				siteName = "Site Name");
 
 			DMNavigator.gotoDocumentPG(dmDocumentTitle = "New Document");
+
+			Pause(locator1 = "5000");
 		}
 
 		task ("Close sessions") {
