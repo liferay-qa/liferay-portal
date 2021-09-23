@@ -1343,7 +1343,7 @@ definition {
 			ACUtils.viewNameList(nameList = "${usernameList}");
 
 			AssertElementNotPresent(
-				key_assetName = "user5 user5",
+				key_nameList = "user5 user5",
 				locator1 = "ACUtils#NAME_LIST");
 		}
 
@@ -1554,7 +1554,7 @@ definition {
 			ACUtils.viewNameList(nameList = "user1 user1");
 
 			AssertElementNotPresent(
-				key_assetName = "userfn userln",
+				key_nameList = "userfn userln",
 				locator1 = "ACUtils#NAME_LIST");
 		}
 	}
@@ -1627,11 +1627,11 @@ definition {
 
 		task ("View only the userea shown in modal") {
 			AssertVisible(
-				key_assetName = "userfn userln",
+				key_nameList = "userfn userln",
 				locator1 = "ACUtils#NAME_LIST");
 
 			AssertElementNotPresent(
-				key_assetName = "user1 user1",
+				key_nameList = "user1 user1",
 				locator1 = "ACUtils#NAME_LIST");
 		}
 
@@ -1643,11 +1643,11 @@ definition {
 
 		task ("View only the user1 shown in modal") {
 			AssertVisible(
-				key_assetName = "user1 user1",
+				key_nameList = "user1 user1",
 				locator1 = "ACUtils#NAME_LIST");
 
 			AssertElementNotPresent(
-				key_assetName = "userfn userln",
+				key_nameList = "userfn userln",
 				locator1 = "ACUtils#NAME_LIST");
 		}
 	}
