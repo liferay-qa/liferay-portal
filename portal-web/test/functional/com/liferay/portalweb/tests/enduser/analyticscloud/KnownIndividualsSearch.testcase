@@ -318,6 +318,12 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9033 | Test Summary: Case Insensitive Search"
 	@priority = "5"
 	test CanCaseInsensitiveSearch {
+		property portal.upstream = "quarantine";
+
+		// AC Refactor: It is not possible to search the list of known individuals because of the bug
+		// AC Bug ticket: LRAC-9431
+		// AC Refactor ticket: LRAC-9432
+
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 		}
@@ -565,7 +571,11 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9026 | Test Summary: Search for an Individual in the individual List"
 	@priority = "4"
 	test SearchIndividualList {
-		property portal.upstream = "vini";
+		property portal.upstream = "quarantine";
+
+		// AC Refactor: It is not possible to search the list of known individuals because of the bug
+		// AC Bug ticket: LRAC-9431
+		// AC Refactor ticket: LRAC-9433
 
 		var usernameList = "randy.smith,maria.rau";
 
@@ -616,6 +626,9 @@ definition {
 		}
 
 		task ("Search for an Individual using a First Name") {
+
+			// It is not possible to search the list of known individuals because of the bug
+
 			ACUtils.searchBar(searchItem = "Randy Smith");
 
 			ACIndividualsDashboard.assertIndividualAttribute(key_individualAttribute = "Randy Smith");
