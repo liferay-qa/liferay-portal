@@ -34,6 +34,8 @@ definition {
 		}
 		else {
 			JSONGroup.deleteGroupByName(groupName = "Site Name");
+
+			JSONUser.tearDownNonAdminUsers();
 		}
 
 		ACUtils.tearDownAC();
@@ -563,6 +565,10 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9026 | Test Summary: Search for an Individual in the individual List"
 	@priority = "4"
 	test SearchIndividualList {
+		property portal.upstream = "vini";
+
+		var usernameList = "randy.smith,maria.rau";
+
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 		}
@@ -584,25 +590,15 @@ definition {
 		}
 
 		task ("Sign in with the new user to visit the site pages") {
-			User.logoutAndLoginPG(
-				userLoginEmailAddress = "randy.smith@liferay.com",
-				userLoginFullName = "Randy Smith");
+			for (var username : list "${usernameList}") {
+				User.logoutAndLoginPG(userLoginEmailAddress = "${username}@liferay.com");
 
-			Navigator.gotoSitePage(
-				pageName = "AC Page",
-				siteName = "Site Name");
+				Navigator.gotoSitePage(
+					pageName = "AC Page",
+					siteName = "Site Name");
 
-			Pause(locator1 = "5000");
-
-			User.logoutAndLoginPG(
-				userLoginEmailAddress = "maria.rau@liferay.com",
-				userLoginFullName = "Maria Rau");
-
-			Navigator.gotoSitePage(
-				pageName = "AC Page",
-				siteName = "Site Name");
-
-			Pause(locator1 = "5000");
+				Pause(locator1 = "5000");
+			}
 		}
 
 		task ("Switch to new property in AC") {
@@ -620,16 +616,18 @@ definition {
 		}
 
 		task ("Search for an Individual using a First Name") {
-			ACUtils.searchBar(searchItem = "Randy");
+			ACUtils.searchBar(searchItem = "Randy Smith");
 
 			ACIndividualsDashboard.assertIndividualAttribute(key_individualAttribute = "Randy Smith");
+
 			ACIndividualsDashboard.assertIndividualAttributeNotPresent(key_individualAttribute = "Maria Rau");
 		}
 
 		task ("Search for an Individual using a Last Name") {
-			ACUtils.searchBar(searchItem = "Rau");
+			ACUtils.searchBar(searchItem = "Maria Rau");
 
 			ACIndividualsDashboard.assertIndividualAttribute(key_individualAttribute = "Maria Rau");
+
 			ACIndividualsDashboard.assertIndividualAttributeNotPresent(key_individualAttribute = "Randy Smith");
 		}
 
@@ -637,6 +635,7 @@ definition {
 			ACUtils.searchBar(searchItem = "Randy Smith");
 
 			ACIndividualsDashboard.assertIndividualAttribute(key_individualAttribute = "Randy Smith");
+
 			ACIndividualsDashboard.assertIndividualAttributeNotPresent(key_individualAttribute = "Maria Rau");
 		}
 
@@ -644,6 +643,7 @@ definition {
 			ACUtils.searchBar(searchItem = "maria.rau@liferay.com");
 
 			ACIndividualsDashboard.assertIndividualAttribute(key_individualAttribute = "Maria Rau");
+
 			ACIndividualsDashboard.assertIndividualAttributeNotPresent(key_individualAttribute = "Randy Smith");
 		}
 
@@ -651,6 +651,7 @@ definition {
 			ACUtils.searchBar(searchItem = "Teacher");
 
 			ACIndividualsDashboard.assertIndividualAttribute(key_individualAttribute = "Maria Rau");
+
 			ACIndividualsDashboard.assertIndividualAttributeNotPresent(key_individualAttribute = "Randy Smith");
 		}
 	}
