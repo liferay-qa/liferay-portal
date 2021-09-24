@@ -33,10 +33,10 @@ definition {
 	test AddCSVWithIndividualWhoseEmailMatchesAnotherIndividualAlreadyHasActivitiesCheckIndividualDetailsUpdated {
 		task ("Add user") {
 			JSONUser.addUser(
-				userEmailAddress = "wuksiwze@fo.pf",
-				userFirstName = "Manuel",
-				userLastName = "Test",
-				userScreenName = "usersn");
+				userEmailAddress = "ac@liferay.com",
+				userFirstName = "ac",
+				userLastName = "ac",
+				userScreenName = "ac");
 		}
 
 		task ("Connect to AC") {
@@ -44,13 +44,9 @@ definition {
 		}
 
 		task ("Login as another user and visit DXP") {
-			Navigator.openURL();
-
-			Pause(locator1 = "5000");
-
 			User.logoutAndLoginPG(
-				userLoginEmailAddress = "wuksiwze@fo.pf",
-				userLoginFullName = "Manuel Test");
+				userLoginEmailAddress = "ac@liferay.com",
+				userLoginFullName = "ac ac");
 		}
 
 		task ("Close sessions") {
@@ -66,21 +62,19 @@ definition {
 
 			ACNavigation.switchTab(tabName = "Known Individuals");
 
-			ACIndividualsDashboard.goToKnownIndividualDetails(individualName = "Manuel Test");
+			ACIndividualsDashboard.goToKnownIndividualDetails(individualName = "ac ac");
 
 			ACNavigation.switchTab(tabName = "Details");
 
-			ACIndividualsDashboard.assertIndividualAttribute(individualAttribute = "wuksiwze@fo.pf");
+			ACIndividualsDashboard.assertIndividualAttribute(individualAttribute = "ac@liferay.com");
 
-			ACIndividualsDashboard.assertIndividualAttributeNotPresent(individualAttribute = "Murphy");
+			ACIndividualsDashboard.assertIndividualAttributeNotPresent(individualAttribute = "Farmer");
 		}
 
 		task ("Add a CSV Data Source") {
 			ACSettings.addCSVDataSource(
-				dataSourceName = "CSV users",
-				fieldNameList = "additionalName,additionalName",
-				selectAnalyticsCloudField = "true",
-				sourceFileName = "10users.csv");
+				dataSourceName = "CSV Job Title",
+				sourceFileName = "jobTitle.csv");
 		}
 
 		task ("Exit Settings") {
@@ -94,15 +88,15 @@ definition {
 		}
 
 		task ("Assert that the new user is present") {
-			ACUtils.searchBar(searchItem = "Manuel Test");
+			ACUtils.searchBar(searchItem = "ac ac");
 
-			ACIndividualsDashboard.goToKnownIndividualDetails(individualName = "Manuel Test");
+			ACIndividualsDashboard.goToKnownIndividualDetails(individualName = "ac ac");
 
 			ACNavigation.switchTab(tabName = "Details");
 
-			ACIndividualsDashboard.assertIndividualAttribute(individualAttribute = "wuksiwze@fo.pf");
+			ACIndividualsDashboard.assertIndividualAttribute(individualAttribute = "ac@liferay.com");
 
-			ACIndividualsDashboard.assertIndividualAttribute(individualAttribute = "Murphy");
+			ACIndividualsDashboard.assertIndividualAttribute(individualAttribute = "Farmer");
 		}
 	}
 
