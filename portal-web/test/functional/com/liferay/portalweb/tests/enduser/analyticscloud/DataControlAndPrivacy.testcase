@@ -39,6 +39,8 @@ definition {
 	@description = "Automation ID: LRAC-8890 | Test Summary: Able to change retention period"
 	@priority = "4"
 	test CanChangeRetentionPeriod {
+		property portal.upstream = "vini";
+
 		task ("Launch AC and go to Settings") {
 			ACUtils.launchAC();
 
