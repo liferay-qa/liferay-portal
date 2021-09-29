@@ -1247,6 +1247,8 @@ definition {
 	@description = "Create a segment with behavior of viewing a form"
 	@priority = "5"
 	test CanCreateWebBehaviorSegmentViewingForm {
+		property portal.upstream = "vini";
+
 		var username = "ac";
 
 		ACUtils.createFormAndAddToPage();
