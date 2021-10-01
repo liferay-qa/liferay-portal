@@ -31,6 +31,8 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8498 | Test Summary: Link to view all criteria allows the user to scroll down and see more"
 	@priority = "4"
 	test LinkToViewAllCriteriaAllowsUserScrollDownAndSeeMore {
+		property portal.upstream = "vini";
+
 		task ("Connect the DXP to Analytics Cloud") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud();
 		}
