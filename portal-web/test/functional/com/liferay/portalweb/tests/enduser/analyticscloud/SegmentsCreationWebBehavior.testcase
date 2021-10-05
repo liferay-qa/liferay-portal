@@ -642,7 +642,7 @@ definition {
 			userLoginEmailAddress = "ac@liferay.com",
 			userLoginFullName = "ac ac");
 
-		for (var n : list "1,2,3") {
+		for (var n : list "1,2") {
 			Navigator.gotoSitePage(
 				pageName = "AC Page",
 				siteName = "Site Name");
@@ -674,7 +674,7 @@ definition {
 			indexField = "1",
 			month = "${staticMonth}",
 			month2 = "${staticMonth2}",
-			occurenceNumber = "6",
+			occurenceNumber = "4",
 			searchTerm = "Web Content AC Title",
 			timeOption = "between",
 			year = "${staticYear}",
@@ -684,9 +684,7 @@ definition {
 
 		ACNavigation.switchTab(tabName = "Membership");
 
-		AssertTextEquals(
-			locator1 = "ACSegments#NO_MEMBER_TITLE",
-			value1 = "There are no items found.");
+		ACUtils.viewNoResultsMessage(noResultMessage = "There are no items found.");
 
 		ACUtils.launchDXP(userEmailAddress = "ac@liferay.com");
 
