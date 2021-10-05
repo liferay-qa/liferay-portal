@@ -105,8 +105,6 @@ definition {
 	test CanEditDynamicSegmentCheckEditSaved {
 		ACUtils.createBlogsAndAddToPage();
 
-		Navigator.openURL();
-
 		var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 
 		JSONUser.addUser(
@@ -121,13 +119,15 @@ definition {
 			userLoginEmailAddress = "ac@liferay.com",
 			userLoginFullName = "ac ac");
 
-		Navigator.gotoSitePage(
-			pageName = "AC Page",
-			siteName = "Site Name");
+		for (var n : list "1,2") {
+			Navigator.gotoSitePage(
+				pageName = "AC Page",
+				siteName = "Site Name");
 
-		BlogsNavigator.gotoPG(entryTitle = "Blogs AC Title");
+			BlogsNavigator.gotoPG(entryTitle = "Blogs AC Title");
 
-		Pause(locator1 = "5000");
+			Pause(locator1 = "5000");
+		}
 
 		ACUtils.closeAllSessionsAndWait();
 
@@ -152,9 +152,7 @@ definition {
 
 		ACNavigation.switchTab(tabName = "Membership");
 
-		AssertTextEquals(
-			locator1 = "ACSegments#NO_MEMBER_TITLE",
-			value1 = "There are no items found.");
+		ACUtils.viewNoResultsMessage(noResultMessage = "There are no items found.");
 
 		ACUtils.launchDXP(userEmailAddress = "ac@liferay.com");
 
@@ -186,9 +184,7 @@ definition {
 
 		ACNavigation.switchTab(tabName = "Membership");
 
-		AssertElementPresent(
-			key_userName = "ac ac",
-			locator1 = "ACSegments#SEGMENT_MEMBERS");
+		ACUtils.viewNameList(nameList = "ac ac");
 
 		ACNavigation.goToSegments();
 
@@ -198,7 +194,7 @@ definition {
 			activitiesOption = "has not",
 			atLeastMost = "at most",
 			indexField = "1",
-			occurenceNumber = "5",
+			occurenceNumber = "6",
 			timeOption = "ever");
 
 		ACSegments.saveSegment();
@@ -210,15 +206,13 @@ definition {
 		ACSegments.viewSegmentCriteriaWebBehavior(
 			activitiesOption = "has not",
 			atLeastMost = "at most",
-			occurenceNumber = "5",
+			occurenceNumber = "6",
 			searchTerm = "'Blogs AC Title'",
 			timeOption = "ever");
 
 		ACNavigation.switchTab(tabName = "Membership");
 
-		AssertTextEquals(
-			locator1 = "ACSegments#NO_MEMBER_TITLE",
-			value1 = "There are no items found.");
+		ACUtils.viewNoResultsMessage(noResultMessage = "There are no items found.");
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8135 | Test Summary: Edit a static segment and check the edits are saved"
