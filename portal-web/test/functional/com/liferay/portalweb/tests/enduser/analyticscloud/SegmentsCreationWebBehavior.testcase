@@ -712,13 +712,6 @@ definition {
 	@description = "Add segment using a web behavior 'ever' done"
 	@priority = "5"
 	test CanCreateWebBehaviorSegmentUsingEver {
-		property portal.upstream = "quarantine";
-
-		// AC Refactor: Issues with segment members may happen on this test case
-		// AC Refactor ticket: LRAC-9402
-		// AC Fix ticket: LRAC-9285
-		// AC Bug ticket : LRAC-9412
-
 		ACUtils.createFormAndAddToPage();
 
 		Navigator.openURL();
@@ -737,9 +730,13 @@ definition {
 			userLoginEmailAddress = "ac@liferay.com",
 			userLoginFullName = "ac ac");
 
-		Navigator.gotoSitePage(
-			pageName = "AC Page",
-			siteName = "Site Name");
+		for (var n : list "1,2") {
+			Navigator.gotoSitePage(
+				pageName = "AC Page",
+				siteName = "Site Name");
+
+			Pause(locator1 = "5000");
+		}
 
 		ACUtils.closeAllSessionsAndWait();
 
@@ -765,9 +762,7 @@ definition {
 
 		ACNavigation.switchTab(tabName = "Membership");
 
-		AssertTextEquals(
-			locator1 = "ACSegments#NO_MEMBER_TITLE",
-			value1 = "There are no items found.");
+		ACUtils.viewNoResultsMessage(noResultMessage = "There are no items found.");
 
 		ACUtils.launchDXP(userEmailAddress = "ac@liferay.com");
 
@@ -788,8 +783,6 @@ definition {
 		ACSegments.accessSegment(segmentName = "Dynamic Segment Test");
 
 		ACNavigation.switchTab(tabName = "Membership");
-
-		// Couldn't assert the user due to missing data.
 
 		ACUtils.viewNameList(nameList = "ac ac");
 	}
