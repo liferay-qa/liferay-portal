@@ -327,7 +327,7 @@ definition {
 			pageName = "AC Page",
 			siteName = "Site Name");
 
-		ACUtils.closeAllSessionsAndWait();
+	 	ACUtils.closeAllSessionsAndWait();
 
 		ACUtils.launchAC();
 
@@ -341,15 +341,13 @@ definition {
 		var previousDay = DateUtil.getFormattedDate("-1", "d");
 		var previousMonth = DateUtil.getFormattedDate("-1", "MMMM");
 
-		ACTimeFilter.setCustomRange(
-			endDay = "${displayDateDay}",
-			endMonth = "${displayDateMonth}",
-			endYear = "${displayDateYear}",
-			startDay = "${previousDay}",
-			startMonth = "${previousMonth}",
-			startYear = "${displayDateYear}");
-
-		AssertElementPresent(locator1 = "ACIndividualsDashboard#ACTIVE_INDIVIDUAL_CHART");
+		ACUtils.assertActiveIndividualChat(
+			displayDateDay = "${displayDateDay}",
+			displayDateMonth = "${displayDateMonth}",
+			displayDateYear = "${displayDateYear}",
+			previousDay = "${previousDay}",
+			previousMonth = "${previousMonth}",
+			timeFilter = "Custom Range");
 	}
 
 	@description = "Set custom range filter with empty data for individual activity"
