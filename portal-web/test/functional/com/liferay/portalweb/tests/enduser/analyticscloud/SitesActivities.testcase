@@ -484,9 +484,7 @@ definition {
 		}
 
 		task ("Go to Sites overview") {
-			ACTimeFilter.clickTimeFilterButton();
-
-			ACTimeFilter.setLast24Hours();
+			ACUtils.assertActiveIndividualChat(timeFilter = "Last 24 hours");
 		}
 
 		task ("Verify if anonymous and known users legends are shown") {
@@ -498,8 +496,6 @@ definition {
 				MouseOver(
 					key_visitorLegend = "${visitor} Visitors",
 					locator1 = "ACIndividualsDashboard#VISITORS_LEGEND");
-
-				AssertElementPresent(locator1 = "ACIndividualsDashboard#ACTIVE_INDIVIDUAL_CHART");
 			}
 		}
 	}

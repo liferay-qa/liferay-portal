@@ -96,11 +96,11 @@ definition {
 					startMonth = "${previousMonth}",
 					startYear = "${displayDateYear}");
 			}
-<<<<<<< HEAD
-=======
+			<<<<<<< HEAD
+			=======
 
 			Refresh();
->>>>>>> 45b15af (LRAC-9538 Fix CanSetDataWithCustomRangeOnIndividualActivitiesCard)
+			>>>>>>> 45b15af (LRAC-9538 Fix CanSetDataWithCustomRangeOnIndividualActivitiesCard)
 		}
 
 		AssertElementPresent(locator1 = "ACIndividualsDashboard#ACTIVE_INDIVIDUAL_CHART");
