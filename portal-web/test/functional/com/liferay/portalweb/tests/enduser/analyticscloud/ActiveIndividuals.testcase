@@ -342,11 +342,12 @@ definition {
 		var previousMonth = DateUtil.getFormattedDate("-1", "MMMM");
 
 		ACUtils.assertActiveIndividualChat(
-			displayDateDay = "${displayDateDay}",
-			displayDateMonth = "${displayDateMonth}",
-			displayDateYear = "${displayDateYear}",
-			previousDay = "${previousDay}",
-			previousMonth = "${previousMonth}",
+			endDay = "${displayDateDay}",
+			endMonth = "${displayDateMonth}",
+			endYear = "${displayDateYear}",
+			startDay = "${previousDay}",
+			startMonth = "${previousMonth}",
+			startYear = "${displayDateYear}",
 			timeFilter = "Custom Range");
 	}
 
