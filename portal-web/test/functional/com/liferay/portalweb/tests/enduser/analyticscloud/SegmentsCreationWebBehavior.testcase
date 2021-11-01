@@ -11,7 +11,7 @@ definition {
 
 		ACSettings.takeTokenFromAnalyticsCloud();
 
-		// TestCase.setUpPortalInstance();
+		TestCase.setUpPortalInstance();
 
 		ACUtils.launchDXP();
 
@@ -799,11 +799,9 @@ definition {
 
 		ACDXPSettings.syncNewContactData();
 
-		User.logoutAndLoginPG(
-			userLoginEmailAddress = "ac@liferay.com",
-			userLoginFullName = "ac ac");
-
-		ACUtils.navigateToSitePage(
+		ACUtils.navigateToSitePageWithUser(
+			documentTitleList = "Web Content AC Title",
+			emailList = "ac@liferay.com",
 			pageName = "AC Page",
 			siteName = "Site Name");
 
