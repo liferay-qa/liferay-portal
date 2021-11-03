@@ -1225,7 +1225,7 @@ definition {
 
 		task ("View the page as different users") {
 			ACUtils.navigateToSitePageWithUser(
-				emailList = "${emailList}",
+				emailList = "${emailList},user5@liferay.com",
 				pageName = "AC Page",
 				siteName = "Site Name");
 		}
@@ -1275,8 +1275,6 @@ definition {
 		task ("Select the 5 Items in Pagination") {
 			ACUtils.changePagination(itemsPerPage = "5");
 		}
-
-		ScrollWebElementIntoView(locator1 = "ACSegments#SEGMENT_MEMBERS_TABLE");
 
 		task ("View only 5 users are shown in page 1") {
 			ACUtils.viewNameList(nameList = "${nameList}");
