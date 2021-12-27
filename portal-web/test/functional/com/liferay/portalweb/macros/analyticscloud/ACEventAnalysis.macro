@@ -158,6 +158,14 @@ definition {
 		}
 	}
 
+	macro viewAnalysisInformationNotPresent {
+		for (var informationValue : list "${informationValueList}") {
+			var key_informationValue = "${informationValue}";
+
+			AssertElementNotPresent(locator1 = "ACEventAnalysis#VIEW_ANALYSIS_INFORMATION");
+		}
+	}
+
 	macro viewChangedAttributeDataType {
 		var key_buttonName = "${attributeName}";
 
