@@ -208,4 +208,12 @@ definition {
 		}
 	}
 
+	macro viewTotalNumberRelatedToColumnInformation {
+		var key_columnInformationValue = "${columnInformationValue}";
+
+		var key_totalEventsValue = "${totalEventsValue}";
+
+		AssertElementPresent(locator1 = "ACEventAnalysis#VIEW_TOTAL_NUMBER_RELATED_COLUMN_INFORMATION");
+	}
+
 }
