@@ -436,6 +436,8 @@ definition {
 	@description = "Feature ID: LRAC-4266 | Automation ID: LRAC-10306 | Test Summary: Remove Attribute"
 	@priority = "5"
 	test RemoveAttribute {
+		property portal.upstream = "vini";
+
 		var attributeName = "pageTitle";
 		var dataSource = StringUtil.extractFirst("${assignedPropertyName}", " ");
 
