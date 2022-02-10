@@ -106,7 +106,7 @@ definition {
 		}
 
 		task ("Type the segment name") {
-			ACSegments.nameSegment(segmentName = "Static Segment Test");
+			ACUtils.fileName(fileName = "Static Segment Test");
 		}
 
 		task ("Select the 5 items in Add Members modal") {
@@ -182,7 +182,7 @@ definition {
 
 			ACSegments.createDynamicSegment();
 
-			ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+			ACUtils.fileName(fileName = "Dynamic Segment Test");
 		}
 
 		task ("Add an email field") {
@@ -240,7 +240,7 @@ definition {
 
 			ACSegments.createStaticSegment();
 
-			ACSegments.nameSegment(segmentName = "Static Segment Test");
+			ACUtils.fileName(fileName = "Static Segment Test");
 		}
 
 		task ("Add the new user as member") {
@@ -312,7 +312,7 @@ definition {
 
 			ACSegments.createDynamicSegment();
 
-			ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+			ACUtils.fileName(fileName = "Dynamic Segment Test");
 		}
 
 		task ("Add a birthDate field") {
@@ -415,7 +415,7 @@ definition {
 
 			ACSegments.createDynamicSegment();
 
-			ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+			ACUtils.fileName(fileName = "Dynamic Segment Test");
 		}
 
 		task ("Add a jobTitle criteria from Individual Attributes") {
@@ -532,7 +532,7 @@ definition {
 
 			ACSegments.createDynamicSegment();
 
-			ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+			ACUtils.fileName(fileName = "Dynamic Segment Test");
 		}
 
 		task ("Add the first country criteria from Individual Attributes") {
@@ -612,7 +612,7 @@ definition {
 
 		ACSegments.createDynamicSegment();
 
-		ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+		ACUtils.fileName(fileName = "Dynamic Segment Test");
 
 		ACSegments.goToSidebarAttributes(criterion = "Individual Attributes");
 
@@ -662,7 +662,7 @@ definition {
 
 		ACSegments.createDynamicSegment();
 
-		ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+		ACUtils.fileName(fileName = "Dynamic Segment Test");
 
 		ACSegments.goToSidebarAttributes(criterion = "Individual Attributes");
 
@@ -743,7 +743,7 @@ definition {
 
 			ACSegments.createDynamicSegment();
 
-			ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+			ACUtils.fileName(fileName = "Dynamic Segment Test");
 		}
 
 		task ("Add an email criteria from Individual Attributes") {
@@ -882,7 +882,7 @@ definition {
 
 			ACSegments.createDynamicSegment();
 
-			ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+			ACUtils.fileName(fileName = "Dynamic Segment Test");
 		}
 
 		task ("Mark anonymous toggle") {
@@ -996,7 +996,7 @@ definition {
 
 			ACSegments.createDynamicSegment();
 
-			ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+			ACUtils.fileName(fileName = "Dynamic Segment Test");
 		}
 
 		task ("Add an age criteria from Individual Attributes") {
@@ -1064,7 +1064,7 @@ definition {
 
 		ACSegments.createStaticSegment();
 
-		ACSegments.nameSegment(segmentName = "Static Segment Test");
+		ACUtils.fileName(fileName = "Static Segment Test");
 
 		ACSegments.addStaticMember(tableMember = "userfn userln");
 
@@ -1099,7 +1099,7 @@ definition {
 
 			ACSegments.createDynamicSegment();
 
-			ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+			ACUtils.fileName(fileName = "Dynamic Segment Test");
 		}
 
 		task ("Add a jobTitle field") {
@@ -1201,7 +1201,7 @@ definition {
 
 			ACSegments.createDynamicSegment();
 
-			ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+			ACUtils.fileName(fileName = "Dynamic Segment Test");
 		}
 
 		task ("Add an email field") {
@@ -1377,7 +1377,7 @@ definition {
 
 			ACSegments.createDynamicSegment();
 
-			ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+			ACUtils.fileName(fileName = "Dynamic Segment Test");
 		}
 
 		task ("Add an email criteria") {
@@ -1568,7 +1568,7 @@ definition {
 		}
 
 		task ("Type the segment name") {
-			ACSegments.nameSegment(segmentName = "Static Segment Test");
+			ACUtils.fileName(fileName = "Static Segment Test");
 		}
 
 		task ("View the Create button is still disabled when there are no individuals") {
@@ -1600,7 +1600,7 @@ definition {
 		}
 
 		task ("Type the segment name") {
-			ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
+			ACUtils.fileName(fileName = "Dynamic Segment Test");
 		}
 
 		task ("View the Save Segment button is still disabled when the form is empty") {
