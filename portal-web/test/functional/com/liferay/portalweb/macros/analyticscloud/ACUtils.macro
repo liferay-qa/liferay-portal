@@ -789,8 +789,9 @@ definition {
 
 	macro restartDockerContainer {
 		var containerName = "${containerName}";
+
 		AntCommand(
-			locator1="build-test.xml",
+			locator1 = "build-test.xml",
 			value1 = "restart-docker-container -Ddocker.container=${containerName}");
 	}
 
