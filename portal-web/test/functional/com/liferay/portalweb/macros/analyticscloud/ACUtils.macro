@@ -410,6 +410,8 @@ definition {
 	}
 
 	macro closeAllSessions {
+		ACUtils.restartDockerContainer(containerName = "osbasahredis");
+
 		var analyticsCloudAsahCuratorBatchURL = PropsUtil.get("analytics.cloud.asah.curator.batch.url");
 
 		var cleanCurl = '''
