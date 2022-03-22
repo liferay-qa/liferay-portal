@@ -62,7 +62,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8483 | Test Summary: Add members from different pages"
 	@priority = "3"
 	test CanAddMembersFromDifferentPages {
-		property portal.upstream = "quarantine";
+		
 
 		var usernameList = "user1,user2,user3,user4,user5";
 		var emailList = "userea@liferay.com,user1@liferay.com,user2@liferay.com,user3@liferay.com,user4@liferay.com,user5@liferay.com";
@@ -211,7 +211,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8477 | Test Summary: Cancel creating a static segment"
 	@priority = "3"
 	test CanCancelCreatingStaticSegment {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor ticket: LRAC-9707
 
@@ -265,7 +265,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8478 | Test Summary: Create a Dynamic Individuals Segment By Date"
 	@priority = "4"
 	test CanCreateDynamicIndividualsSegmentByDate {
-		property portal.upstream = "quarantine";
+		
 		property test.name.skip.portal.instance = "SegmentsCreation#CanCreateDynamicIndividualsSegmentByDate";
 
 		var fullNameList = "userfn userln,user1 user1";
@@ -359,7 +359,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8481 | Test Summary: Create a Dynamic Individuals Segment with a criteria that uses a boolean and a does not contain"
 	@priority = "4"
 	test CanCreateDynamicSegmentWithIndividualCriteriaUsesBooleanAndDoesNotContain {
-		property portal.upstream = "quarantine";
+		
 		property test.name.skip.portal.instance = "SegmentsCreation#CanCreateDynamicSegmentWithIndividualCriteriaUsesBooleanAndDoesNotContain";
 
 		var usernameList = "user1,user2,user3";
@@ -475,7 +475,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8480 | Test Summary: Create a Dynamic Individuals Segment with a criteria that uses is known and is not"
 	@priority = "4"
 	test CanCreateDynamicSegmentWithIndividualCriteriaUsesIsKnownAndIsNot {
-		property portal.upstream = "quarantine";
+		
 		property test.name.skip.portal.instance = "SegmentsCreation#CanCreateDynamicSegmentWithIndividualCriteriaUsesIsKnownAndIsNot";
 
 		var usernameList = "user1,user2,user3";
@@ -591,7 +591,7 @@ definition {
 	@description = "Create a dynamic segment with individuals"
 	@priority = "5"
 	test CanCreateDynamicSegmentWithIndividuals {
-		property portal.upstream = "quarantine";
+		
 
 		task ("Sign in as new user") {
 			User.logoutAndLoginPG(
@@ -643,7 +643,7 @@ definition {
 	@description = "Create a Dynamic Individuals Segment with a criteria that uses is unknown"
 	@priority = "5"
 	test CanCreateDynamicSegmentWithIndividualsUseUnknown {
-		property portal.upstream = "quarantine";
+		
 
 		task ("Sign in as new user") {
 			User.logoutAndLoginPG(
@@ -697,7 +697,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8482 | Test Summary: Create a nested criteria"
 	@priority = "3"
 	test CanCreateNestedCriteria {
-		property portal.upstream = "quarantine";
+		
 		property test.name.skip.portal.instance = "SegmentsCreation#CanCreateNestedCriteria";
 
 		// AC Refactor ticket: LRAC-9707
@@ -938,7 +938,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8479 | Test Summary: Create a Segment with a Number Property"
 	@priority = "4"
 	test CanCreateSegmentWithNumberProperty {
-		property portal.upstream = "quarantine";
+		
 
 		var usernameList = "user1,user2,user3";
 		var emailList = "user1@liferay.com,user2@liferay.com,user3@liferay.com";
@@ -1043,7 +1043,7 @@ definition {
 	@description = "Create a static segment with individual"
 	@priority = "5"
 	test CanCreateStaticSegmentWithIndividuals {
-		property portal.upstream = "quarantine";
+		
 
 		task ("Sign in as new user") {
 			User.logoutAndLoginPG(
@@ -1159,7 +1159,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8471 | Test Summary: Paginate Segment Profile in Membership List"
 	@priority = "3"
 	test CanPaginateSegmentProfileInMembershipList {
-		property portal.upstream = "quarantine";
+		
 
 		var usernameList = "user1,user2,user3,user4,user5";
 		var emailList = "userea@liferay.com,user1@liferay.com,user2@liferay.com,user3@liferay.com,user4@liferay.com,user5@liferay.com";
@@ -1257,6 +1257,10 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8472 | Test Summary: Paginate static segment 'Add Members' creation model"
 	@priority = "3"
 	test CanPaginateStaticSegmentAddMembers {
+		
+
+		// AC Refactor ticket: LRAC-9707
+
 		var usernameList = "user1,user2,user3,user4,user5";
 		var emailList = "userea@liferay.com,user1@liferay.com,user2@liferay.com,user3@liferay.com,user4@liferay.com,user5@liferay.com";
 		var nameList = "user1 user1,user2 user2,user3 user3,user4 user4,user5 user5";
@@ -1333,7 +1337,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8475 | Test Summary: Dynamic segment members preview in real time"
 	@priority = "3"
 	test CanPreviewDynamicSegmentMembers {
-		property portal.upstream = "quarantine";
+		
 
 		var emailList = "userea@liferay.com,user1@liferay.com";
 		var usernameList = "userfn userln,user1 user1";
@@ -1419,6 +1423,8 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8473 | Test Summary: Filter the Segment 'Add Members' Modal"
 	@priority = "3"
 	test CanSearchUserInAddMembersModal {
+		
+
 		var emailList = "userea@liferay.com,user1@liferay.com";
 
 		task ("Add one more user with a given birth date") {

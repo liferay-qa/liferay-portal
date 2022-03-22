@@ -127,7 +127,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ViewMembershipCardExistsShowsMembersAdded {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: members are not appearing
 		// AC Refactor ticket: LRAC-8818
@@ -216,7 +216,7 @@ definition {
 	@ignore = "true"
 	@priority = "4"
 	test ViewMembershipCardHoverDetails {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: timing issue for membership card
 		// AC Refactor ticket: LRAC-9130
@@ -306,7 +306,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ViewMembershipCardShowsAnonymousUsers {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: timing issue for membership card
 		// AC Refactor ticket: LRAC-9192
@@ -378,7 +378,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ViewMembershipCardShowsMembersRemoved {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: timing issue for membership card
 		// AC Refactor ticket: LRAC-8887

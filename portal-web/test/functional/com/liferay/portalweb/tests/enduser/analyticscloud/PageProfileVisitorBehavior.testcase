@@ -63,7 +63,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ShowNumberOfUniqueVisitorsAndViews {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: data doesn't appear on time
 		// AC Refactor ticket: LRAC-8728
@@ -135,7 +135,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test TimeFilterByCustomRangeInPagesOverview {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: data doesn't appear on time and the test needs data from a past date
 		// AC Refactor ticket: LRAC-8730
@@ -209,7 +209,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test TimeFilterByLast180DaysInPagesOverview {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: data doesn't appear on time and the test needs data from a past date
 		// AC Refactor ticket: LRAC-8731
@@ -277,7 +277,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test TimeFilterByLastYearInPagesOverview {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: data doesn't appear on time and the test needs data from a past date
 		// AC Refactor ticket: LRAC-8729

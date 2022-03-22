@@ -45,7 +45,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test CanSearchPageInPagesList {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: It is not possible to view the data because of timing problems
 		// AC Refactor ticket: LRAC-9342
@@ -127,7 +127,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test CanTimeFilterUseCustomRangeInPageTable {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: Test needs data from past dates to assert
 		// AC Refactor ticket: LRAC-8957
@@ -191,7 +191,7 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test PeriodFilter180DaysPageTable {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: Test needs data from past dates to assert
 		// AC Refactor ticket: LRAC-8933
@@ -247,7 +247,7 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test PeriodFilterLastYearPageTable {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: Test needs data from past dates to assert
 		// AC Refactor ticket: LRAC-8934
@@ -303,7 +303,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ShowsListOfPages {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: The data on Pages doesn't appear
 		// AC Refactor ticket: LRAC-8883

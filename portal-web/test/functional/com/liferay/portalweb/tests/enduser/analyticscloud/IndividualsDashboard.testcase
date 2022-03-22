@@ -62,7 +62,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8907 | Test Summary: Expand activity in individual overview"
 	@priority = "3"
 	test CanExpandActivityInIndividualOverview {
-		property portal.upstream = "quarantine";
+		
 
 		task ("Sign in as new user") {
 			User.logoutAndLoginPG(
@@ -240,7 +240,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8906 | Test Summary: As a Business User, I should be able to select a point on individual overview activities graph"
 	@priority = "3"
 	test SelectDataOnIndividualsActivitiesChart {
-		property portal.upstream = "quarantine";
+		
 
 		task ("Sign in as new user") {
 			User.logoutAndLoginPG(
@@ -307,7 +307,7 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test ShowLast5ActivitiesOnIndividualsActivitiesChartWhenSetPaginationTo5 {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: data doesn't appear on time
 		// AC Refactor ticket: LRAC-8951
@@ -416,7 +416,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8902 | Test Summary: As an Business User, I should be able to assert the cards on the Overview tab of an Individual's page"
 	@priority = "4"
 	test ViewCardsInTheOverviewTabOfIndividualsPage {
-		property portal.upstream = "quarantine";
+		
 
 		task ("View the site page with new user") {
 			ACUtils.navigateToSitePageWithUser(

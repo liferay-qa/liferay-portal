@@ -47,7 +47,7 @@ definition {
 	@ignore = "true"
 	@priority = "4"
 	test CanCreateSessionAttributeUsingDevice {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: timing issue for total members and membership card
 		// AC Refactor ticket: LRAC-9264
@@ -125,7 +125,7 @@ definition {
 	@ignore = "true"
 	@priority = "4"
 	test CanCreateSessionAttributeUsingReferrerURL {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: timing issue for Referrer URL with page sync
 		// AC Refactor ticket: LRAC-9272
@@ -228,7 +228,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9211 | Test Summary: Add segment using a session property 'URL'"
 	@priority = "4"
 	test CanCreateSessionAttributeUsingURL {
-		property portal.upstream = "quarantine";
+		
 
 		task ("Connect the DXP to Analytics Cloud") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud();

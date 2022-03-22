@@ -66,7 +66,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8565 | Test Summary: Add segment using an individual property 'role'"
 	@priority = "4"
 	test CanAddSegmentUsingIndividualPropertyRole {
-		property portal.upstream = "quarantine";
+		
 
 		task ("Add a new regular role and assign to the user") {
 			JSONRole.addRegularRole(
@@ -130,7 +130,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8564 | Test Summary: Add segment using an individual property 'site'"
 	@priority = "4"
 	test CanAddSegmentUsingIndividualPropertySite {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor ticket: LRAC-9707
 
@@ -351,7 +351,7 @@ definition {
 	@ignore = "true"
 	@priority = "4"
 	test CanAddSegmentUsingIndividualPropertyUser {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor ticket: LRAC-9332
 		// AC Bug ticket: LRAC-10593
@@ -416,6 +416,8 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8567 | Test Summary: Add segment using an individual property 'user group'"
 	@priority = "4"
 	test CanAddSegmentUsingIndividualPropertyUserGroup {
+		
+
 		task ("Add a new user group and assign to the user") {
 			JSONUserGroup.addUserGroup(
 				userGroupDescription = "UG UserGroup Description",
@@ -571,6 +573,8 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8570 | Test Summary: Add segment with custom fields for organizations"
 	@priority = "4"
 	test CanAddSegmentWithCustomFieldsForOrganizations {
+		
+
 		task ("Add a new organization and assign to the user") {
 			JSONOrganization.addOrganization(organizationName = "Organization Name");
 

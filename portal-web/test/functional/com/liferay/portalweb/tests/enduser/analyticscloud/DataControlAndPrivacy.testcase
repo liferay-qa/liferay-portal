@@ -200,7 +200,7 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test CanUnsuppressUser {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: Timing issues may happen on this test case
 		// AC Refactor ticket: LRAC-9439
@@ -274,7 +274,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test SuppressedUserAppearsInSuppressedUserList {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: Timing issues may happen on this test case
 		// AC Refactor ticket: LRAC-9438

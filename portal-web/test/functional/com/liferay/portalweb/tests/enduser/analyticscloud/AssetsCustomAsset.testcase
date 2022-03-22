@@ -164,7 +164,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test CanDeleteCustomAssetReport {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: Data doesn't appear on time
 		// AC Refactor ticket: LRAC-9174

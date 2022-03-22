@@ -87,7 +87,7 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test AssertBlogsPageTImeFilter180Days {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: It is not possible to perform the assert because this test needs data from the past.
 		// AC Refactor ticket: LRAC-8930
@@ -274,7 +274,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test BlogsLocationCardShowsViewsByExpectedLocation {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: The location data should show the name of the country but it's actually showing "Local network"
 		// AC Refactor: Personas
@@ -536,7 +536,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test CanUseCustomRangeBlogsAssetsPage {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: It is not possible to perform the assert because this test needs data from the past.
 		// AC Refactor ticket: LRAC-8931
@@ -596,7 +596,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8114 | Test Summary: Blogs known individuals list shows individuals who have viewed the blog"
 	@priority = "5"
 	test KnownIndividualsListShowsIndividualsWhoHaveViewedBlog {
-		property portal.upstream = "quarantine";
+		
 
 		var usernameList = "ac,dxp,liferay";
 		var emailList = "ac@liferay.com,dxp@liferay.com,liferay@liferay.com";

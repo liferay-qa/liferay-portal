@@ -48,7 +48,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test AssertAppearsOnListShowsPagesWebContentExists {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: It's not possible to get some information due to timing problems
 		// AC Refactor ticket: LRAC-9358
@@ -99,7 +99,7 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test AssertAssetsPageTimeFilter180Days {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: the test needs data from a past date
 		// AC Refactor ticket: LRAC-8860
@@ -296,7 +296,7 @@ definition {
 	@ignore = "true"
 	@priority = "4"
 	test CanAssertWebContentTimeFIlterCustom {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: It is not possible to perform the assert because this test needs data from the past.
 		// AC Refactor ticket: LRAC-8817
@@ -491,7 +491,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test CanUse180DaysTimeFilterInWebContentOverview {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: the test needs data from a past date
 		// AC Refactor ticket: LRAC-8861
@@ -540,7 +540,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test CanUseCustomRangeTimeFilterInWebContentOverview {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: the test needs data from a past date
 		// AC Refactor ticket: LRAC-8865
@@ -601,6 +601,8 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8131 | Test Summary: Web content known individuals shows which individuals interact with the web content"
 	@priority = "5"
 	test KnownIndividualsShowsWhichIndividualsInteractWithWebContent {
+		
+
 		var nameList = "ac ac,liferay liferay,dxp dxp";
 		var usernameList = "ac,liferay,dxp";
 		var emailList = "ac@liferay.com,liferay@liferay.com,dxp@liferay.com";
@@ -763,7 +765,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test WebContentLocationCardShowsViewsByExpectedLocation {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: The location data should show the name of the country but it's actually showing "Local network"
 		// AC Refactor: Personas

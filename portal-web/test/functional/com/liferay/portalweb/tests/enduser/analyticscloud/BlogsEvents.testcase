@@ -7,6 +7,10 @@ definition {
 	property testray.main.component.name = "Analytics Cloud";
 
 	setUp {
+		AntCommand(
+			locator1 = "build-test.xml",
+			value1 = "record-test-generated-properties");
+
 		ACUtils.launchAC();
 
 		ACSettings.takeTokenFromAnalyticsCloud();
@@ -41,6 +45,9 @@ definition {
 	@priority = "3"
 	test CheckBlogClickedTriggeredWhenBlogClicked {
 		property proxy.server.enabled = "true";
+		
+
+		// AC Refactor ticket: LRAC-9599
 
 		task ("Get the Property ID in AC") {
 			ACUtils.launchAC();
@@ -597,7 +604,7 @@ definition {
 				applicationId = "Blog",
 				eventId = "blogViewed",
 				property = "numberOfWords",
-				value = "20");
+				value = "22");
 		}
 
 		task ("View the request common properties value") {

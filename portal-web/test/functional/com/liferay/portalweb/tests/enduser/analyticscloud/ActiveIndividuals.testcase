@@ -44,7 +44,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8913 | Test Summary: Assert Individual Activities Chart popover follows format"
 	@priority = "3"
 	test AssertIndividualActivitiesChartPopover {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor ticket: LRAC-9707
 
@@ -226,7 +226,7 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test AssertIndividualActivitiesTimeFilter180Days {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: data doesn't appear on time and the test needs data from a past date
 		// AC Refactor ticket: LRAC-8970
@@ -333,7 +333,7 @@ definition {
 	@description = "Set custom range filter with data for individual activity"
 	@priority = "5"
 	test CanSetDataWithCustomRangeOnIndividualActivitiesCard {
-		property portal.upstream = "quarantine";
+		
 
 		ACUtils.createDMAndAddToPage();
 

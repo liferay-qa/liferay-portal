@@ -39,7 +39,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ClickOnPageInPagesListsNavigatesToPageProfile {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: the issue is due to data not appearing on time
 		// AC Refactor ticket: LRAC-8990

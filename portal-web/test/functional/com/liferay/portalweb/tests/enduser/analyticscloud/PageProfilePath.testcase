@@ -36,7 +36,7 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test CanTimeFilterUse180DaysPathAnalysis {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: Need past data
 		// AC Refactor ticket: LRAC-8874
@@ -70,7 +70,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test CanTimeFilterUseCustomRangeInPathAnalysis {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: Need past data
 		// AC Refactor ticket: LRAC-8878
@@ -108,7 +108,7 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test CanTimeFilterUseLastYearPathAnalysis {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: Need past data
 		// AC Refactor ticket: LRAC-8875

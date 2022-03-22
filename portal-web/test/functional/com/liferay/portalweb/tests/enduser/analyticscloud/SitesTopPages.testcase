@@ -39,7 +39,7 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test AssertSitesTopPagesCardEntrancePagesHighestEntrances {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: the issue is due to data not appearing on time
 		// AC Refactor ticket: LRAC-9010
@@ -93,7 +93,7 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test AssertSitesTopPagesCardExitPagesHighestExits {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: the issue is due to data not appearing on time
 		// AC Refactor ticket: LRAC-8964
@@ -160,7 +160,7 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test AssertSitesTopPagesCardVisitedPagesHighestViews {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: the issue is due to data not appearing on time
 		// AC Refactor ticket: LRAC-8961
@@ -247,7 +247,7 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test AssertSitesTopPagesChangeTimeFilter {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: the issue is due to data not appearing on time
 		// AC Refactor ticket: LRAC-8815
@@ -298,7 +298,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ShowTop5EntrancePages {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: the issue is due to data not appearing on time
 		// AC Refactor ticket: LRAC-8725
@@ -357,7 +357,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ShowTop5ExitPages {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: the issue is due to data not appearing on time
 		// AC Refactor ticket: LRAC-8898
@@ -429,7 +429,7 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ShowTop5VisitedPages {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: This test is flaky due to timing issues
 		// AC Refactor ticket: LRAC-8764

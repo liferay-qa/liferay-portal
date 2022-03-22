@@ -204,7 +204,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8941 | Test Summary: Assert Known Individual Chart Popover follows format"
 	@priority = "3"
 	test AssertKnownIndividualChartPopover {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor ticket: LRAC-9707
 

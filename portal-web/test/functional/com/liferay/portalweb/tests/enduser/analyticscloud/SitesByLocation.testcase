@@ -37,7 +37,7 @@ definition {
 	@ignore = "true"
 	@priority = "4"
 	test CanprivateIpsReportedAsLocalNetwork {
-		property portal.upstream = "quarantine";
+		
 
 		// AC Refactor: data doesn't appear on time
 		// AC Refactor ticket: LRAC-9011
