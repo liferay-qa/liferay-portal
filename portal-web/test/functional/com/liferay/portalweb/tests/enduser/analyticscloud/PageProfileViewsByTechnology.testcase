@@ -93,7 +93,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ShowsWhichBrowsersBeingUsed {
-		
 
 		// AC Refactor: Data doesn't appear on time
 		// AC Refactor ticket: LRAC-9001
@@ -111,7 +110,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ShowsWhichDevicesBeingUsed {
-		
 
 		// AC Refactor: Data doesn't appear on time
 		// AC Refactor ticket: LRAC-9002

@@ -35,7 +35,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ShowsBrowsersAccessingSiteMost {
-		
 
 		// AC Refactor: data doesn't appear on time
 		// AC Refactor ticket: LRAC-8746
@@ -104,7 +103,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ShowsDevicesAccessingSiteMost {
-		
 
 		// AC Refactor: data doesn't appear on time
 		// AC Refactor ticket: LRAC-8745

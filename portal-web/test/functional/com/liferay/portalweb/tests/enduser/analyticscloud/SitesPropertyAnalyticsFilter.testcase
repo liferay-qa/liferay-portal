@@ -37,7 +37,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test CustomRangeTimePeriodFilterSites {
-		
 
 		// AC Refactor: the test needs data from a past date
 		// AC Refactor ticket: LRAC-8744
@@ -95,7 +94,6 @@ definition {
 	@ignore = "true"
 	@priority = "4"
 	test FirstAccessAndNoProperty {
-		
 
 		// AC Refactor: this test needs to simulate the first access
 		// AC Refactor ticket: LRAC-8752
@@ -132,7 +130,6 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test PeriodFilter180Days {
-		
 
 		// AC Refactor: the test needs data from a past date
 		// AC Refactor ticket: LRAC-8723
@@ -187,7 +184,6 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test PeriodFilterLastYear {
-		
 
 		// AC Refactor: the test needs data from a past date
 		// AC Refactor ticket: LRAC-8726

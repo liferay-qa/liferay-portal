@@ -43,7 +43,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test AllInterestsInWorkspaceAppearInList {
-		
 
 		// AC Refactor: data doesn't appear on time and the test needs data from a past date
 		// AC Refactor ticket: LRAC-9004
@@ -127,7 +126,6 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test AssertIndividualInterestContributingPages {
-		
 
 		// AC Refactor: data doesn't appear on time and the test needs data from a past date
 		// AC Refactor ticket: LRAC-9006
@@ -197,7 +195,6 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test AssertIndividualInterestDetails {
-		
 
 		// AC Refactor: data doesn't appear on time and the test needs data from a past date
 		// AC Refactor ticket: LRAC-9007
@@ -261,7 +258,6 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test OrderIndividualsInterests {
-		
 
 		// AC Refactor: data doesn't appear on time and the test needs data from a past date
 		// AC Refactor ticket: LRAC-9005
@@ -339,7 +335,6 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test PaginateIndividualsInterestsList {
-		
 
 		// AC Refactor: data doesn't appear on time and the test needs data from a past date
 		// AC Refactor ticket: LRAC-9008

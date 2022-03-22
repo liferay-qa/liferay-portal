@@ -39,7 +39,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ClickOnPageInPagesListsNavigatesToPageProfile {
-		
 
 		// AC Refactor: the issue is due to data not appearing on time
 		// AC Refactor ticket: LRAC-8990

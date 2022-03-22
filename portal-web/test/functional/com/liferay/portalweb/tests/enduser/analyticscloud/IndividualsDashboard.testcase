@@ -62,8 +62,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8907 | Test Summary: Expand activity in individual overview"
 	@priority = "3"
 	test CanExpandActivityInIndividualOverview {
-		
-
 		task ("Sign in as new user") {
 			User.logoutAndLoginPG(
 				userLoginEmailAddress = "userea@liferay.com",
@@ -240,8 +238,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8906 | Test Summary: As a Business User, I should be able to select a point on individual overview activities graph"
 	@priority = "3"
 	test SelectDataOnIndividualsActivitiesChart {
-		
-
 		task ("Sign in as new user") {
 			User.logoutAndLoginPG(
 				userLoginEmailAddress = "userea@liferay.com",
@@ -307,7 +303,6 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test ShowLast5ActivitiesOnIndividualsActivitiesChartWhenSetPaginationTo5 {
-		
 
 		// AC Refactor: data doesn't appear on time
 		// AC Refactor ticket: LRAC-8951
@@ -416,8 +411,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8902 | Test Summary: As an Business User, I should be able to assert the cards on the Overview tab of an Individual's page"
 	@priority = "4"
 	test ViewCardsInTheOverviewTabOfIndividualsPage {
-		
-
 		task ("View the site page with new user") {
 			ACUtils.navigateToSitePageWithUser(
 				emailList = "userea@liferay.com",

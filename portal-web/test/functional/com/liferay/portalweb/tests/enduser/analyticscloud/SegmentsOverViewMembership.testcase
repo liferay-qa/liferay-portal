@@ -127,7 +127,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ViewMembershipCardExistsShowsMembersAdded {
-		
 
 		// AC Refactor: members are not appearing
 		// AC Refactor ticket: LRAC-8818
@@ -216,7 +215,6 @@ definition {
 	@ignore = "true"
 	@priority = "4"
 	test ViewMembershipCardHoverDetails {
-		
 
 		// AC Refactor: timing issue for membership card
 		// AC Refactor ticket: LRAC-9130
@@ -306,7 +304,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ViewMembershipCardShowsAnonymousUsers {
-		
 
 		// AC Refactor: timing issue for membership card
 		// AC Refactor ticket: LRAC-9192
@@ -378,7 +375,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ViewMembershipCardShowsMembersRemoved {
-		
 
 		// AC Refactor: timing issue for membership card
 		// AC Refactor ticket: LRAC-8887

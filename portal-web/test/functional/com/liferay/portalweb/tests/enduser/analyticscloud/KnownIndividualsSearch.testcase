@@ -183,7 +183,6 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test AssertNoIndividualsInterestsResults {
-		
 
 		// AC Refactor: The interest list data takes a long time to appear.
 		// AC Refactor ticket: LRAC-9645
@@ -314,7 +313,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9033 | Test Summary: Case Insensitive Search"
 	@priority = "5"
 	test CanCaseInsensitiveSearch {
-		
 
 		// AC Refactor ticket: LRAC-9707
 
@@ -381,8 +379,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9032 | Test Summary: Search and Clear Field"
 	@priority = "1"
 	test SearchAndClearField {
-		
-
 		var usernameList = "user1,user2";
 		var emailList = "user1@liferay.com,user2@liferay.com";
 		var nameList = "user1 user1,user2 user2";
@@ -553,8 +549,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9026 | Test Summary: Search for an Individual in the individual List"
 	@priority = "4"
 	test SearchIndividualList {
-		
-
 		var emailList = "randy.smith@liferay.com,maria.rau@liferay.com";
 
 		task ("Get site assigned property name") {
@@ -646,8 +640,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9022 | Test Summary: Search an Individual's Activities List"
 	@priority = "4"
 	test SearchIndividualsActivitiesList {
-		
-
 		task ("Create a Document And Media") {
 			ACUtils.createDMAndAddToPage();
 		}
@@ -711,7 +703,6 @@ definition {
 	@ignore = "true"
 	@priority = "4"
 	test SearchIndividualsInterests {
-		
 
 		// AC Refactor: data doesn't appear on time
 		// AC Refactor ticket: LRAC-9184
@@ -786,8 +777,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9029 | Test Summary: Sort Individuals List"
 	@priority = "3"
 	test SortIndividualList {
-		
-
 		var usernameList = "user1,user2,user3";
 		var emailList = "user1@liferay.com,user2@liferay.com,user3@liferay.com";
 
@@ -846,8 +835,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9030 | Test Summary: Sorting a List Returns a User to the First Page"
 	@priority = "3"
 	test SortingReturnsUserToFirstPage {
-		
-
 		var usernameList = "user1,user2,user3,user4,user5,user6,user7";
 
 		task ("Get site assigned property name") {
@@ -925,8 +912,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9031 | Test Summary: Table Pagination"
 	@priority = "4"
 	test TablePagination {
-		
-
 		var usernameList = "user1,user2,user3,user4,user5,user6";
 
 		task ("Get site assigned property name") {

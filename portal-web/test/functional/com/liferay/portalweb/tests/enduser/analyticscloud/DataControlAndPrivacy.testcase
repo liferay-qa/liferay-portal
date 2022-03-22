@@ -200,7 +200,6 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test CanUnsuppressUser {
-		
 
 		// AC Refactor: Timing issues may happen on this test case
 		// AC Refactor ticket: LRAC-9439
@@ -274,7 +273,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test SuppressedUserAppearsInSuppressedUserList {
-		
 
 		// AC Refactor: Timing issues may happen on this test case
 		// AC Refactor ticket: LRAC-9438

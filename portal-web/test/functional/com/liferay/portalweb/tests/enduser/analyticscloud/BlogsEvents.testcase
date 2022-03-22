@@ -45,7 +45,6 @@ definition {
 	@priority = "3"
 	test CheckBlogClickedTriggeredWhenBlogClicked {
 		property proxy.server.enabled = "true";
-		
 
 		// AC Refactor ticket: LRAC-9599
 

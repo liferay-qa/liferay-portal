@@ -49,7 +49,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test AssertAppearsOnListShowsPagesDocumentsExists {
-		
 
 		// AC Refactor: This test fails because of timing issues.
 		// AC Refactor ticket: LRAC-9343
@@ -110,7 +109,6 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test AssertDocumentsAndMediaPageTImeFilter180Days {
-		
 
 		// AC Refactor: Need past data.
 		// AC Refactor ticket: LRAC-8876
@@ -213,7 +211,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8403 | Test Summary: Documents audience card shows expected amount of segmented and unsegmented individuals"
 	@priority = "5"
 	test AudienceCardShowsExpectedAmountSegmentedAndUnsegmentedInDM {
-		
 
 		// AC Quarantine reason: The percentage of the downloads does not match the correct one
 		// AC Quarantine ticket: LRAC-9806
@@ -301,7 +298,6 @@ definition {
 	@ignore = "true"
 	@priority = "4"
 	test CanAssertDocumentsAndMediaTimeFilterCustom {
-		
 
 		// AC Refactor: Need past data.
 		// AC Refactor ticket: LRAC-8877
@@ -547,7 +543,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test DocumentsLocationCardShowsDownloadsByExpectedLocation {
-		
 
 		// AC Refactor: The location data should show the name of the country but it's actually showing "Local network"
 		// AC Refactor: Personas
@@ -712,7 +707,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8118 | Test Summary: Document known individuals list shows the individuals who have viewed the documents"
 	@priority = "5"
 	test KnownIndividualsListShowsIndividualsWhoHaveViewedDocuments {
-		
 
 		// AC Quarantine reason: The name of the known individuals do not appear in the list
 		// AC Quarantine ticket: LRAC-9807

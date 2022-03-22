@@ -41,7 +41,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test AssertAppearsOnListShowsPagesFormsExists {
-		
 
 		// AC Refactor: It is not possible to perform the assert because this test presents timing problems.
 		// AC Refactor ticket: LRAC-9467
@@ -94,8 +93,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8423 | Test Summary: Forms audience card shows expected amount of known and anonymous individuals"
 	@priority = "5"
 	test AudienceCardShowsExpectedAmountKnowAndAnonymousIndividualsInForms {
-		
-
 		var usernameList = "ac,ac2";
 		var emailList = "ac@liferay.com,ac2@liferay.com";
 
@@ -162,8 +159,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8424 | Test Summary: Forms audience card shows expected amount of segmented and unsegmented individuals"
 	@priority = "5"
 	test AudienceCardShowsExpectedAmountSegmentedAndUnsegmentedInForms {
-		
-
 		var usernameList = "ac,ac2";
 		var emailList = "ac@liferay.com,ac2@liferay.com";
 
@@ -257,8 +252,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8417 | Test Summary: Forms list is searchable"
 	@priority = "5"
 	test CanFormsListSearchable {
-		
-
 		var formNameList = "Created Form Name,Created Form Name 1";
 
 		ACUtils.addPage(layoutName = "AC Page 1");
@@ -307,8 +300,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8121 | Test Summary: Assert clicking a form in the forms list navigates to the form overview page"
 	@priority = "5"
 	test CanNavigatesToFormsOverviewPage {
-		
-
 		Navigator.openURL();
 
 		var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
@@ -368,7 +359,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test CanTimeFilterUseCustomRangeInFormsBehaviourReport {
-		
 
 		// AC Refactor: Timing issues may happen on this test case
 		// AC Refactor ticket: LRAC-8813
@@ -486,7 +476,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test FormsLocationCardShowsViewsByExpectedLocation {
-		
 
 		// AC Refactor: Location data issues happen in this ticket
 		// AC Refactor ticket: LRAC-8750
@@ -540,8 +529,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8429 | Test Summary: Form submissions by technology card shows views by expected browser"
 	@priority = "5"
 	test FormsTechnologyCardShowsViewsByExpectedBrowser {
-		
-
 		var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 
 		task ("Form submit") {
@@ -588,8 +575,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8428 | Test Summary: Form submissions by technology card shows views by expected device"
 	@priority = "5"
 	test FormsTechnologyCardShowsViewsByExpectedDevice {
-		
-
 		var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 
 		task ("Submit the form") {
@@ -634,8 +619,6 @@ definition {
 	@description = "Form known individuals shows which individuals interact with the form"
 	@priority = "5"
 	test KnownIndividualsShowsWhichIndividualsInteractWithForm {
-		
-
 		var nameList = "ac ac,liferay liferay,dxp dxp";
 		var usernameList = "ac,liferay,dxp";
 		var emailList = "ac@liferay.com,liferay@liferay.com,dxp@liferay.com";

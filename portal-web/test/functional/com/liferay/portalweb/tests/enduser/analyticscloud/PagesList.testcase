@@ -45,7 +45,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test CanSearchPageInPagesList {
-		
 
 		// AC Refactor: It is not possible to view the data because of timing problems
 		// AC Refactor ticket: LRAC-9342
@@ -127,7 +126,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test CanTimeFilterUseCustomRangeInPageTable {
-		
 
 		// AC Refactor: Test needs data from past dates to assert
 		// AC Refactor ticket: LRAC-8957
@@ -191,7 +189,6 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test PeriodFilter180DaysPageTable {
-		
 
 		// AC Refactor: Test needs data from past dates to assert
 		// AC Refactor ticket: LRAC-8933
@@ -247,7 +244,6 @@ definition {
 	@ignore = "true"
 	@priority = "3"
 	test PeriodFilterLastYearPageTable {
-		
 
 		// AC Refactor: Test needs data from past dates to assert
 		// AC Refactor ticket: LRAC-8934
@@ -303,7 +299,6 @@ definition {
 	@ignore = "true"
 	@priority = "5"
 	test ShowsListOfPages {
-		
 
 		// AC Refactor: The data on Pages doesn't appear
 		// AC Refactor ticket: LRAC-8883
