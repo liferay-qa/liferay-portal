@@ -410,6 +410,8 @@ definition {
 	}
 
 	macro closeAllSessions {
+		ACUtils.restartDockerContainer(containerName = "osbasahredis");
+
 		var analyticsCloudAsahCuratorBatchURL = PropsUtil.get("analytics.cloud.asah.curator.batch.url");
 
 		var cleanCurl = '''
@@ -785,6 +787,14 @@ definition {
 				Click(locator1 = "ACUtils#ORDER_ARROW_TABLE_BUTTON_DOWN");
 			}
 		}
+	}
+
+	macro restartDockerContainer {
+		var containerName = "${containerName}";
+
+		AntCommand(
+			locator1 = "build-test.xml",
+			value1 = "restart-docker-container -Ddocker.container=${containerName}");
 	}
 
 	macro saveButton {
