@@ -46,7 +46,8 @@ definition {
 	test AddCSVWithIndividualWhoseEmailMatchesAnotherIndividualAlreadyHasActivitiesCheckIndividualDetailsUpdated {
 		property portal.upstream = "quarantine";
 
-		// AC Quarantine Reason: CSV takes a long time to load LRAC-10771
+		// AC Quarantine reason: CSV data source takes too long to update individual details
+		// AC Quarantine: Maybe it is possible to validate in personas
 
 		task ("Add user") {
 			JSONUser.addUser(
