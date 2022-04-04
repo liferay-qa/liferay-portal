@@ -1332,7 +1332,7 @@ definition {
 	@priority = "3"
 	test CanPreviewDynamicSegmentMembers {
 		property test.name.skip.portal.instance = "SegmentsCreation#CanPreviewDynamicSegmentMembers";
-		
+
 		var emailList = "userea@liferay.com,user1@liferay.com";
 		var usernameList = "userfn userln,user1 user1";
 
