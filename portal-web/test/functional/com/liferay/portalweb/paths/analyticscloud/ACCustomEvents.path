@@ -15,7 +15,7 @@
 
 <tr>
 	<td>SEND_CUSTOM_EVENTS</td>
-	<td>//button[@onclick]</td>
+	<td>//button[contains(@class,'mybutton-shop') and contains(@onclick,'${key_items}')]</td>
 	<td></td>
 </tr>
 

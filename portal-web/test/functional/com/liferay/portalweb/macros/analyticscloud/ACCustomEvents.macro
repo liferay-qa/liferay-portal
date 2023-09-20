@@ -183,6 +183,7 @@ definition {
 	}
 
 	macro createNCustomEvents {
+		var key_attributeName = "${items}";
 		Click(locator1 = "ACCustomEvents#SEND_CUSTOM_EVENTS");
 	}
 

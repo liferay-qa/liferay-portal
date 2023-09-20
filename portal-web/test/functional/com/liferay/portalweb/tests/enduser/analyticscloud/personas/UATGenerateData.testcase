@@ -1,0 +1,100 @@
+@component-name = "portal-analytics-cloud"
+definition {
+
+	property portal.release = "false";
+	property portal.upstream = "true";
+	property property.group = "analytics.cloud.profile";
+	property testray.main.component.name = "Analytics Cloud";
+
+	setUp {
+		Navigator.openURL(baseURL = "https://osbasahdxpserver73-ac-stagingdxps.lfr.cloud/");
+	}
+
+	tearDown {
+		ACUtils.closeAllSessionsAndWait();
+	}
+
+	@description = "Test Summary: Perform clicks for AB testing as Abby AB"
+	@priority = "5"
+	test GenerateABTestData {
+		ACUtils.navigateToSitePageWithUser(
+			emailList = "abby.ab@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		Navigator.gotoSitePage(pageName = "Shop");
+
+		ACCustomEvents.createNCustomEvents(items = "buyBoard");
+	}
+
+	@description = "Test Summary: Browse blog page as Barbara Blogger"
+	@priority = "5"
+	test GenerateBlogData {
+		ACUtils.navigateToSitePageWithUser(
+			emailList = "barbara.blogger@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		Navigator.gotoSitePage(pageName = "Blog");
+	}
+
+	@description = "Test Summary: Generate custom random events"
+	@priority = "4"
+	test GenerateRandomEvents {
+		var attributeName1 = "action1";
+		var attributeName2 = "action2";
+		var attributeName3 = "action3";
+		var attributeNameList = "${attributeName1},${attributeName2},${attributeName3}";
+		var attributeValueList = "read article, browse item, read blog";
+
+		ACUtils.navigateToSitePageWithUser(
+			emailList = "cindy.customevent@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		task ("Create custom events") {
+			var customEventName = ACCustomEvents.generateCustomEventName();
+
+			ACCustomEvents.createCustomEvent(
+				attributesName = "${attributeNameList}",
+				attributesValue = "${attributeValueList}",
+				customEventName = "${customEventName}",
+				timeToSendCustomEvent = "3");
+		}
+	}
+
+	@description = "Test Summary: Search for key words and article as Steven Searcher"
+	@priority = "5"
+	test GenerateSearchData {
+		ACUtils.navigateToSitePageWithUser(
+			emailList = "steven.searcher@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		ACUtils.searchBar(searchItem = "surf");
+
+		Click(locator1 = "SIMILAR_RESULTS_LIST_TITLE", key_listResultTitle = "");
+
+		ACUtils.searchBar(searchItem = "beach");
+
+		Click(locator1 = "SIMILAR_RESULTS_LIST_TITLE", key_listResultTitle = "");
+	}
+
+	@description = "Test Summary: Shop for different items as Sally Shopper"
+	@priority = "5"
+	test GenerateShopData {
+		ACUtils.navigateToSitePageWithUser(
+			emailList = "sally.shopper@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		Navigator.gotoSitePage(pageName = "Shop");
+
+		ACCustomEvents.createNCustomEvents(items = "buySurfwear");
+
+		ACCustomEvents.createNCustomEvents(items = "buyBoard");
+
+		ACCustomEvents.createNCustomEvents(items = "buyGear");
+	}
+
+}
