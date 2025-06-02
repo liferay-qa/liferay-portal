@@ -109,7 +109,7 @@ public class AuthorizeRestController extends BaseRestController {
 				Objects.requireNonNull(
 					get(
 						"Bearer " + jwt.getTokenValue(),
-						StringBundler.concat(
+						createURI(
 							"/o/headless-commerce-admin-order/v1.0/orders/",
 							jsonObject.getLong("classPK"),
 							"?nestedFields=orderItems"))));

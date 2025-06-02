@@ -24,6 +24,7 @@ import com.liferay.dynamic.data.mapping.expression.DDMExpressionFactory;
 import com.liferay.dynamic.data.mapping.util.NumberUtil;
 import com.liferay.friendly.url.model.FriendlyURLEntry;
 import com.liferay.friendly.url.service.FriendlyURLEntryLocalService;
+import com.liferay.list.type.exception.NoSuchListTypeEntryException;
 import com.liferay.list.type.model.ListTypeEntry;
 import com.liferay.list.type.service.ListTypeEntryLocalService;
 import com.liferay.object.action.engine.ObjectActionEngine;
@@ -40,6 +41,7 @@ import com.liferay.object.constants.ObjectFilterConstants;
 import com.liferay.object.constants.ObjectRelationshipConstants;
 import com.liferay.object.definition.setting.util.ObjectDefinitionSettingUtil;
 import com.liferay.object.definition.util.ObjectDefinitionThreadLocal;
+import com.liferay.object.definition.util.ObjectDefinitionUtil;
 import com.liferay.object.entry.ObjectEntryContext;
 import com.liferay.object.entry.contributor.ObjectEntryValuesContributor;
 import com.liferay.object.entry.util.ObjectEntryThreadLocal;
@@ -1177,6 +1179,14 @@ public class ObjectEntryLocalServiceImpl
 	}
 
 	@Override
+	public List<ObjectEntry> getObjectEntryFolderObjectEntries(
+		long groupId, long objectEntryFolderId, int start, int end) {
+
+		return objectEntryPersistence.findByG_OEFI(
+			groupId, objectEntryFolderId, start, end);
+	}
+
+	@Override
 	public int getObjectEntryFolderObjectEntriesCount(
 		long groupId, long objectEntryFolderId) {
 
@@ -2136,7 +2146,10 @@ public class ObjectEntryLocalServiceImpl
 			ServiceContext serviceContext, Map<String, Serializable> values)
 		throws PortalException {
 
-		if (!FeatureFlagManagerUtil.isEnabled("LPD-21926")) {
+		if (!FeatureFlagManagerUtil.isEnabled("LPD-21926") ||
+			ObjectDefinitionUtil.isDefaultFriendlyURLSeparator(
+				objectDefinition.getFriendlyURLSeparator())) {
+
 			return;
 		}
 
@@ -5841,15 +5854,22 @@ public class ObjectEntryLocalServiceImpl
 			List<ValidationError> validationErrors)
 		throws PortalException {
 
-		ListTypeEntry listTypeEntry =
-			_listTypeEntryLocalService.fetchListTypeEntry(
-				objectField.getListTypeDefinitionId(), listTypeEntryKey);
+		try {
+			_listTypeEntryLocalService.getOrAddIncompleteListTypeEntry(
+				objectField.getUserId(), objectField.getListTypeDefinitionId(),
+				listTypeEntryKey);
+		}
+		catch (NoSuchListTypeEntryException noSuchListTypeEntryException) {
+			if (Validator.isNotNull(listTypeEntryKey)) {
+				_handle(
+					new ObjectEntryValuesException.ListTypeEntry(
+						objectField.getName()),
+					validationErrors);
+			}
 
-		if ((listTypeEntry == null) && Validator.isNotNull(listTypeEntryKey)) {
-			_handle(
-				new ObjectEntryValuesException.ListTypeEntry(
-					objectField.getName()),
-				validationErrors);
+			if (_log.isDebugEnabled()) {
+				_log.debug(noSuchListTypeEntryException);
+			}
 		}
 	}
 

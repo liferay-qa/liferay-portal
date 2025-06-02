@@ -40,8 +40,9 @@ public class BaseRestController
 					HttpHeaders.CONTENT_TYPE,
 					MediaType.APPLICATION_FORM_URLENCODED_VALUE
 				).build(),
-				getPayPalURL(jsonObject.getString("mode")) +
-					"/v1/oauth2/token"));
+				createURI(
+					getPayPalURL(jsonObject.getString("mode")),
+					"/v1/oauth2/token")));
 
 		return authorizationRequestJSONObject.getString("access_token");
 	}
@@ -56,11 +57,6 @@ public class BaseRestController
 		}
 
 		return "https://api-m.sandbox.paypal.com";
-	}
-
-	@Override
-	protected String getWebClientBaseURL() {
-		return "";
 	}
 
 }

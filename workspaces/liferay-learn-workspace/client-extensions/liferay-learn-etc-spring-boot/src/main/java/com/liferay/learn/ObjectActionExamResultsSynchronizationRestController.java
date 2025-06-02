@@ -7,7 +7,6 @@ package com.liferay.learn;
 
 import com.liferay.client.extension.util.spring.boot3.BaseRestController;
 import com.liferay.client.extension.util.spring.boot3.client.LiferayOAuth2AccessTokenManager;
-import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.time.OffsetDateTime;
@@ -87,11 +86,6 @@ public class ObjectActionExamResultsSynchronizationRestController
 		return new ResponseEntity<>(json, HttpStatus.OK);
 	}
 
-	@Override
-	protected String getWebClientBaseURL() {
-		return "";
-	}
-
 	private String _getAuthorization() {
 		return _liferayOAuth2AccessTokenManager.getAuthorization(
 			"liferay-learn-etc-spring-boot-oauth-application-headless-server");
@@ -101,7 +95,7 @@ public class ObjectActionExamResultsSynchronizationRestController
 		JSONObject jsonObject = new JSONObject(
 			get(
 				_getAuthorization(),
-				StringBundler.concat(
+				createURI(
 					lxcDXPServerProtocol, "://", lxcDXPMainDomain,
 					"/o/c/p2s3examresultssynchronizations/scopes/",
 					_siteGroupId,
@@ -201,8 +195,9 @@ public class ObjectActionExamResultsSynchronizationRestController
 					offsetDateTime.format(
 						DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss"))
 				).toString(),
-				"https://webassessor.com/WebAssessorWebServices/jaxrs" +
-					"/wawebservices/processRequest"));
+				createURI(
+					"https://webassessor.com/WebAssessorWebServices/jaxrs",
+					"/wawebservices/processRequest")));
 
 		if (jsonArray.get(0) instanceof String) {
 			return 0;
@@ -214,7 +209,7 @@ public class ObjectActionExamResultsSynchronizationRestController
 			JSONObject jsonObject2 = new JSONObject(
 				put(
 					_getAuthorization(), _getPayload(jsonObject1),
-					StringBundler.concat(
+					createURI(
 						lxcDXPServerProtocol, "://", lxcDXPMainDomain,
 						"/o/c/p2s3examresults/scopes/", _siteGroupId,
 						"/by-external-reference-code/",
@@ -235,7 +230,7 @@ public class ObjectActionExamResultsSynchronizationRestController
 						"roleName", "Guest"
 					)
 				).toString(),
-				StringBundler.concat(
+				createURI(
 					lxcDXPServerProtocol, "://", lxcDXPMainDomain,
 					"/o/c/p2s3examresults/", jsonObject2.getLong("id"),
 					"/permissions"));
@@ -258,7 +253,7 @@ public class ObjectActionExamResultsSynchronizationRestController
 			).put(
 				"synchronizationStatus", synchronizationStatus
 			).toString(),
-			StringBundler.concat(
+			createURI(
 				lxcDXPServerProtocol, "://", lxcDXPMainDomain,
 				"/o/c/p2s3examresultssynchronizations/", classPK));
 	}

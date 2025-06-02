@@ -61,8 +61,7 @@ public class ObjectActionMDFClaimStatusManagementRestController
 						).path(
 							"/o/c/mdfrequests/by-external-reference-code/" +
 								mdfRequestExternalReferenceCode
-						).build(
-						).toString()));
+						).build()));
 
 				if (responseJSONObject.getDouble("totalPaidAmount") >=
 						responseJSONObject.getDouble("totalMDFRequestAmount")) {
@@ -92,8 +91,9 @@ public class ObjectActionMDFClaimStatusManagementRestController
 
 		patch(
 			_getAuthorization(), jsonObject.toString(),
-			"/o/c/mdfrequests/by-external-reference-code/" +
-				mdfRequestExternalReferenceCode);
+			createURI(
+				"/o/c/mdfrequests/by-external-reference-code/",
+				mdfRequestExternalReferenceCode));
 	}
 
 	private String _getAuthorization() {

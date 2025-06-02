@@ -68,8 +68,9 @@ public class ObjectActionTicketRestController extends BaseRestController {
 		patch(
 			"Bearer " + jwt.getTokenValue(),
 			objectEntryDTOJ3Y7TicketPatchJSONObject.toString(),
-			"/o/c/j3y7tickets/" +
-				objectEntryDTOJ3Y7TicketJSONObject.getString("id"));
+			createURI(
+				"/o/c/j3y7tickets/",
+				objectEntryDTOJ3Y7TicketJSONObject.getString("id")));
 
 		return new ResponseEntity<>(json, HttpStatus.OK);
 	}

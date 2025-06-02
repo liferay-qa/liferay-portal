@@ -177,7 +177,8 @@ public abstract class BaseEntityRelationshipDALO
 
 					try {
 						responseJSON = put(
-							getAuthorization(), "", objectDefinitionURLPath);
+							getAuthorization(), "",
+							createURI(objectDefinitionURLPath));
 					}
 					catch (Exception exception) {
 						refresh();
@@ -225,7 +226,9 @@ public abstract class BaseEntityRelationshipDALO
 				},
 				() -> {
 					try {
-						delete(getAuthorization(), "", objectDefinitionURLPath);
+						delete(
+							getAuthorization(), "",
+							createURI(objectDefinitionURLPath));
 					}
 					catch (Exception exception) {
 						refresh();
@@ -281,8 +284,7 @@ public abstract class BaseEntityRelationshipDALO
 										getObjectRelationshipName())
 								).queryParam(
 									"page", String.valueOf(finalCurrentPage)
-								).build(
-								).toString());
+								).build());
 						}
 						catch (Exception exception) {
 							refresh();

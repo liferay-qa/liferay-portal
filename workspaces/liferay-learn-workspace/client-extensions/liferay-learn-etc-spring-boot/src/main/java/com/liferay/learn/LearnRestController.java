@@ -8,7 +8,6 @@ package com.liferay.learn;
 import com.liferay.client.extension.util.spring.boot3.BaseRestController;
 import com.liferay.client.extension.util.spring.boot3.client.LiferayOAuth2AccessTokenManager;
 import com.liferay.petra.function.transform.TransformUtil;
-import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
 
@@ -50,9 +49,10 @@ public class LearnRestController extends BaseRestController {
 				new JSONObject(
 					get(
 						_getAuthorization(),
-						"/o/object-admin/v1.0/object-folders" +
-							"/by-external-reference-code" +
-								"/P2S3_LEARNING_MANAGEMENT_SYSTEM")
+						createURI(
+							"/o/object-admin/v1.0/object-folders",
+							"/by-external-reference-code",
+							"/P2S3_LEARNING_MANAGEMENT_SYSTEM"))
 				).getJSONArray(
 					"objectFolderItems"
 				).toList(),
@@ -70,12 +70,13 @@ public class LearnRestController extends BaseRestController {
 			new JSONObject(
 				get(
 					_getAuthorization(),
-					StringBundler.concat(
+					createURI(
 						"/o/c/quizquestions/scopes/", _siteGroupId,
 						"?filter=quizId eq '", quizId, "'&fields=id,position,",
-						"question,questionType,quizAnswers,quizAnswers.answer,",
-						"quizAnswers.id,quizAnswers.position&nestedFields=",
-						"quizAnswers&pageSize=500&sort=position"))
+						"question,questionType,quizAnswers,",
+						"quizAnswers.answer,quizAnswers.id,",
+						"quizAnswers.position&nestedFields=quizAnswers&",
+						"pageSize=500&sort=position"))
 			).getJSONArray(
 				"items"
 			).toList(),
@@ -94,7 +95,7 @@ public class LearnRestController extends BaseRestController {
 			new JSONObject(
 				get(
 					_getAuthorization(),
-					StringBundler.concat(
+					createURI(
 						"/o/c/quizes/", quizId,
 						"?&fields=id,r_quiz_c_moduleId,durationMinutes,",
 						"passingScore,isKnowledgeCheck,quizQuestions.id,",
@@ -268,7 +269,7 @@ public class LearnRestController extends BaseRestController {
 		JSONArray jsonArray = new JSONObject(
 			get(
 				_getAuthorization(),
-				"/o/c/quizes/" + quizId + "/quizBadge?fields=id")
+				createURI("/o/c/quizes/", quizId, "/quizBadge?fields=id"))
 		).getJSONArray(
 			"items"
 		);
@@ -282,7 +283,7 @@ public class LearnRestController extends BaseRestController {
 		JSONObject userBadgeJSONObject = new JSONObject(
 			get(
 				_getAuthorization(),
-				StringBundler.concat(
+				createURI(
 					"/o/c/userbadges/scopes/", _siteGroupId,
 					"/?filter=userId eq '", userId, "' and badgeId eq ",
 					badgeJSONObject.getLong("id"))));
@@ -301,7 +302,7 @@ public class LearnRestController extends BaseRestController {
 			).put(
 				"r_userBadges_userId", userId
 			).toString(),
-			"/o/c/userbadges/scopes/" + _siteGroupId);
+			createURI("/o/c/userbadges/scopes/", _siteGroupId));
 	}
 
 	private Map<String, Object> _toMap(Object object) {

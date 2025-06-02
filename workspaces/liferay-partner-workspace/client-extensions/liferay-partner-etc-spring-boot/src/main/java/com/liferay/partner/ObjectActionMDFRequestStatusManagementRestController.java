@@ -102,8 +102,7 @@ public class ObjectActionMDFRequestStatusManagementRestController
 					"page", "1"
 				).queryParam(
 					"pageSize", "-1"
-				).build(
-				).toString()));
+				).build()));
 
 		JSONArray itemsJSONArray = responseJSONObject.getJSONArray("items");
 
@@ -122,7 +121,7 @@ public class ObjectActionMDFRequestStatusManagementRestController
 
 		put(
 			_getAuthorization(), itemsJSONArray.toString(),
-			"/o/c/activities/batch");
+			createURI("/o/c/activities/batch"));
 
 		return new ResponseEntity<>(json, HttpStatus.OK);
 	}

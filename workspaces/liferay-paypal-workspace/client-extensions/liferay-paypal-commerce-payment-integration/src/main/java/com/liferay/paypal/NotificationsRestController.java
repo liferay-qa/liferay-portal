@@ -71,9 +71,9 @@ public class NotificationsRestController extends BaseRestController {
 					_liferayOAuth2AccessTokenManager.getAuthorization(
 						"liferay-paypal-commerce-payment-integration-oauth-" +
 							"application-headless-server"),
-					getLiferayURL() +
-						"/o/c/b9k3paypalwebhooks/by-external-reference-code/" +
-							transactionCode));
+					createURI(
+						getLiferayURL(), "/o/c/b9k3paypalwebhooks",
+						"/by-external-reference-code/", transactionCode)));
 
 			if (!_hasAuthentication(
 					b9k3PayPalWebhookJSONObject, headers, json)) {
@@ -115,8 +115,9 @@ public class NotificationsRestController extends BaseRestController {
 		JSONObject verifyWebhookSignatureResponseJSONObject = new JSONObject(
 			post(
 				"Bearer " + getAuthorization(b9k3PayPalWebhookJSONObject), body,
-				getPayPalURL(b9k3PayPalWebhookJSONObject.getString("mode")) +
-					"v1/notifications/verify-webhook-signature"));
+				createURI(
+					getPayPalURL(b9k3PayPalWebhookJSONObject.getString("mode")),
+					"v1/notifications/verify-webhook-signature")));
 
 		return Objects.equals(
 			verifyWebhookSignatureResponseJSONObject.getString(
@@ -144,18 +145,20 @@ public class NotificationsRestController extends BaseRestController {
 			).put(
 				"paymentStatus", paymentStatus
 			).toString(),
-			getLiferayURL() +
-				"/o/headless-commerce-admin-payment/v1.0/payments/" +
-					b9k3PayPalWebhookJSONObject.getLong("paymentEntryId"));
+			createURI(
+				getLiferayURL(),
+				"/o/headless-commerce-admin-payment/v1.0/payments/",
+				b9k3PayPalWebhookJSONObject.getLong("paymentEntryId")));
 
 		delete(
 			_liferayOAuth2AccessTokenManager.getAuthorization(
 				"liferay-paypal-commerce-payment-integration-oauth-" +
 					"application-headless-server"),
 			StringPool.BLANK,
-			getLiferayURL() +
-				"/o/c/b9k3paypalwebhooks/by-external-reference-code/" +
-					transactionCode);
+			createURI(
+				getLiferayURL(),
+				"/o/c/b9k3paypalwebhooks/by-external-reference-code/",
+				transactionCode));
 	}
 
 	private static final Log _log = LogFactory.getLog(

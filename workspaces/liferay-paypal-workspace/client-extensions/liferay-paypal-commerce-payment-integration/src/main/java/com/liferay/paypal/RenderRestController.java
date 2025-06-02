@@ -5,7 +5,6 @@
 
 package com.liferay.paypal;
 
-import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.util.HashMapBuilder;
 
@@ -54,7 +53,7 @@ public class RenderRestController extends BaseRestController {
 				).put(
 					HttpHeaders.AUTHORIZATION, "Bearer " + jwt.getTokenValue()
 				).build(),
-				StringBundler.concat(
+				createURI(
 					getLiferayURL(),
 					"/o/headless-commerce-delivery-cart/v1.0/carts/", orderId,
 					"/payment-url")));
@@ -69,9 +68,10 @@ public class RenderRestController extends BaseRestController {
 			sb.append(jsonObject.getBoolean("cancel"));
 			delete(
 				"Bearer " + jwt.getTokenValue(), StringPool.BLANK,
-				getLiferayURL() +
-					"/o/c/b9k3paypalwebhooks/by-external-reference-code/" +
-						jsonObject.getString("transactionCode"));
+				createURI(
+					getLiferayURL(),
+					"/o/c/b9k3paypalwebhooks/by-external-reference-code/",
+					jsonObject.getString("transactionCode")));
 		}
 
 		if (jsonObject.has("transactionCode")) {
@@ -105,10 +105,10 @@ public class RenderRestController extends BaseRestController {
 		JSONObject paymentsJSONObject = new JSONObject(
 			get(
 				"Bearer " + jwt.getTokenValue(),
-				StringBundler.concat(
+				createURI(
 					getLiferayURL(),
-					"/o/headless-commerce-admin-payment/v1.0/payments/?filter=",
-					"relatedItemId eq ", orderId)));
+					"/o/headless-commerce-admin-payment/v1.0/payments/?",
+					"filter=relatedItemId eq ", orderId)));
 
 		JSONArray itemsJSONArray = paymentsJSONObject.getJSONArray("items");
 

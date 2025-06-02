@@ -7,7 +7,6 @@ package com.liferay.customer.service;
 
 import com.liferay.client.extension.util.spring.boot3.client.LiferayOAuth2AccessTokenManager;
 import com.liferay.client.extension.util.spring.boot3.service.BaseService;
-import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 
 import java.text.DateFormat;
@@ -40,7 +39,7 @@ public class OverdueBusinessEventService extends BaseService {
 			JSONObject jsonObject = new JSONObject(
 				get(
 					_getAuthorization(),
-					StringBundler.concat(
+					createURI(
 						"/o/c/businessevents?page=", page,
 						"&pageSize=500&filter=eventStatus eq 'open' and ",
 						"targetGoLiveDateTime lt ", dateFormat.format(date))));
@@ -62,14 +61,16 @@ public class OverdueBusinessEventService extends BaseService {
 							"name", "Overdue"
 						)
 					).toString(),
-					"/o/c/businessevents/" +
-						businessEventJSONObject.getInt("id"));
+					createURI(
+						"/o/c/businessevents/",
+						businessEventJSONObject.getInt("id")));
 
 				put(
 					_getAuthorization(), StringPool.BLANK,
-					"/o/c/businessevents/" +
-						businessEventJSONObject.getInt("id") +
-							"/object-actions/overdueBusinessEventAction");
+					createURI(
+						"/o/c/businessevents/",
+						businessEventJSONObject.getInt("id"),
+						"/object-actions/overdueBusinessEventAction"));
 			}
 
 			if (jsonObject.getInt("lastPage") == page) {

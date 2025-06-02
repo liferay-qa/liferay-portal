@@ -152,7 +152,7 @@ public class JiraRestController extends BaseRestController {
 			return new JSONObject(
 				get(
 					"Bearer " + jwt.getTokenValue(),
-					"/o/headless-admin-user/v1.0/my-user-account"));
+					createURI("/o/headless-admin-user/v1.0/my-user-account")));
 		}
 		catch (Exception exception) {
 			if (_log.isWarnEnabled()) {

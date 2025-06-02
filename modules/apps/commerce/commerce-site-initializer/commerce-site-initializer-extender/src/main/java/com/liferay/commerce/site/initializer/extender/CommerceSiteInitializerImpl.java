@@ -697,8 +697,9 @@ public class CommerceSiteInitializerImpl implements CommerceSiteInitializer {
 				continue;
 			}
 
-			String json = SiteInitializerUtil.read(
-				resourcePath, servletContext);
+			String json = SiteInitializerUtil.replace(
+				SiteInitializerUtil.read(resourcePath, servletContext),
+				serviceContext);
 
 			JSONObject jsonObject = _jsonFactory.createJSONObject(json);
 
@@ -767,6 +768,8 @@ public class CommerceSiteInitializerImpl implements CommerceSiteInitializer {
 		ChannelResource channelResource = channelResourceBuilder.user(
 			serviceContext.fetchUser()
 		).build();
+
+		json = SiteInitializerUtil.replace(json, serviceContext);
 
 		JSONObject jsonObject = _jsonFactory.createJSONObject(json);
 

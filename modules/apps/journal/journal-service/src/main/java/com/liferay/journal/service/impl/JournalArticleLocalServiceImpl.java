@@ -6071,16 +6071,30 @@ public class JournalArticleLocalServiceImpl
 
 				Folder folder = article.addImagesFolder();
 
-				String fileEntryName = DLUtil.getUniqueFileName(
-					folder.getGroupId(), folder.getFolderId(),
-					tempFileEntry.getFileName(), false);
+				FileEntry portletFileEntry =
+					_portletFileRepository.
+						fetchPortletFileEntryByExternalReferenceCode(
+							tempFileEntry.getUuid(), folder.getGroupId());
 
-				fileEntry = _portletFileRepository.addPortletFileEntry(
-					null, folder.getGroupId(), tempFileEntry.getUserId(),
-					JournalArticle.class.getName(),
-					article.getResourcePrimKey(), JournalConstants.SERVICE_NAME,
-					folder.getFolderId(), tempFileEntry.getContentStream(),
-					fileEntryName, tempFileEntry.getMimeType(), false);
+				if (portletFileEntry == null) {
+					String fileEntryName = DLUtil.getUniqueFileName(
+						folder.getGroupId(), folder.getFolderId(),
+						tempFileEntry.getFileName(), false);
+
+					// See LPD-52357
+
+					fileEntry = _portletFileRepository.addPortletFileEntry(
+						tempFileEntry.getUuid(), folder.getGroupId(),
+						tempFileEntry.getUserId(),
+						JournalArticle.class.getName(),
+						article.getResourcePrimKey(),
+						JournalConstants.SERVICE_NAME, folder.getFolderId(),
+						tempFileEntry.getContentStream(), fileEntryName,
+						tempFileEntry.getMimeType(), false);
+				}
+				else {
+					fileEntry = portletFileEntry;
+				}
 			}
 
 			String previewURL = _dlURLHelper.getPreviewURL(

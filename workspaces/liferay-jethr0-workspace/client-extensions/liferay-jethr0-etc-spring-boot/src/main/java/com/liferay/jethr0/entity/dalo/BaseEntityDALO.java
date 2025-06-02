@@ -143,8 +143,8 @@ public abstract class BaseEntityDALO<T extends Entity>
 
 					try {
 						responseJSON = post(
-							getAuthorization(), _getEntityURLPath(),
-							requestJSONObject.toString());
+							getAuthorization(), requestJSONObject.toString(),
+							createURI(_getEntityURLPath()));
 					}
 					catch (Exception exception) {
 						refresh();
@@ -203,7 +203,7 @@ public abstract class BaseEntityDALO<T extends Entity>
 					try {
 						delete(
 							getAuthorization(), "",
-							_getEntityURLPath(objectEntryId));
+							createURI(_getEntityURLPath(objectEntryId)));
 					}
 					catch (Exception exception) {
 						refresh();
@@ -241,7 +241,8 @@ public abstract class BaseEntityDALO<T extends Entity>
 
 					try {
 						responseJSON = get(
-							getAuthorization(), _getEntityURLPath() + "/" + id);
+							getAuthorization(),
+							createURI(_getEntityURLPath(), "/", id));
 					}
 					catch (Exception exception) {
 						refresh();
@@ -313,9 +314,7 @@ public abstract class BaseEntityDALO<T extends Entity>
 							}
 
 							responseJSON = get(
-								getAuthorization(),
-								uriBuilder.build(
-								).toString());
+								getAuthorization(), uriBuilder.build());
 						}
 						catch (Exception exception) {
 							refresh();
@@ -425,7 +424,7 @@ public abstract class BaseEntityDALO<T extends Entity>
 					try {
 						responseJSON = put(
 							getAuthorization(), requestJSONObject.toString(),
-							_getEntityURLPath(requestObjectEntryId));
+							createURI(_getEntityURLPath(requestObjectEntryId)));
 					}
 					catch (Exception exception) {
 						refresh();

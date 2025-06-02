@@ -45,17 +45,14 @@ public class MarketplaceCommandLineRunner
 		_processOnHoldTrials();
 	}
 
-	@Override
-	protected String getWebClientBaseURL() {
-		return _liferayMarketplaceEtcSpringBootURL.toString();
-	}
-
 	private JSONObject _getAvailabilityJSONObject() throws Exception {
 		return new JSONObject(
 			get(
 				_liferayOAuth2AccessTokenManager.getAuthorization(
 					_liferayOAuthApplicationExternalReferenceCodes),
-				"/trial/availability"));
+				createURI(
+					_liferayMarketplaceEtcSpringBootURL,
+					"/trial/availability")));
 	}
 
 	private Page<Order> _getOrdersPage(int orderStatus) throws Exception {
@@ -82,7 +79,9 @@ public class MarketplaceCommandLineRunner
 				HttpHeaders.AUTHORIZATION,
 				_liferayOAuth2AccessTokenManager.getAuthorization(
 					_liferayOAuthApplicationExternalReferenceCodes)),
-			"/trial/expire/" + orderId);
+			createURI(
+				_liferayMarketplaceEtcSpringBootURL, "/trial/expire/",
+				orderId));
 	}
 
 	private void _postTrialNotifyEnd(long orderId) throws Exception {
@@ -92,7 +91,9 @@ public class MarketplaceCommandLineRunner
 				HttpHeaders.AUTHORIZATION,
 				_liferayOAuth2AccessTokenManager.getAuthorization(
 					_liferayOAuthApplicationExternalReferenceCodes)),
-			"/trial/notify-end/" + orderId);
+			createURI(
+				_liferayMarketplaceEtcSpringBootURL, "/trial/notify-end/",
+				orderId));
 	}
 
 	private void _postTrialProvisioning(Order order) throws Exception {
@@ -111,7 +112,8 @@ public class MarketplaceCommandLineRunner
 				HttpHeaders.AUTHORIZATION,
 				_liferayOAuth2AccessTokenManager.getAuthorization(
 					_liferayOAuthApplicationExternalReferenceCodes)),
-			"/trial/provisioning");
+			createURI(
+				_liferayMarketplaceEtcSpringBootURL, "/trial/provisioning"));
 	}
 
 	private void _processInProgressTrials() throws Exception {

@@ -238,7 +238,7 @@ public class QueueListener extends BaseRestController {
 
 		post(
 			_getAuthorization(), "",
-			StringBundler.concat(
+			createURI(
 				"/o/headless-admin-user/v1.0/accounts",
 				"/by-external-reference-code/", accountExternalReferenceCode,
 				"/user-accounts/by-email-address/", contactEmailAddress));
@@ -264,7 +264,7 @@ public class QueueListener extends BaseRestController {
 
 		post(
 			_getAuthorization(), "",
-			StringBundler.concat(
+			createURI(
 				"/o/headless-admin-user/v1.0/accounts",
 				"/by-external-reference-code/", accountExternalReferenceCode,
 				"/account-roles/", accountRoleId,
@@ -275,8 +275,9 @@ public class QueueListener extends BaseRestController {
 		JSONObject userAccountJSONObject = new JSONObject(
 			get(
 				_getAuthorization(),
-				"/o/headless-admin-user/v1.0/user-accounts/by-email-address/" +
-					emailAddress));
+				createURI(
+					"/o/headless-admin-user/v1.0/user-accounts",
+					"/by-email-address/", emailAddress)));
 
 		Long userAccountId = userAccountJSONObject.getLong("id");
 
@@ -299,7 +300,7 @@ public class QueueListener extends BaseRestController {
 
 		post(
 			_getAuthorization(), "",
-			StringBundler.concat(
+			createURI(
 				"/o/headless-admin-user/v1.0/roles/", roleId,
 				"/association/user-account/", userAccountId));
 	}
@@ -318,8 +319,7 @@ public class QueueListener extends BaseRestController {
 						accountExternalReferenceCode, "/account-roles")
 				).queryParam(
 					"pageSize", "-1"
-				).build(
-				).toString()));
+				).build()));
 
 		JSONArray accountRolesJSONArray =
 			accountRolesResponseJSONObject.getJSONArray("items");
@@ -391,8 +391,7 @@ public class QueueListener extends BaseRestController {
 				).path(
 					"/o/headless-admin-user/v1.0/organizations" +
 						"/by-external-reference-code/PRM-ORG-GLOBAL"
-				).build(
-				).toString()));
+				).build()));
 
 		JSONObject organizationsJSONObject = _getJSONObject(
 			get(
@@ -404,8 +403,7 @@ public class QueueListener extends BaseRestController {
 							"/child-organizations"
 				).queryParam(
 					"pageSize", "-1"
-				).build(
-				).toString()));
+				).build()));
 
 		JSONArray organizationsJSONArray = organizationsJSONObject.getJSONArray(
 			"items");
@@ -433,8 +431,7 @@ public class QueueListener extends BaseRestController {
 					"filter", "name eq '" + name + "'"
 				).queryParam(
 					"pageSize", "-1"
-				).build(
-				).toString()));
+				).build()));
 
 		JSONArray regularRolesJSONArray =
 			regularRolesResponseJSONObject.getJSONArray("items");
@@ -564,7 +561,7 @@ public class QueueListener extends BaseRestController {
 		JSONObject jsonObject = new JSONObject(
 			get(
 				_getAuthorization(),
-				StringBundler.concat(
+				createURI(
 					"/o/headless-admin-user/v1.0/accounts",
 					"/by-external-reference-code/",
 					accountExternalReferenceCode,
@@ -584,7 +581,7 @@ public class QueueListener extends BaseRestController {
 
 		delete(
 			_getAuthorization(), "",
-			StringBundler.concat(
+			createURI(
 				"/o/headless-admin-user/v1.0/accounts",
 				"/by-external-reference-code/", accountExternalReferenceCode,
 				"/user-accounts/by-email-address/", contactEmailAddress));
@@ -610,7 +607,7 @@ public class QueueListener extends BaseRestController {
 
 		delete(
 			_getAuthorization(), "",
-			StringBundler.concat(
+			createURI(
 				"/o/headless-admin-user/v1.0/accounts",
 				"/by-external-reference-code/", accountExternalReferenceCode,
 				"/account-roles/", accountRoleId,
@@ -627,8 +624,7 @@ public class QueueListener extends BaseRestController {
 				).path(
 					"/o/headless-admin-user/v1.0/user-accounts" +
 						"/by-email-address/" + emailAddress
-				).build(
-				).toString()));
+				).build()));
 
 		Long userAccountId = userAccountJSONObject.getLong("id");
 
@@ -651,7 +647,7 @@ public class QueueListener extends BaseRestController {
 
 		delete(
 			_getAuthorization(), "",
-			StringBundler.concat(
+			createURI(
 				"/o/headless-admin-user/v1.0/roles/", roleId,
 				"/association/user-account/", userAccountId));
 	}
@@ -670,8 +666,9 @@ public class QueueListener extends BaseRestController {
 		JSONObject proxyAccountJSONObject = new JSONObject(
 			get(
 				_getAuthorization(),
-				"/o/c/proxyaccounts/by-external-reference-code/" +
-					externalReferenceCode));
+				createURI(
+					"/o/c/proxyaccounts/by-external-reference-code/",
+					externalReferenceCode)));
 
 		if (proxyAccountJSONObject.has("currency")) {
 			JSONObject proxyCurrencyJSONObject =
@@ -688,8 +685,9 @@ public class QueueListener extends BaseRestController {
 		JSONObject updatedAccountJSONObject = _getJSONObject(
 			put(
 				_getAuthorization(), accountJSONObject.toString(),
-				"/o/headless-admin-user/v1.0/accounts" +
-					"/by-external-reference-code/" + externalReferenceCode));
+				createURI(
+					"/o/headless-admin-user/v1.0/accounts",
+					"/by-external-reference-code/", externalReferenceCode)));
 
 		if (proxyAccountJSONObject.has("region")) {
 			_updateAccountRegion(
@@ -718,7 +716,7 @@ public class QueueListener extends BaseRestController {
 		if (organizationIdsJSONArray.isEmpty()) {
 			post(
 				_getAuthorization(), "",
-				StringBundler.concat(
+				createURI(
 					"/o/headless-admin-user/v1.0/accounts",
 					"/by-external-reference-code/",
 					accountJSONObject.getString("externalReferenceCode"),
@@ -737,7 +735,7 @@ public class QueueListener extends BaseRestController {
 				patch(
 					_getAuthorization(),
 					accountExternalReferenceCodeJSONArray.toString(),
-					StringBundler.concat(
+					createURI(
 						"/o/headless-admin-user/v1.0/organizations",
 						"/move-accounts/", organizationId, "/",
 						regionOrganizationId, "/by-external-reference-code"));

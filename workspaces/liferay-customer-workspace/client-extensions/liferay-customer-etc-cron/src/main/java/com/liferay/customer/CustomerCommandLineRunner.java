@@ -90,8 +90,7 @@ public class CustomerCommandLineRunner
 					"/o/c/ticketattachments"
 				).queryParam(
 					"filter=zendeskTicketId eq " + zendeskTicketId
-				).build(
-				).toString()));
+				).build()));
 
 		JSONArray jsonArray = jsonObject.getJSONArray("items");
 
@@ -106,8 +105,9 @@ public class CustomerCommandLineRunner
 
 			delete(
 				_getAuthorization(), "",
-				"/ticket-attachments/" +
-					ticketAttachmentJSONObject.getInt("id"));
+				createURI(
+					"/ticket-attachments/",
+					ticketAttachmentJSONObject.getInt("id")));
 		}
 	}
 

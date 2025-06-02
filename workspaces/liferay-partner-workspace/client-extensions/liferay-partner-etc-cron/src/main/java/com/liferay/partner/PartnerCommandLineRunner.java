@@ -48,8 +48,7 @@ public class PartnerCommandLineRunner
 					"page", "1"
 				).queryParam(
 					"pageSize", "-1"
-				).build(
-				).toString()));
+				).build()));
 
 		if (responseJSONObject.getInt("totalCount") > 0) {
 			JSONArray itemsJSONArray = responseJSONObject.getJSONArray("items");
@@ -77,7 +76,7 @@ public class PartnerCommandLineRunner
 			try {
 				put(
 					_getAuthorization(), itemsJSONArray.toString(),
-					"/o/c/activities/batch");
+					createURI("/o/c/activities/batch"));
 			}
 			catch (Exception exception) {
 				_log.error(exception);
@@ -104,8 +103,7 @@ public class PartnerCommandLineRunner
 					"page", "1"
 				).queryParam(
 					"pageSize", "-1"
-				).build(
-				).toString()));
+				).build()));
 
 		if (responseJSONObject.getInt("totalCount") > 0) {
 			JSONArray itemsJSONArray = responseJSONObject.getJSONArray("items");
@@ -151,8 +149,7 @@ public class PartnerCommandLineRunner
 									_defaultUriBuilderFactory.builder(
 									).path(
 										"/o/c/mdfclaims/" + mdfClaimId
-									).build(
-									).toString()));
+									).build()));
 
 							JSONObject mdfClaimStatusJSONObject =
 								responseJSONObject.getJSONObject(
@@ -222,7 +219,7 @@ public class PartnerCommandLineRunner
 
 			sb.append("TemplateAction");
 
-			put(_getAuthorization(), "", sb.toString());
+			put(_getAuthorization(), "", createURI(sb.toString()));
 
 			if (_log.isInfoEnabled()) {
 				_log.info(

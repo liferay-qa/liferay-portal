@@ -45,8 +45,7 @@ public class TestrayCommandLineRunner
 							_currentDateTime.minusDays(_maxDaysOpened)
 				).queryParam(
 					"pageSize", "-1"
-				).build(
-				).toString())
+				).build())
 		).getJSONArray(
 			"items"
 		);
@@ -65,7 +64,9 @@ public class TestrayCommandLineRunner
 			_log.info("Archiving " + jsonArray.length() + " Testray builds");
 		}
 
-		put(_getAuthorization(), jsonArray.toString(), "/o/c/builds/batch");
+		put(
+			_getAuthorization(), jsonArray.toString(),
+			createURI("/o/c/builds/batch"));
 	}
 
 	public void deleteTestrayBuilds() throws Exception {
@@ -83,8 +84,7 @@ public class TestrayCommandLineRunner
 						_currentDateTime.minusDays(_maxDaysArchived)
 				).queryParam(
 					"pageSize", "-1"
-				).build(
-				).toString())
+				).build())
 		).getJSONArray(
 			"items"
 		);
@@ -93,7 +93,9 @@ public class TestrayCommandLineRunner
 			_log.info("Deleting " + jsonArray.length() + " Testray builds");
 		}
 
-		delete(_getAuthorization(), jsonArray.toString(), "/o/c/builds/batch");
+		delete(
+			_getAuthorization(), jsonArray.toString(),
+			createURI("/o/c/builds/batch"));
 	}
 
 	@Override
