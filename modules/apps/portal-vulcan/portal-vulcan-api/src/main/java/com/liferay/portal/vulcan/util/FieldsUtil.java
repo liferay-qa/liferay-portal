@@ -19,22 +19,23 @@ public class FieldsUtil {
 			return Collections.singletonList(fieldName);
 		}
 
-		List<String> list = new ArrayList<>();
+		List<String> expandedFieldNames = new ArrayList<>();
 
-		String pending = fieldName;
+		String expandedFieldName = fieldName;
 
-		while (!pending.equals("")) {
-			list.add(pending);
+		while (!expandedFieldName.equals("")) {
+			expandedFieldNames.add(expandedFieldName);
 
-			if (pending.contains(".")) {
-				pending = pending.substring(0, pending.lastIndexOf("."));
+			if (expandedFieldName.contains(".")) {
+				expandedFieldName = expandedFieldName.substring(
+					0, expandedFieldName.lastIndexOf("."));
 			}
 			else {
-				pending = "";
+				expandedFieldName = "";
 			}
 		}
 
-		return list;
+		return expandedFieldNames;
 	}
 
 }

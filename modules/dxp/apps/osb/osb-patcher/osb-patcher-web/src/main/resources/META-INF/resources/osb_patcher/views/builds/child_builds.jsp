@@ -8,6 +8,8 @@
 <%@ include file="/osb_patcher/views/init.jsp" %>
 
 <%
+PatcherChildBuildsDisplayContext patcherChildBuildsDisplayContext = new PatcherChildBuildsDisplayContext(request, renderRequest, renderResponse);
+
 long patcherBuildId = ParamUtil.getLong(request, "patcherBuildId");
 
 PatcherBuild patcherBuild = PatcherBuildLocalServiceUtil.fetchPatcherBuild(patcherBuildId);
@@ -39,10 +41,8 @@ List<PatcherBuild> childPatcherBuilds = PatcherBuildRelUtil.getChildPatcherBuild
 			name="build-id"
 		>
 			<clay:link
-				cssClass="clean-link"
-				href="javascript:void(0);"
+				href="<%= viewPatcherBuildURL %>"
 				label="<%= String.valueOf(childPatcherBuild.getPatcherBuildId()) %>"
-				onClick='<%= liferayPortletResponse.getNamespace() + "navigateWindow('" + viewPatcherBuildURL + "'); " %>'
 			/>
 		</liferay-ui:search-container-column-text>
 
@@ -52,6 +52,7 @@ List<PatcherBuild> childPatcherBuilds = PatcherBuildRelUtil.getChildPatcherBuild
 		/>
 
 		<liferay-ui:search-container-column-text
+			cssClass="table-cell-expand table-cell-minw-200"
 			name="name"
 		>
 
@@ -105,27 +106,10 @@ List<PatcherBuild> childPatcherBuilds = PatcherBuildRelUtil.getChildPatcherBuild
 		<liferay-ui:search-container-column-text
 			align="right"
 		>
-			<liferay-ui:icon-menu
-				direction="left-side"
-				icon="<%= StringPool.BLANK %>"
-				markupView="lexicon"
-				message="<%= StringPool.BLANK %>"
-				showWhenSingleIcon="<%= true %>"
-			>
-				<portlet:renderURL var="viewPatcherBuildPatcherFixesURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-					<portlet:param name="mvcRenderCommandName" value="/patcher/view_fixes_builds" />
-					<portlet:param name="patcherBuildId" value="<%= String.valueOf(childPatcherBuild.getPatcherBuildId()) %>" />
-				</portlet:renderURL>
-
-				<c:if test="<%= PatcherPermission.contains(permissionChecker, childPatcherBuild, PatcherActionKeys.FIXES, childPatcherBuild.getUserId()) %>">
-					<liferay-ui:icon
-						image="view"
-						message="view-fixes"
-						method="get"
-						url="<%= viewPatcherBuildPatcherFixesURL %>"
-					/>
-				</c:if>
-			</liferay-ui:icon-menu>
+			<clay:dropdown-actions
+				aria-label='<%= LanguageUtil.get(request, "show-actions") %>'
+				dropdownItems="<%= patcherChildBuildsDisplayContext.getDropdownItems(childPatcherBuild) %>"
+			/>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
@@ -134,27 +118,3 @@ List<PatcherBuild> childPatcherBuilds = PatcherBuildRelUtil.getChildPatcherBuild
 		paginate="<%= false %>"
 	/>
 </liferay-ui:search-container>
-
-<aui:script>
-	Liferay.provide(
-		window,
-		'<portlet:namespace />navigateWindow',
-		function (targetURL) {
-			window.location.href = targetURL;
-		}
-	);
-
-	AUI().ready(function () {
-		var A = AUI();
-
-		var cleanLinks = A.all('.clean-link');
-
-		cleanLinks.each(function (cleanLink) {
-			var href = cleanLink.attr('href');
-
-			var index = href.indexOf('?');
-
-			cleanLink.set('href', href.substring(0, index));
-		});
-	});
-</aui:script>

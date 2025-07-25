@@ -23,6 +23,7 @@ import com.liferay.headless.admin.site.resource.v1_0.PageTemplateResource;
 import com.liferay.layout.page.template.constants.LayoutPageTemplateCollectionTypeConstants;
 import com.liferay.layout.page.template.constants.LayoutPageTemplateConstants;
 import com.liferay.layout.page.template.constants.LayoutPageTemplateEntryTypeConstants;
+import com.liferay.layout.page.template.exception.LayoutPageTemplateEntryLayoutPageTemplateCollectionIdException;
 import com.liferay.layout.page.template.model.LayoutPageTemplateCollection;
 import com.liferay.layout.page.template.model.LayoutPageTemplateEntry;
 import com.liferay.layout.page.template.service.LayoutPageTemplateCollectionService;
@@ -317,8 +318,7 @@ public class PageTemplateResourceImpl extends BasePageTemplateResourceImpl {
 		long layoutPageTemplateCollectionId =
 			_getLayoutPageTemplateCollectionId(groupId, pageTemplate);
 
-		if (Validator.isNotNull(pageTemplate.getPageTemplateSet()) &&
-			!Objects.equals(
+		if (!Objects.equals(
 				layoutPageTemplateEntry.getLayoutPageTemplateCollectionId(),
 				layoutPageTemplateCollectionId)) {
 
@@ -425,6 +425,14 @@ public class PageTemplateResourceImpl extends BasePageTemplateResourceImpl {
 			WidgetPageTemplate widgetPageTemplate)
 		throws Exception {
 
+		if (!((layoutPageTemplateCollectionId ==
+				LayoutPageTemplateConstants.
+					PARENT_LAYOUT_PAGE_TEMPLATE_COLLECTION_ID_DEFAULT) ^
+			  (groupId != contextCompany.getGroupId()))) {
+
+			throw new LayoutPageTemplateEntryLayoutPageTemplateCollectionIdException();
+		}
+
 		ServiceContext serviceContext = _getServiceContext(
 			groupId, widgetPageTemplate);
 
@@ -522,7 +530,9 @@ public class PageTemplateResourceImpl extends BasePageTemplateResourceImpl {
 
 		PageTemplateSet pageTemplateSet = pageTemplate.getPageTemplateSet();
 
-		if (pageTemplateSet == null) {
+		if ((pageTemplateSet == null) ||
+			Validator.isNull(pageTemplateSet.getExternalReferenceCode())) {
+
 			return LayoutPageTemplateConstants.
 				PARENT_LAYOUT_PAGE_TEMPLATE_COLLECTION_ID_DEFAULT;
 		}
@@ -532,12 +542,8 @@ public class PageTemplateResourceImpl extends BasePageTemplateResourceImpl {
 				fetchLayoutPageTemplateCollection(
 					pageTemplateSet.getExternalReferenceCode(), groupId);
 
-		if (layoutPageTemplateCollection == null) {
-			return LayoutPageTemplateConstants.
-				PARENT_LAYOUT_PAGE_TEMPLATE_COLLECTION_ID_DEFAULT;
-		}
-
-		if (!Objects.equals(
+		if ((layoutPageTemplateCollection == null) ||
+			!Objects.equals(
 				LayoutPageTemplateCollectionTypeConstants.BASIC,
 				layoutPageTemplateCollection.getType())) {
 

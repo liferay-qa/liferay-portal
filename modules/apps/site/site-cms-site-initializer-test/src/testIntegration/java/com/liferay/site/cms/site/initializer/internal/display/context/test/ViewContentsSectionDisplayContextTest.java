@@ -12,7 +12,6 @@ import com.liferay.object.constants.ObjectEntryFolderConstants;
 import com.liferay.object.constants.ObjectFolderConstants;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.util.HashMapBuilder;
@@ -53,34 +52,34 @@ public class ViewContentsSectionDisplayContextTest
 	@Test
 	public void testGetFDSActionDropdownItems() throws Exception {
 		List<FDSActionDropdownItem> fdsActionDropdownItems =
-			_getFDSActionDropdownItems();
+			getFDSActionDropdownItems();
 
 		Assert.assertEquals(
 			fdsActionDropdownItems.toString(), 8,
 			fdsActionDropdownItems.size());
 
-		_assertFDSActionDropdownItem(
+		assertFDSActionDropdownItem(
 			fdsActionDropdownItems.get(0), "view", "actionLinkFolder",
 			"view-folder", "get", "item");
-		_assertFDSActionDropdownItem(
+		assertFDSActionDropdownItem(
 			fdsActionDropdownItems.get(1), "info-circle-open", "show-details",
 			"show-details", null, "item");
-		_assertFDSActionDropdownItem(
+		assertFDSActionDropdownItem(
 			fdsActionDropdownItems.get(2), "pencil", "editFolder", "edit",
 			"get", "item");
-		_assertFDSActionDropdownItem(
+		assertFDSActionDropdownItem(
 			fdsActionDropdownItems.get(3), "pencil", "actionLink", "edit",
 			"get", "item");
-		_assertFDSActionDropdownItem(
+		assertFDSActionDropdownItem(
 			fdsActionDropdownItems.get(4), "view", "viewContent", "view", "get",
 			"item");
-		_assertFDSActionDropdownItem(
+		assertFDSActionDropdownItem(
 			fdsActionDropdownItems.get(5), "date-time", "version-history",
 			"view-history", "get", "item");
-		_assertFDSActionDropdownItem(
+		assertFDSActionDropdownItem(
 			fdsActionDropdownItems.get(6), "password-policies", "permissions",
 			"permissions", "get", "item");
-		_assertFDSActionDropdownItem(
+		assertFDSActionDropdownItem(
 			fdsActionDropdownItems.get(7), "trash", "delete", "delete",
 			"delete", "item");
 	}
@@ -125,31 +124,6 @@ public class ViewContentsSectionDisplayContextTest
 		Assert.assertNotNull(contentsSectionDisplayContext);
 
 		return contentsSectionDisplayContext;
-	}
-
-	private void _assertFDSActionDropdownItem(
-		FDSActionDropdownItem fdsActionDropdownItem, String icon, String id,
-		String label, String method, String type) {
-
-		Assert.assertNotNull(fdsActionDropdownItem);
-
-		Map<String, String> data =
-			(Map<String, String>)fdsActionDropdownItem.get("data");
-
-		Assert.assertEquals(id, data.get("id"));
-		Assert.assertEquals(method, data.get("method"));
-
-		Assert.assertEquals(icon, fdsActionDropdownItem.get("icon"));
-		Assert.assertEquals(label, fdsActionDropdownItem.get("label"));
-		Assert.assertEquals(type, fdsActionDropdownItem.get("type"));
-	}
-
-	private List<FDSActionDropdownItem> _getFDSActionDropdownItems()
-		throws Exception {
-
-		return ReflectionTestUtil.invoke(
-			getSectionDisplayContext(getMockHttpServletRequest()),
-			"getFDSActionDropdownItems", new Class<?>[0]);
 	}
 
 	@Inject(

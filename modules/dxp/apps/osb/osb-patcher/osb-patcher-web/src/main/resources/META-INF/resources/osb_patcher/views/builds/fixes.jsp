@@ -8,6 +8,8 @@
 <%@ include file="/osb_patcher/views/init.jsp" %>
 
 <%
+PatcherBuildFixesDisplayContext patcherBuildFixesDisplayContext = new PatcherBuildFixesDisplayContext(request, renderRequest, renderResponse);
+
 long patcherBuildId = ParamUtil.getLong(request, "patcherBuildId");
 
 PatcherBuild patcherBuild = PatcherBuildLocalServiceUtil.fetchPatcherBuild(patcherBuildId);
@@ -62,9 +64,8 @@ else if (patcherFixes.size() > 1) {
 				<clay:link
 					aria-label='<%= LanguageUtil.get(request, "this-fix-is-obsolete") %>'
 					cssClass="lfr-portal-tooltip"
-					href="javascript:void(0);"
+					href="<%= viewPatcherFixURL %>"
 					icon="check-circle"
-					onClick='<%= liferayPortletResponse.getNamespace() + "navigateWindow('" + viewPatcherFixURL + "')" %>'
 					title='<%= LanguageUtil.get(request, "this-fix-is-obsolete") %>'
 				/>
 			</c:if>
@@ -74,10 +75,9 @@ else if (patcherFixes.size() > 1) {
 			name="fix-id"
 		>
 			<clay:link
-				cssClass="clean-link"
 				href="javascript:void(0);"
 				label="<%= String.valueOf(patcherFix.getPatcherFixId()) %>"
-				onClick='<%= liferayPortletResponse.getNamespace() + "navigateWindow('" + viewPatcherFixURL + "'); " %>'
+				onClick="<%= viewPatcherFixURL %>"
 			/>
 		</liferay-ui:search-container-column-text>
 
@@ -144,40 +144,11 @@ else if (patcherFixes.size() > 1) {
 		<liferay-ui:search-container-column-text
 			align="right"
 		>
-			<liferay-ui:icon-menu
-				direction="left-side"
-				icon="<%= StringPool.BLANK %>"
-				markupView="lexicon"
-				message="<%= StringPool.BLANK %>"
-				showWhenSingleIcon="<%= true %>"
-			>
-				<c:if test="<%= (patcherFix.getStatus() == WorkflowConstants.STATUS_FIX_FAILED) || (patcherFix.getStatus() == WorkflowConstants.STATUS_FIX_CONFLICT) %>">
-					<portlet:renderURL var="editPatcherFixURL">
-						<portlet:param name="mvcRenderCommandName" value="/patcher/edit_fixes" />
-						<portlet:param name="patcherFixId" value="<%= String.valueOf(patcherFix.getPatcherFixId()) %>" />
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-					</portlet:renderURL>
-
-					<liferay-ui:icon
-						image="edit"
-						method="get"
-						url="<%= editPatcherFixURL %>"
-					/>
-				</c:if>
-
-				<c:if test="<%= PatcherPermission.contains(permissionChecker, patcherFix, PatcherActionKeys.EXCLUDE, patcherFix.getUserId()) && (patcherFix.getType() != PatcherFixConstants.TYPE_EXCLUDED) %>">
-					<portlet:actionURL name="/patcher/exclude_fixes" var="excludePatcherFixURL">
-						<portlet:param name="patcherFixId" value="<%= String.valueOf(patcherFix.getPatcherFixId()) %>" />
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-					</portlet:actionURL>
-
-					<liferay-ui:icon
-						image="../api/method"
-						message="exclude"
-						url="<%= excludePatcherFixURL %>"
-					/>
-				</c:if>
-			</liferay-ui:icon-menu>
+			<clay:dropdown-actions
+				aria-label='<%= LanguageUtil.get(request, "show-actions") %>'
+				dropdownItems="<%= patcherBuildFixesDisplayContext.getDropdownItems(patcherFix) %>"
+				propsTransformer="{PatcherDropdownDefaultPropsTransformer} from osb-patcher-web"
+			/>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
@@ -194,22 +165,4 @@ else if (patcherFixes.size() > 1) {
 			url: url,
 		});
 	}
-
-	function <portlet:namespace />navigateWindow(targetURL) {
-		window.location.href = targetURL;
-	}
-
-	AUI().ready(function () {
-		var A = AUI();
-
-		var cleanLinks = A.all('.clean-link');
-
-		cleanLinks.each(function (cleanLink) {
-			var href = cleanLink.attr('href');
-
-			var index = href.indexOf('?');
-
-			cleanLink.set('href', href.substring(0, index));
-		});
-	});
 </aui:script>

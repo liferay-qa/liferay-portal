@@ -8,11 +8,9 @@
 <%@ include file="/osb_patcher/views/init.jsp" %>
 
 <%
-long patcherFixId = ParamUtil.getLong(request, "patcherFixId");
+PatcherFixBuildsDisplayContext patcherFixBuildsDisplayContext = new PatcherFixBuildsDisplayContext(request, patcherConfiguration, renderRequest, renderResponse);
 
-PatcherFix patcherFix = PatcherFixLocalServiceUtil.fetchPatcherFix(patcherFixId);
-
-List<PatcherBuild> patcherBuilds = PatcherBuildLocalServiceUtil.getPatcherFixPatcherBuilds(patcherFixId);
+List<PatcherBuild> patcherBuilds = PatcherBuildLocalServiceUtil.getPatcherFixPatcherBuilds(patcherFixBuildsDisplayContext.getPatcherFixId());
 %>
 
 <liferay-ui:search-container
@@ -42,9 +40,8 @@ List<PatcherBuild> patcherBuilds = PatcherBuildLocalServiceUtil.getPatcherFixPat
 						<clay:link
 							aria-label='<%= LanguageUtil.get(request, "this-build-is-obsolete") %>'
 							cssClass="lfr-portal-tooltip"
-							href="javascript:void(0);"
+							href="<%= viewPatcherBuildPatcherFixesURL %>"
 							icon="check-circle"
-							onClick='<%= liferayPortletResponse.getNamespace() + "navigateWindow('" + viewPatcherBuildPatcherFixesURL + "'); " %>'
 							title='<%= LanguageUtil.get(request, "this-build-is-obsolete") %>'
 						/>
 					</c:when>
@@ -67,7 +64,7 @@ List<PatcherBuild> patcherBuilds = PatcherBuildLocalServiceUtil.getPatcherFixPat
 			</c:if>
 		</liferay-ui:search-container-column-text>
 
-		<portlet:renderURL var="viewPatcherBuildURL">
+		<portlet:renderURL var="viewPatcherBuildURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 			<portlet:param name="mvcRenderCommandName" value="/patcher/view_builds" />
 			<portlet:param name="patcherBuildId" value="<%= String.valueOf(patcherBuild.getPatcherBuildId()) %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -76,10 +73,9 @@ List<PatcherBuild> patcherBuilds = PatcherBuildLocalServiceUtil.getPatcherFixPat
 		<liferay-ui:search-container-column-text
 			name="build-id"
 		>
-			<clay:button
-				displayType="link"
+			<clay:link
+				href="<%= viewPatcherBuildURL %>"
 				icon="warning"
-				onClick='<%= liferayPortletResponse.getNamespace() + "navigateWindow('" + viewPatcherBuildURL + "'); " %>'
 				title="<%= String.valueOf(patcherBuild.getPatcherBuildId()) %>"
 			/>
 		</liferay-ui:search-container-column-text>
@@ -175,57 +171,11 @@ List<PatcherBuild> patcherBuilds = PatcherBuildLocalServiceUtil.getPatcherFixPat
 		<liferay-ui:search-container-column-text
 			align="right"
 		>
-			<liferay-ui:icon-menu
-				direction="left-side"
-				icon="<%= StringPool.BLANK %>"
-				markupView="lexicon"
-				message="<%= StringPool.BLANK %>"
-				showWhenSingleIcon="<%= true %>"
-			>
-				<c:if test="<%= Validator.isNotNull(patcherFix.getGitHash()) && JenkinsUtil.isValidJenkinsSetup() && JenkinsUtil.isValidSendDistJenkinsRequest(patcherBuild) %>">
-					<portlet:actionURL name="/patcher/build_builds" var="buildPatcherBuildURL">
-						<portlet:param name="patcherBuildId" value="<%= String.valueOf(patcherBuild.getPatcherBuildId()) %>" />
-					</portlet:actionURL>
-
-					<liferay-ui:icon
-						image="post"
-						message="build"
-						method="get"
-						url="<%= buildPatcherBuildURL %>"
-					/>
-				</c:if>
-
-				<c:if test="<%= patcherBuild.getStatus() == WorkflowConstants.STATUS_BUILD_COMPLETE %>">
-					<portlet:actionURL name="/patcher/test_builds" var="testPatcherBuildURL">
-						<portlet:param name="patcherBuildId" value="<%= String.valueOf(patcherBuild.getPatcherBuildId()) %>" />
-						<portlet:param name="status" value="<%= String.valueOf(WorkflowConstants.STATUS_BUILD_QA_AUTOMATION_STARTED) %>" />
-					</portlet:actionURL>
-
-					<liferay-ui:icon
-						image="post"
-						message="test"
-						method="get"
-						url="<%= testPatcherBuildURL %>"
-					/>
-
-					<portlet:actionURL name="/patcher/test_builds" var="smokeTestPatcherBuildURL">
-						<portlet:param name="patcherBuildId" value="<%= String.valueOf(patcherBuild.getPatcherBuildId()) %>" />
-						<portlet:param name="status" value="<%= String.valueOf(WorkflowConstants.STATUS_BUILD_QA_AUTOMATION_STARTED_SMOKE_ONLY) %>" />
-					</portlet:actionURL>
-
-					<liferay-ui:icon
-						image="post"
-						message="smoke-test"
-						method="get"
-						url="<%= smokeTestPatcherBuildURL %>"
-					/>
-
-					<liferay-ui:icon
-						image="download"
-						url="<%= hotfixURL %>"
-					/>
-				</c:if>
-			</liferay-ui:icon-menu>
+			<clay:dropdown-actions
+				aria-label='<%= LanguageUtil.get(request, "show-actions") %>'
+				dropdownItems="<%= patcherFixBuildsDisplayContext.getDropdownItems(patcherBuild) %>"
+				propsTransformer="{PatcherDropdownDefaultPropsTransformer} from osb-patcher-web"
+			/>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
@@ -234,23 +184,3 @@ List<PatcherBuild> patcherBuilds = PatcherBuildLocalServiceUtil.getPatcherFixPat
 		paginate="<%= false %>"
 	/>
 </liferay-ui:search-container>
-
-<aui:script>
-	function <portlet:namespace />navigateWindow(targetURL) {
-		window.location.href = targetURL;
-	}
-
-	AUI().ready(function () {
-		var A = AUI();
-
-		var cleanLinks = A.all('.clean-link');
-
-		cleanLinks.each(function (cleanLink) {
-			var href = cleanLink.attr('href');
-
-			var index = href.indexOf('?');
-
-			cleanLink.set('href', href.substring(0, index));
-		});
-	});
-</aui:script>

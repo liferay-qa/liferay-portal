@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.servlet.TempAttributesServletRequest;
 import com.liferay.portal.kernel.struts.LastPath;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.LayoutTypeAccessPolicyTracker;
@@ -413,6 +414,16 @@ public class SecurityPortletContainerWrapper implements PortletContainer {
 		String portletContent = null;
 
 		if (portlet.isShowPortletAccessDenied()) {
+			String key = StringBundler.concat(
+				SecurityPortletContainerWrapper.class.getName(),
+				"#SKIP_SHOW_PORTLET_ACCESS_DENIED#", portlet.getPortletId());
+
+			if (ParamUtil.getBoolean(httpServletRequest, key)) {
+				return;
+			}
+
+			httpServletRequest.setAttribute(key, Boolean.TRUE);
+
 			portletContent = "/html/portal/portlet_access_denied.jsp";
 		}
 
